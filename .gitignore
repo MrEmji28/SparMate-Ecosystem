@@ -1,0 +1,9 @@
+# Mac System Files
+.DS_Store
+
+# Python Virtual Environment
+ml_microservice/venv/
+ml_microservice/__pycache__/
+
+# Obsidian Local Workspace Settings (optional, keeps team settings clean)
+#docs/.obsidian/workspace.json
