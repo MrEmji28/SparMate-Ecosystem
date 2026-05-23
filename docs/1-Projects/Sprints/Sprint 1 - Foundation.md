@@ -4,7 +4,7 @@
 ---
 ## 🎯 Objectives
 - [ ] Complete UI/UX prototyping in Figma (Dashboard, Game Board, Analytics).
-- [ ] Initialize the Flutter project repository.
+- [x] Initialize the Flutter project repository.
 - [ ] Successfully bind the Stockfish C++ binary using Dart FFI.
 - [ ] Prove local UCI parameter manipulation works without crashing the app.
 
