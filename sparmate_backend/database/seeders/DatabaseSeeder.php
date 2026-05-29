@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,14 +11,17 @@ class DatabaseSeeder extends Seeder
 
     /**
      * Seed the application's database.
+     *
+     * Order matters: Grandmasters and Lessons must be seeded before
+     * the DemoUser, which references them for match history and progress.
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $this->call([
+            GrandmasterSeeder::class,
+            LessonSeeder::class,
+            PuzzleSeeder::class,
+            DemoUserSeeder::class,
         ]);
     }
 }

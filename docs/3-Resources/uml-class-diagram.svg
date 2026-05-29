@@ -1,0 +1,461 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 1650" font-family="'Segoe UI', 'Inter', Arial, sans-serif">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f0f1a" />
+      <stop offset="100%" style="stop-color:#1a1a2e" />
+    </linearGradient>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#6366f1" />
+      <stop offset="50%" style="stop-color:#8b5cf6" />
+      <stop offset="100%" style="stop-color:#a78bfa" />
+    </linearGradient>
+    <filter id="s" x="-3%" y="-3%" width="108%" height="112%">
+      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+    <marker id="aOpen" markerWidth="12" markerHeight="8" refX="11" refY="4" orient="auto" fill="none" stroke="#94a3b8" stroke-width="1.2">
+      <polyline points="0 0, 11 4, 0 8" />
+    </marker>
+    <marker id="aFilled" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto" fill="#94a3b8">
+      <polygon points="0 0, 10 3.5, 0 7" />
+    </marker>
+    <marker id="aDiamondFill" markerWidth="14" markerHeight="10" refX="0" refY="5" orient="auto" fill="#60a5fa">
+      <polygon points="0 5, 7 0, 14 5, 7 10" />
+    </marker>
+    <marker id="aTriangle" markerWidth="12" markerHeight="10" refX="11" refY="5" orient="auto" fill="none" stroke="#94a3b8" stroke-width="1.5">
+      <polygon points="0 0, 12 5, 0 10" fill="#1e1e2e" stroke="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1500" height="1650" fill="url(#bgGrad)"/>
+  <g opacity="0.025">
+    <line x1="200" y1="0" x2="200" y2="1650" stroke="#fff"/>
+    <line x1="400" y1="0" x2="400" y2="1650" stroke="#fff"/>
+    <line x1="600" y1="0" x2="600" y2="1650" stroke="#fff"/>
+    <line x1="800" y1="0" x2="800" y2="1650" stroke="#fff"/>
+    <line x1="1000" y1="0" x2="1000" y2="1650" stroke="#fff"/>
+    <line x1="1200" y1="0" x2="1200" y2="1650" stroke="#fff"/>
+  </g>
+
+  <!-- Title -->
+  <text x="750" y="44" text-anchor="middle" fill="url(#titleGrad)" font-size="28" font-weight="700" letter-spacing="2">SparMate — UML Class Diagram</text>
+  <text x="750" y="68" text-anchor="middle" fill="#94a3b8" font-size="13" letter-spacing="1">Domain Model · Multi-Tier Architecture · Key Relationships</text>
+  <line x1="100" y1="82" x2="1400" y2="82" stroke="#6366f1" stroke-width="1" opacity="0.3"/>
+
+  <!-- ===== PACKAGE: FLUTTER CLIENT (Blue) ===== -->
+  <rect x="40" y="95" width="700" height="720" rx="16" fill="#027DFD" fill-opacity="0.03" stroke="#027DFD" stroke-width="1" stroke-opacity="0.2" stroke-dasharray="8,4"/>
+  <text x="60" y="118" fill="#60a5fa" font-size="12" font-weight="600" letter-spacing="1">📱 «package» flutter_client</text>
+
+  <!-- Class: User -->
+  <g filter="url(#s)">
+    <rect x="70" y="138" width="240" height="186" rx="8" fill="#1e1e2e" stroke="#60a5fa" stroke-width="1.5"/>
+    <rect x="70" y="138" width="240" height="36" rx="8" fill="#027DFD" fill-opacity="0.15"/>
+    <rect x="70" y="162" width="240" height="12" fill="#1e1e2e"/>
+    <text x="190" y="162" text-anchor="middle" fill="#60a5fa" font-size="13" font-weight="700">User</text>
+    <line x1="70" y1="174" x2="310" y2="174" stroke="#3b3b5c" stroke-width="0.8"/>
+    <text x="82" y="194" fill="#94a3b8" font-size="10">- id: int</text>
+    <text x="82" y="210" fill="#94a3b8" font-size="10">- name: String</text>
+    <text x="82" y="226" fill="#94a3b8" font-size="10">- email: String</text>
+    <text x="82" y="242" fill="#94a3b8" font-size="10">- elo_rating: int</text>
+    <text x="82" y="258" fill="#94a3b8" font-size="10">- sanctum_token: String</text>
+    <line x1="70" y1="266" x2="310" y2="266" stroke="#3b3b5c" stroke-width="0.8"/>
+    <text x="82" y="284" fill="#c4b5fd" font-size="10">+ authenticate(): bool</text>
+    <text x="82" y="300" fill="#c4b5fd" font-size="10">+ getMasteryScores(): Map</text>
+    <text x="82" y="316" fill="#c4b5fd" font-size="10">+ getMatchHistory(): List</text>
+  </g>
+
+  <!-- Class: GameSession -->
+  <g filter="url(#s)">
+    <rect x="380" y="138" width="280" height="218" rx="8" fill="#1e1e2e" stroke="#60a5fa" stroke-width="1.5"/>
+    <rect x="380" y="138" width="280" height="36" rx="8" fill="#027DFD" fill-opacity="0.15"/>
+    <rect x="380" y="162" width="280" height="12" fill="#1e1e2e"/>
+    <text x="520" y="162" text-anchor="middle" fill="#60a5fa" font-size="13" font-weight="700">GameSession</text>
+    <line x1="380" y1="174" x2="660" y2="174" stroke="#3b3b5c" stroke-width="0.8"/>
+    <text x="392" y="194" fill="#94a3b8" font-size="10">- sessionId: String</text>
+    <text x="392" y="210" fill="#94a3b8" font-size="10">- currentFEN: String</text>
+    <text x="392" y="226" fill="#94a3b8" font-size="10">- moveHistory: List&lt;Move&gt;</text>
+    <text x="392" y="242" fill="#94a3b8" font-size="10">- timeControl: Duration</text>
+    <text x="392" y="258" fill="#94a3b8" font-size="10">- isActive: bool</text>
+    <line x1="380" y1="266" x2="660" y2="266" stroke="#3b3b5c" stroke-width="0.8"/>
+    <text x="392" y="284" fill="#c4b5fd" font-size="10">+ startGame(profile): void</text>
+    <text x="392" y="300" fill="#c4b5fd" font-size="10">+ makeMove(move): Evaluation</text>
+    <text x="392" y="316" fill="#c4b5fd" font-size="10">+ resign(): void</text>
+    <text x="392" y="332" fill="#c4b5fd" font-size="10">+ generatePGN(): String</text>
+    <text x="392" y="348" fill="#c4b5fd" font-size="10">+ getMetrics(): PressureMetrics</text>
+  </g>
+
+  <!-- Class: HeuristicProfile (Abstract) -->
+  <g filter="url(#s)">
+    <rect x="70" y="380" width="240" height="186" rx="8" fill="#1e1e2e" stroke="#8B5CF6" stroke-width="1.5"/>
+    <rect x="70" y="380" width="240" height="36" rx="8" fill="#8B5CF6" fill-opacity="0.15"/>
+    <rect x="70" y="404" width="240" height="12" fill="#1e1e2e"/>
+    <text x="190" y="396" text-anchor="middle" fill="#a78bfa" font-size="10" font-style="italic">«abstract»</text>
+    <text x="190" y="412" text-anchor="middle" fill="#a78bfa" font-size="13" font-weight="700">HeuristicProfile</text>
+    <line x1="70" y1="420" x2="310" y2="420" stroke="#3b3b5c" stroke-width="0.8"/>
+    <text x="82" y="440" fill="#94a3b8" font-size="10">- contempt: int</text>
+    <text x="82" y="456" fill="#94a3b8" font-size="10">- aggressiveness: double</text>
+    <text x="82" y="472" fill="#94a3b8" font-size="10">- positionalWeight: double</text>
+    <text x="82" y="488" fill="#94a3b8" font-size="10">- searchDepth: int</text>
+    <line x1="70" y1="496" x2="310" y2="496" stroke="#3b3b5c" stroke-width="0.8"/>
+    <text x="82" y="514" fill="#c4b5fd" font-size="10">+ getUCIParams(): Map</text>
+    <text x="82" y="530" fill="#c4b5fd" font-size="10">+ applySoftShield(eval): Move</text>
+    <text x="82" y="546" fill="#c4b5fd" font-size="10">+ adjustDifficulty(elo): void</text>
+  </g>
+
+  <!-- Subclasses: Tactical, Positional, Universal -->
+  <g filter="url(#s)">
+    <rect x="70" y="630" width="115" height="50" rx="8" fill="#1e1e2e" stroke="#ef4444" stroke-width="1"/>
+    <text x="128" y="652" text-anchor="middle" fill="#fca5a5" font-size="11" font-weight="600">Tactical</text>
+    <text x="128" y="670" text-anchor="middle" fill="#94a3b8" font-size="8">High Contempt</text>
+  </g>
+  <g filter="url(#s)">
+    <rect x="195" y="630" width="115" height="50" rx="8" fill="#1e1e2e" stroke="#3b82f6" stroke-width="1"/>
+    <text x="253" y="652" text-anchor="middle" fill="#93c5fd" font-size="11" font-weight="600">Positional</text>
+    <text x="253" y="670" text-anchor="middle" fill="#94a3b8" font-size="8">Deep Search</text>
+  </g>
+  <g filter="url(#s)">
+    <rect x="320" y="630" width="115" height="50" rx="8" fill="#1e1e2e" stroke="#22c55e" stroke-width="1"/>
+    <text x="378" y="652" text-anchor="middle" fill="#86efac" font-size="11" font-weight="600">Universal</text>
+    <text x="378" y="670" text-anchor="middle" fill="#94a3b8" font-size="8">Balanced</text>
+  </g>
+
+  <!-- Inheritance arrows: subclasses → HeuristicProfile -->
+  <path d="M 128 630 L 128 600 L 190 600 L 190 566" stroke="#94a3b8" stroke-width="1.2" fill="none" marker-end="url(#aTriangle)"/>
+  <path d="M 253 630 L 253 600 L 190 600" stroke="#94a3b8" stroke-width="1.2" fill="none"/>
+  <path d="M 378 630 L 378 600 L 190 600" stroke="#94a3b8" stroke-width="1.2" fill="none"/>
+
+  <!-- Class: StockfishEngine -->
+  <g filter="url(#s)">
+    <rect x="460" y="410" width="250" height="170" rx="8" fill="#1e1e2e" stroke="#8B5CF6" stroke-width="1.5"/>
+    <rect x="460" y="410" width="250" height="36" rx="8" fill="#8B5CF6" fill-opacity="0.15"/>
+    <rect x="460" y="434" width="250" height="12" fill="#1e1e2e"/>
+    <text x="585" y="434" text-anchor="middle" fill="#a78bfa" font-size="13" font-weight="700">StockfishEngine</text>
+    <line x1="460" y1="446" x2="710" y2="446" stroke="#3b3b5c" stroke-width="0.8"/>
+    <text x="472" y="466" fill="#94a3b8" font-size="10">- binaryPath: String</text>
+    <text x="472" y="482" fill="#94a3b8" font-size="10">- depth: int</text>
+    <text x="472" y="498" fill="#94a3b8" font-size="10">- threads: int</text>
+    <line x1="460" y1="508" x2="710" y2="508" stroke="#3b3b5c" stroke-width="0.8"/>
+    <text x="472" y="528" fill="#c4b5fd" font-size="10">+ setPosition(fen): void</text>
+    <text x="472" y="544" fill="#c4b5fd" font-size="10">+ evaluate(depth): double</text>
+    <text x="472" y="560" fill="#c4b5fd" font-size="10">+ getBestMove(): Move</text>
+    <text x="472" y="576" fill="#c4b5fd" font-size="10">+ setUCIOption(k, v): void</text>
+  </g>
+
+  <!-- Class: PressureMetrics -->
+  <g filter="url(#s)">
+    <rect x="460" y="630" width="250" height="170" rx="8" fill="#1e1e2e" stroke="#6366f1" stroke-width="1.5"/>
+    <rect x="460" y="630" width="250" height="36" rx="8" fill="#6366f1" fill-opacity="0.15"/>
+    <rect x="460" y="654" width="250" height="12" fill="#1e1e2e"/>
+    <text x="585" y="654" text-anchor="middle" fill="#818cf8" font-size="13" font-weight="700">PressureMetrics</text>
+    <line x1="460" y1="666" x2="710" y2="666" stroke="#3b3b5c" stroke-width="0.8"/>
+    <text x="472" y="686" fill="#94a3b8" font-size="10">- pieceTension: double</text>
+    <text x="472" y="702" fill="#94a3b8" font-size="10">- kingSafety: double</text>
+    <text x="472" y="718" fill="#94a3b8" font-size="10">- timePressure: double</text>
+    <text x="472" y="734" fill="#94a3b8" font-size="10">- centipawnLoss: double</text>
+    <line x1="460" y1="744" x2="710" y2="744" stroke="#3b3b5c" stroke-width="0.8"/>
+    <text x="472" y="764" fill="#c4b5fd" font-size="10">+ calculate(fen, eval): void</text>
+    <text x="472" y="780" fill="#c4b5fd" font-size="10">+ getBlunderProbability(): double</text>
+    <text x="472" y="796" fill="#c4b5fd" font-size="10">+ toJSON(): Map</text>
+  </g>
+
+  <!-- ===== PACKAGE: EDGE ML (Orange) ===== -->
+  <rect x="40" y="840" width="700" height="215" rx="16" fill="#f39c12" fill-opacity="0.03" stroke="#f39c12" stroke-width="1" stroke-opacity="0.2" stroke-dasharray="8,4"/>
+  <text x="60" y="863" fill="#fbbf24" font-size="12" font-weight="600" letter-spacing="1">🧠 «package» edge_ml</text>
+
+  <!-- Class: ONNXClassifier -->
+  <g filter="url(#s)">
+    <rect x="70" y="880" width="290" height="160" rx="8" fill="#1e1e2e" stroke="#f39c12" stroke-width="1.5"/>
+    <rect x="70" y="880" width="290" height="36" rx="8" fill="#f39c12" fill-opacity="0.15"/>
+    <rect x="70" y="904" width="290" height="12" fill="#1e1e2e"/>
+    <text x="215" y="904" text-anchor="middle" fill="#fbbf24" font-size="13" font-weight="700">ONNXClassifier</text>
+    <line x1="70" y1="916" x2="360" y2="916" stroke="#3b3b5c" stroke-width="0.8"/>
+    <text x="82" y="936" fill="#94a3b8" font-size="10">- modelPath: String (.onnx)</text>
+    <text x="82" y="952" fill="#94a3b8" font-size="10">- session: OrtSession</text>
+    <text x="82" y="968" fill="#94a3b8" font-size="10">- categories: List&lt;String&gt;</text>
+    <line x1="70" y1="978" x2="360" y2="978" stroke="#3b3b5c" stroke-width="0.8"/>
+    <text x="82" y="998" fill="#c4b5fd" font-size="10">+ classifyMistake(features): MistakeType</text>
+    <text x="82" y="1014" fill="#c4b5fd" font-size="10">+ extractFeatures(pre, post): Tensor</text>
+    <text x="82" y="1030" fill="#c4b5fd" font-size="10">+ loadModel(): void</text>
+  </g>
+
+  <!-- Enum: MistakeType -->
+  <g filter="url(#s)">
+    <rect x="430" y="880" width="240" height="160" rx="8" fill="#1e1e2e" stroke="#f39c12" stroke-width="1"/>
+    <rect x="430" y="880" width="240" height="36" rx="8" fill="#f39c12" fill-opacity="0.1"/>
+    <rect x="430" y="904" width="240" height="12" fill="#1e1e2e"/>
+    <text x="550" y="896" text-anchor="middle" fill="#fbbf24" font-size="10" font-style="italic">«enumeration»</text>
+    <text x="550" y="912" text-anchor="middle" fill="#fbbf24" font-size="13" font-weight="700">MistakeType</text>
+    <line x1="430" y1="920" x2="670" y2="920" stroke="#3b3b5c" stroke-width="0.8"/>
+    <text x="442" y="942" fill="#fca5a5" font-size="10">TACTICAL_OVERSIGHT</text>
+    <text x="442" y="960" fill="#93c5fd" font-size="10">POSITIONAL_ERROR</text>
+    <text x="442" y="978" fill="#86efac" font-size="10">ENDGAME_FAILURE</text>
+    <text x="442" y="996" fill="#c4b5fd" font-size="10">OPENING_INACCURACY</text>
+    <text x="442" y="1014" fill="#fbbf24" font-size="10">CALCULATION_BLUNDER</text>
+    <text x="442" y="1032" fill="#94a3b8" font-size="10">TIME_PRESSURE_ERROR</text>
+  </g>
+
+  <!-- ===== PACKAGE: LARAVEL BACKEND (Red) ===== -->
+  <rect x="770" y="95" width="690" height="510" rx="16" fill="#ff6b6b" fill-opacity="0.03" stroke="#ff6b6b" stroke-width="1" stroke-opacity="0.2" stroke-dasharray="8,4"/>
+  <text x="790" y="118" fill="#ff6b6b" font-size="12" font-weight="600" letter-spacing="1">☁️ «package» laravel_api</text>
+
+  <!-- Class: MatchController -->
+  <g filter="url(#s)">
+    <rect x="800" y="138" width="280" height="170" rx="8" fill="#1e1e2e" stroke="#ff6b6b" stroke-width="1.5"/>
+    <rect x="800" y="138" width="280" height="36" rx="8" fill="#ff6b6b" fill-opacity="0.15"/>
+    <rect x="800" y="162" width="280" height="12" fill="#1e1e2e"/>
+    <text x="940" y="156" text-anchor="middle" fill="#fca5a5" font-size="10" font-style="italic">«controller»</text>
+    <text x="940" y="172" text-anchor="middle" fill="#fca5a5" font-size="13" font-weight="700">MatchController</text>
+    <line x1="800" y1="178" x2="1080" y2="178" stroke="#3b3b5c" stroke-width="0.8"/>
+    <text x="812" y="198" fill="#94a3b8" font-size="10">- matchService: MatchService</text>
+    <text x="812" y="214" fill="#94a3b8" font-size="10">- bktClient: HttpClient</text>
+    <line x1="800" y1="224" x2="1080" y2="224" stroke="#3b3b5c" stroke-width="0.8"/>
+    <text x="812" y="244" fill="#c4b5fd" font-size="10">+ store(request): JsonResponse</text>
+    <text x="812" y="260" fill="#c4b5fd" font-size="10">+ index(userId): JsonResponse</text>
+    <text x="812" y="276" fill="#c4b5fd" font-size="10">+ show(matchId): JsonResponse</text>
+    <text x="812" y="292" fill="#c4b5fd" font-size="10">+ forwardToBKT(payload): void</text>
+  </g>
+
+  <!-- Class: Match (Eloquent Model) -->
+  <g filter="url(#s)">
+    <rect x="800" y="348" width="280" height="240" rx="8" fill="#1e1e2e" stroke="#ff6b6b" stroke-width="1.5"/>
+    <rect x="800" y="348" width="280" height="36" rx="8" fill="#ff6b6b" fill-opacity="0.15"/>
+    <rect x="800" y="372" width="280" height="12" fill="#1e1e2e"/>
+    <text x="940" y="366" text-anchor="middle" fill="#fca5a5" font-size="10" font-style="italic">«eloquent model»</text>
+    <text x="940" y="382" text-anchor="middle" fill="#fca5a5" font-size="13" font-weight="700">Match</text>
+    <line x1="800" y1="390" x2="1080" y2="390" stroke="#3b3b5c" stroke-width="0.8"/>
+    <text x="812" y="410" fill="#94a3b8" font-size="10">- id: int</text>
+    <text x="812" y="426" fill="#94a3b8" font-size="10">- user_id: int (FK)</text>
+    <text x="812" y="442" fill="#94a3b8" font-size="10">- pgn: text</text>
+    <text x="812" y="458" fill="#94a3b8" font-size="10">- opponent_style: String</text>
+    <text x="812" y="474" fill="#94a3b8" font-size="10">- result: String</text>
+    <text x="812" y="490" fill="#94a3b8" font-size="10">- risk_metrics: jsonb</text>
+    <text x="812" y="506" fill="#94a3b8" font-size="10">- classified_blunders: jsonb</text>
+    <line x1="800" y1="516" x2="1080" y2="516" stroke="#3b3b5c" stroke-width="0.8"/>
+    <text x="812" y="536" fill="#c4b5fd" font-size="10">+ user(): BelongsTo</text>
+    <text x="812" y="552" fill="#c4b5fd" font-size="10">+ getBlunderSummary(): array</text>
+    <text x="812" y="568" fill="#c4b5fd" font-size="10">+ scopeByStyle(style): Builder</text>
+    <text x="812" y="584" fill="#c4b5fd" font-size="10">+ toPGNString(): String</text>
+  </g>
+
+  <!-- Class: Lesson (Eloquent Model) -->
+  <g filter="url(#s)">
+    <rect x="1130" y="138" width="280" height="200" rx="8" fill="#1e1e2e" stroke="#a78bfa" stroke-width="1.5"/>
+    <rect x="1130" y="138" width="280" height="36" rx="8" fill="#a78bfa" fill-opacity="0.15"/>
+    <rect x="1130" y="162" width="280" height="12" fill="#1e1e2e"/>
+    <text x="1270" y="156" text-anchor="middle" fill="#c4b5fd" font-size="10" font-style="italic">«eloquent model»</text>
+    <text x="1270" y="172" text-anchor="middle" fill="#c4b5fd" font-size="13" font-weight="700">Lesson</text>
+    <line x1="1130" y1="178" x2="1410" y2="178" stroke="#3b3b5c" stroke-width="0.8"/>
+    <text x="1142" y="198" fill="#94a3b8" font-size="10">- id: int</text>
+    <text x="1142" y="214" fill="#94a3b8" font-size="10">- title: String</text>
+    <text x="1142" y="230" fill="#94a3b8" font-size="10">- category: MistakeType</text>
+    <text x="1142" y="246" fill="#94a3b8" font-size="10">- difficulty: int</text>
+    <text x="1142" y="262" fill="#94a3b8" font-size="10">- content: text</text>
+    <line x1="1130" y1="272" x2="1410" y2="272" stroke="#3b3b5c" stroke-width="0.8"/>
+    <text x="1142" y="292" fill="#c4b5fd" font-size="10">+ scopeByCategory(cat): Builder</text>
+    <text x="1142" y="308" fill="#c4b5fd" font-size="10">+ scopeByDifficulty(d): Builder</text>
+    <text x="1142" y="324" fill="#c4b5fd" font-size="10">+ isCompleted(userId): bool</text>
+  </g>
+
+  <!-- Class: UserProgress -->
+  <g filter="url(#s)">
+    <rect x="1130" y="390" width="280" height="200" rx="8" fill="#1e1e2e" stroke="#a78bfa" stroke-width="1.5"/>
+    <rect x="1130" y="390" width="280" height="36" rx="8" fill="#a78bfa" fill-opacity="0.15"/>
+    <rect x="1130" y="414" width="280" height="12" fill="#1e1e2e"/>
+    <text x="1270" y="408" text-anchor="middle" fill="#c4b5fd" font-size="10" font-style="italic">«eloquent model»</text>
+    <text x="1270" y="424" text-anchor="middle" fill="#c4b5fd" font-size="13" font-weight="700">UserProgress</text>
+    <line x1="1130" y1="432" x2="1410" y2="432" stroke="#3b3b5c" stroke-width="0.8"/>
+    <text x="1142" y="452" fill="#94a3b8" font-size="10">- user_id: int (FK)</text>
+    <text x="1142" y="468" fill="#94a3b8" font-size="10">- bkt_matrix: jsonb</text>
+    <text x="1142" y="484" fill="#94a3b8" font-size="10">- curriculum_state: jsonb</text>
+    <text x="1142" y="500" fill="#94a3b8" font-size="10">- total_matches: int</text>
+    <text x="1142" y="516" fill="#94a3b8" font-size="10">- last_updated: DateTime</text>
+    <line x1="1130" y1="526" x2="1410" y2="526" stroke="#3b3b5c" stroke-width="0.8"/>
+    <text x="1142" y="546" fill="#c4b5fd" font-size="10">+ getMasteryFor(skill): double</text>
+    <text x="1142" y="562" fill="#c4b5fd" font-size="10">+ getWeakestSkills(n): List</text>
+    <text x="1142" y="578" fill="#c4b5fd" font-size="10">+ updateMatrix(matrix): void</text>
+  </g>
+
+  <!-- ===== PACKAGE: FASTAPI BKT (Green) ===== -->
+  <rect x="770" y="630" width="690" height="425" rx="16" fill="#00c9a7" fill-opacity="0.03" stroke="#00c9a7" stroke-width="1" stroke-opacity="0.2" stroke-dasharray="8,4"/>
+  <text x="790" y="653" fill="#6ee7b7" font-size="12" font-weight="600" letter-spacing="1">⚡ «package» fastapi_bkt</text>
+
+  <!-- Class: BKTEngine -->
+  <g filter="url(#s)">
+    <rect x="800" y="670" width="290" height="186" rx="8" fill="#1e1e2e" stroke="#00c9a7" stroke-width="1.5"/>
+    <rect x="800" y="670" width="290" height="36" rx="8" fill="#00c9a7" fill-opacity="0.15"/>
+    <rect x="800" y="694" width="290" height="12" fill="#1e1e2e"/>
+    <text x="945" y="694" text-anchor="middle" fill="#6ee7b7" font-size="13" font-weight="700">BKTEngine</text>
+    <line x1="800" y1="706" x2="1090" y2="706" stroke="#3b3b5c" stroke-width="0.8"/>
+    <text x="812" y="726" fill="#94a3b8" font-size="10">- skill_params: Dict[str, SkillParam]</text>
+    <text x="812" y="742" fill="#94a3b8" font-size="10">- p_learn: float</text>
+    <text x="812" y="758" fill="#94a3b8" font-size="10">- p_slip: float</text>
+    <text x="812" y="774" fill="#94a3b8" font-size="10">- p_guess: float</text>
+    <line x1="800" y1="784" x2="1090" y2="784" stroke="#3b3b5c" stroke-width="0.8"/>
+    <text x="812" y="804" fill="#c4b5fd" font-size="10">+ update_mastery(payload): dict</text>
+    <text x="812" y="820" fill="#c4b5fd" font-size="10">+ calc_posterior(prior, obs): float</text>
+    <text x="812" y="836" fill="#c4b5fd" font-size="10">+ get_weakest_skills(matrix): list</text>
+    <text x="812" y="852" fill="#c4b5fd" font-size="10">+ reset_matrix(user_id): dict</text>
+  </g>
+
+  <!-- Class: CurriculumEngine -->
+  <g filter="url(#s)">
+    <rect x="1140" y="670" width="280" height="170" rx="8" fill="#1e1e2e" stroke="#00c9a7" stroke-width="1.5"/>
+    <rect x="1140" y="670" width="280" height="36" rx="8" fill="#00c9a7" fill-opacity="0.15"/>
+    <rect x="1140" y="694" width="280" height="12" fill="#1e1e2e"/>
+    <text x="1280" y="694" text-anchor="middle" fill="#6ee7b7" font-size="13" font-weight="700">CurriculumEngine</text>
+    <line x1="1140" y1="706" x2="1420" y2="706" stroke="#3b3b5c" stroke-width="0.8"/>
+    <text x="1152" y="726" fill="#94a3b8" font-size="10">- lesson_catalog: List[Lesson]</text>
+    <text x="1152" y="742" fill="#94a3b8" font-size="10">- similarity_threshold: float</text>
+    <line x1="1140" y1="754" x2="1420" y2="754" stroke="#3b3b5c" stroke-width="0.8"/>
+    <text x="1152" y="774" fill="#c4b5fd" font-size="10">+ recommend(matrix): List[Lesson]</text>
+    <text x="1152" y="790" fill="#c4b5fd" font-size="10">+ content_filter(skills): List</text>
+    <text x="1152" y="806" fill="#c4b5fd" font-size="10">+ adaptive_difficulty(elo): int</text>
+    <text x="1152" y="822" fill="#c4b5fd" font-size="10">+ rank_by_priority(gaps): List</text>
+  </g>
+
+  <!-- Class: MatchPayload (DTO) -->
+  <g filter="url(#s)">
+    <rect x="800" y="900" width="290" height="140" rx="8" fill="#1e1e2e" stroke="#00c9a7" stroke-width="1"/>
+    <rect x="800" y="900" width="290" height="36" rx="8" fill="#00c9a7" fill-opacity="0.1"/>
+    <rect x="800" y="924" width="290" height="12" fill="#1e1e2e"/>
+    <text x="945" y="918" text-anchor="middle" fill="#6ee7b7" font-size="10" font-style="italic">«pydantic model»</text>
+    <text x="945" y="934" text-anchor="middle" fill="#6ee7b7" font-size="13" font-weight="700">MatchPayload</text>
+    <line x1="800" y1="942" x2="1090" y2="942" stroke="#3b3b5c" stroke-width="0.8"/>
+    <text x="812" y="962" fill="#94a3b8" font-size="10">- user_id: int</text>
+    <text x="812" y="978" fill="#94a3b8" font-size="10">- classified_blunders: List[Blunder]</text>
+    <text x="812" y="994" fill="#94a3b8" font-size="10">- pgn: str</text>
+    <text x="812" y="1010" fill="#94a3b8" font-size="10">- opponent_style: str</text>
+    <text x="812" y="1026" fill="#94a3b8" font-size="10">- risk_metrics: dict</text>
+  </g>
+
+  <!-- ===== PACKAGE: DATABASE (Indigo) ===== -->
+  <rect x="770" y="1080" width="690" height="240" rx="16" fill="#5b9bd5" fill-opacity="0.03" stroke="#5b9bd5" stroke-width="1" stroke-opacity="0.2" stroke-dasharray="8,4"/>
+  <text x="790" y="1103" fill="#93c5fd" font-size="12" font-weight="600" letter-spacing="1">🗄️ «package» postgresql</text>
+
+  <!-- Table: Schema Overview -->
+  <g filter="url(#s)">
+    <rect x="800" y="1115" width="620" height="190" rx="8" fill="#1e1e2e" stroke="#5b9bd5" stroke-width="1.5"/>
+    <rect x="800" y="1115" width="620" height="36" rx="8" fill="#5b9bd5" fill-opacity="0.15"/>
+    <rect x="800" y="1139" width="620" height="12" fill="#1e1e2e"/>
+    <text x="1110" y="1139" text-anchor="middle" fill="#93c5fd" font-size="13" font-weight="700">PostgreSQL Schema</text>
+    <line x1="800" y1="1151" x2="1420" y2="1151" stroke="#3b3b5c" stroke-width="0.8"/>
+    <text x="820" y="1172" fill="#60a5fa" font-size="11" font-weight="600">Relational Tables</text>
+    <text x="820" y="1192" fill="#94a3b8" font-size="10">users (id, name, email, token)</text>
+    <text x="820" y="1208" fill="#94a3b8" font-size="10">matches (id, user_id, pgn, result)</text>
+    <text x="820" y="1224" fill="#94a3b8" font-size="10">lessons (id, title, category, content)</text>
+    <text x="820" y="1240" fill="#94a3b8" font-size="10">user_progress (user_id, total_matches)</text>
+    <line x1="1100" y1="1155" x2="1100" y2="1300" stroke="#3b3b5c" stroke-width="0.5"/>
+    <text x="1120" y="1172" fill="#fbbf24" font-size="11" font-weight="600">JSONB Columns</text>
+    <text x="1120" y="1192" fill="#94a3b8" font-size="10">user_progress.bkt_matrix</text>
+    <text x="1120" y="1208" fill="#94a3b8" font-size="10">user_progress.curriculum_state</text>
+    <text x="1120" y="1224" fill="#94a3b8" font-size="10">matches.risk_metrics</text>
+    <text x="1120" y="1240" fill="#94a3b8" font-size="10">matches.classified_blunders</text>
+    <text x="820" y="1274" fill="#64748b" font-size="9" font-style="italic">PK: id · FK: user_id → users.id · ACID Compliant · Encrypted at Rest</text>
+    <text x="820" y="1292" fill="#64748b" font-size="9" font-style="italic">Indexes: user_id, category, created_at · GDPR / DPA Compliant</text>
+  </g>
+
+  <!-- ===== RELATIONSHIPS ===== -->
+
+  <!-- User [1..*] to GameSession (composition) -->
+  <path d="M 310 247 L 378 247" stroke="#60a5fa" stroke-width="1.5" fill="none" marker-start="url(#aDiamondFill)"/>
+  <text x="340" y="240" fill="#64748b" font-size="9">1..*</text>
+
+  <!-- GameSession uses StockfishEngine -->
+  <path d="M 520 356 L 520 408" stroke="#94a3b8" stroke-width="1.2" fill="none" marker-end="url(#aOpen)" stroke-dasharray="5,3"/>
+  <text x="530" y="384" fill="#64748b" font-size="9">«uses»</text>
+
+  <!-- GameSession to PressureMetrics (composition) -->
+  <path d="M 585 356 L 585 628" stroke="#60a5fa" stroke-width="1.2" fill="none" marker-start="url(#aDiamondFill)"/>
+  <text x="594" y="490" fill="#64748b" font-size="9">1..1</text>
+
+  <!-- GameSession uses HeuristicProfile -->
+  <path d="M 380 290 L 310 290 L 310 378" stroke="#94a3b8" stroke-width="1.2" fill="none" marker-end="url(#aOpen)" stroke-dasharray="5,3"/>
+  <text x="315" y="340" fill="#64748b" font-size="9">«uses»</text>
+
+  <!-- GameSession to Match (dependency: generates) -->
+  <path d="M 660 280 L 798 450" stroke="#ff6b6b" stroke-width="1.5" fill="none" marker-end="url(#aFilled)" stroke-dasharray="6,3"/>
+  <text x="710" y="350" fill="#fca5a5" font-size="9">«generates»</text>
+
+  <!-- GameSession to ONNXClassifier -->
+  <path d="M 450 356 L 300 878" stroke="#f39c12" stroke-width="1.2" fill="none" marker-end="url(#aFilled)" stroke-dasharray="5,3"/>
+  <text x="335" y="620" fill="#fbbf24" font-size="9">«classifies»</text>
+
+  <!-- ONNXClassifier to MistakeType -->
+  <path d="M 360 960 L 428 960" stroke="#94a3b8" stroke-width="1.2" fill="none" marker-end="url(#aOpen)" stroke-dasharray="5,3"/>
+  <text x="378" y="952" fill="#64748b" font-size="9">«returns»</text>
+
+  <!-- MatchController to Match -->
+  <path d="M 940 308 L 940 346" stroke="#94a3b8" stroke-width="1.2" fill="none" marker-end="url(#aOpen)" stroke-dasharray="5,3"/>
+
+  <!-- Match to UserProgress -->
+  <path d="M 1080 490 L 1128 490" stroke="#94a3b8" stroke-width="1.2" fill="none" marker-end="url(#aFilled)"/>
+  <text x="1090" y="484" fill="#64748b" font-size="9">updates</text>
+
+  <!-- MatchController to BKTEngine -->
+  <path d="M 940 308 L 940 320 L 760 320 L 760 760 L 798 760" stroke="#00c9a7" stroke-width="1.5" fill="none" marker-end="url(#aFilled)" stroke-dasharray="6,3"/>
+  <text x="770" y="545" fill="#6ee7b7" font-size="9" transform="rotate(90 770 545)">«forwards payload»</text>
+
+  <!-- BKTEngine to CurriculumEngine -->
+  <path d="M 1090 760 L 1138 760" stroke="#94a3b8" stroke-width="1.2" fill="none" marker-end="url(#aOpen)" stroke-dasharray="5,3"/>
+  <text x="1098" y="752" fill="#64748b" font-size="9">«invokes»</text>
+
+  <!-- BKTEngine to MatchPayload -->
+  <path d="M 945 856 L 945 898" stroke="#94a3b8" stroke-width="1.2" fill="none" marker-end="url(#aOpen)" stroke-dasharray="5,3"/>
+  <text x="955" y="880" fill="#64748b" font-size="9">«accepts»</text>
+
+  <!-- UserProgress to PostgreSQL -->
+  <path d="M 1270 590 L 1270 620 L 1440 620 L 1440 1160 L 1422 1160" stroke="#5b9bd5" stroke-width="1.5" fill="none" marker-end="url(#aFilled)" stroke-dasharray="5,3"/>
+  <text x="1442" y="890" fill="#93c5fd" font-size="9" transform="rotate(90 1442 890)">«persisted in»</text>
+
+  <!-- BKTEngine to PostgreSQL -->
+  <path d="M 945 1040 L 945 1060 L 945 1113" stroke="#5b9bd5" stroke-width="1.5" fill="none" marker-end="url(#aFilled)" stroke-dasharray="5,3"/>
+  <text x="955" y="1078" fill="#93c5fd" font-size="9">«writes JSONB»</text>
+
+  <!-- ===== LEGEND ===== -->
+  <rect x="40" y="1350" width="720" height="280" rx="12" fill="#16162a" stroke="#3b3b5c" stroke-width="1"/>
+  <text x="60" y="1378" fill="#c4b5fd" font-size="14" font-weight="700">Legend</text>
+  <line x1="60" y1="1388" x2="740" y2="1388" stroke="#3b3b5c" stroke-width="0.5"/>
+
+  <!-- Relationship types -->
+  <text x="60" y="1414" fill="#94a3b8" font-size="11" font-weight="600">Relationships:</text>
+  <line x1="60" y1="1434" x2="120" y2="1434" stroke="#94a3b8" stroke-width="1.5"/>
+  <polygon points="120,1430 130,1434 120,1438" fill="#94a3b8"/>
+  <text x="140" y="1438" fill="#94a3b8" font-size="10">Association</text>
+
+  <line x1="60" y1="1460" x2="120" y2="1460" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <polyline points="120,1455 130,1460 120,1465" fill="none" stroke="#94a3b8" stroke-width="1.2"/>
+  <text x="140" y="1464" fill="#94a3b8" font-size="10">Dependency (uses / invokes)</text>
+
+  <polygon points="46,1486 53,1480 60,1486 53,1492" fill="#60a5fa"/>
+  <line x1="60" y1="1486" x2="120" y2="1486" stroke="#60a5fa" stroke-width="1.5"/>
+  <text x="140" y="1490" fill="#94a3b8" font-size="10">Composition (owns lifecycle)</text>
+
+  <polygon points="54,1506 66,1512 54,1518" fill="#1e1e2e" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="66" y1="1512" x2="120" y2="1512" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="140" y="1516" fill="#94a3b8" font-size="10">Generalization (inherits)</text>
+
+  <!-- Package colors -->
+  <text x="400" y="1414" fill="#94a3b8" font-size="11" font-weight="600">Packages:</text>
+  <rect x="400" y="1426" width="14" height="14" rx="3" fill="#027DFD" fill-opacity="0.3" stroke="#027DFD" stroke-width="1"/>
+  <text x="422" y="1438" fill="#60a5fa" font-size="10">flutter_client (Edge / On-Device)</text>
+
+  <rect x="400" y="1452" width="14" height="14" rx="3" fill="#f39c12" fill-opacity="0.3" stroke="#f39c12" stroke-width="1"/>
+  <text x="422" y="1464" fill="#fbbf24" font-size="10">edge_ml (ONNX Runtime)</text>
+
+  <rect x="400" y="1478" width="14" height="14" rx="3" fill="#ff6b6b" fill-opacity="0.3" stroke="#ff6b6b" stroke-width="1"/>
+  <text x="422" y="1490" fill="#fca5a5" font-size="10">laravel_api (REST Gateway)</text>
+
+  <rect x="400" y="1504" width="14" height="14" rx="3" fill="#00c9a7" fill-opacity="0.3" stroke="#00c9a7" stroke-width="1"/>
+  <text x="422" y="1516" fill="#6ee7b7" font-size="10">fastapi_bkt (BKT Microservice)</text>
+
+  <rect x="400" y="1530" width="14" height="14" rx="3" fill="#5b9bd5" fill-opacity="0.3" stroke="#5b9bd5" stroke-width="1"/>
+  <text x="422" y="1542" fill="#93c5fd" font-size="10">postgresql (Data Persistence)</text>
+
+  <!-- Stereotypes -->
+  <text x="60" y="1546" fill="#94a3b8" font-size="11" font-weight="600">Stereotypes:</text>
+  <text x="60" y="1566" fill="#64748b" font-size="10">«abstract» = Abstract class · «controller» = API Handler · «eloquent model» = ORM Entity</text>
+  <text x="60" y="1584" fill="#64748b" font-size="10">«pydantic model» = Request DTO · «enumeration» = Type-safe constants</text>
+
+  <!-- Watermark -->
+  <text x="60" y="1620" fill="#3b3b5c" font-size="10">SparMate-Ecosystem · UML Class Diagram · Milestone 2</text>
+</svg>

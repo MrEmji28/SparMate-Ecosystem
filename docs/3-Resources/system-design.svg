@@ -1,0 +1,345 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1240" font-family="'Segoe UI', 'Inter', Arial, sans-serif">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f0f1a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a1a2e;stop-opacity:1" />
+    </linearGradient>
+    <!-- Card gradients -->
+    <linearGradient id="flutterGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0553B1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#027DFD;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="laravelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e3342f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ff6b6b;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="fastApiGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#009485;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00c9a7;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="pgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#336791;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5b9bd5;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="stockfishGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B5CF6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#a78bfa;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="onnxGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e67e22;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f39c12;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#6366f1" />
+      <stop offset="50%" style="stop-color:#8b5cf6" />
+      <stop offset="100%" style="stop-color:#a78bfa" />
+    </linearGradient>
+    <!-- Filters -->
+    <filter id="cardShadow" x="-5%" y="-5%" width="115%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+    <!-- Arrow markers -->
+    <marker id="arrowHead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto" fill="#6366f1">
+      <polygon points="0 0, 10 3.5, 0 7" />
+    </marker>
+    <marker id="arrowHeadGreen" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto" fill="#00c9a7">
+      <polygon points="0 0, 10 3.5, 0 7" />
+    </marker>
+    <marker id="arrowHeadRed" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto" fill="#ff6b6b">
+      <polygon points="0 0, 10 3.5, 0 7" />
+    </marker>
+    <marker id="arrowHeadBlue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto" fill="#5b9bd5">
+      <polygon points="0 0, 10 3.5, 0 7" />
+    </marker>
+    <marker id="arrowHeadOrange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto" fill="#f39c12">
+      <polygon points="0 0, 10 3.5, 0 7" />
+    </marker>
+    <marker id="arrowHeadPurple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto" fill="#a78bfa">
+      <polygon points="0 0, 10 3.5, 0 7" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1400" height="1240" fill="url(#bgGrad)" rx="0"/>
+
+  <!-- Subtle grid pattern -->
+  <g opacity="0.03">
+    <line x1="0" y1="100" x2="1400" y2="100" stroke="#fff" stroke-width="1"/>
+    <line x1="0" y1="200" x2="1400" y2="200" stroke="#fff" stroke-width="1"/>
+    <line x1="0" y1="300" x2="1400" y2="300" stroke="#fff" stroke-width="1"/>
+    <line x1="0" y1="400" x2="1400" y2="400" stroke="#fff" stroke-width="1"/>
+    <line x1="0" y1="500" x2="1400" y2="500" stroke="#fff" stroke-width="1"/>
+    <line x1="0" y1="600" x2="1400" y2="600" stroke="#fff" stroke-width="1"/>
+    <line x1="0" y1="700" x2="1400" y2="700" stroke="#fff" stroke-width="1"/>
+    <line x1="0" y1="800" x2="1400" y2="800" stroke="#fff" stroke-width="1"/>
+    <line x1="0" y1="900" x2="1400" y2="900" stroke="#fff" stroke-width="1"/>
+    <line x1="0" y1="1000" x2="1400" y2="1000" stroke="#fff" stroke-width="1"/>
+    <line x1="0" y1="1100" x2="1400" y2="1100" stroke="#fff" stroke-width="1"/>
+    <line x1="200" y1="0" x2="200" y2="1200" stroke="#fff" stroke-width="1"/>
+    <line x1="400" y1="0" x2="400" y2="1200" stroke="#fff" stroke-width="1"/>
+    <line x1="600" y1="0" x2="600" y2="1200" stroke="#fff" stroke-width="1"/>
+    <line x1="800" y1="0" x2="800" y2="1200" stroke="#fff" stroke-width="1"/>
+    <line x1="1000" y1="0" x2="1000" y2="1200" stroke="#fff" stroke-width="1"/>
+    <line x1="1200" y1="0" x2="1200" y2="1200" stroke="#fff" stroke-width="1"/>
+  </g>
+
+  <!-- ===== TITLE ===== -->
+  <text x="700" y="48" text-anchor="middle" fill="url(#titleGrad)" font-size="28" font-weight="700" letter-spacing="2">SparMate Ecosystem — System Architecture</text>
+  <text x="700" y="72" text-anchor="middle" fill="#94a3b8" font-size="13" letter-spacing="1">Hybrid Edge-Computing · Microservice Architecture · Monorepo (SparMate-Ecosystem)</text>
+  <line x1="100" y1="86" x2="1300" y2="86" stroke="#6366f1" stroke-width="1" opacity="0.3"/>
+
+  <!-- ===== TIER LABELS ===== -->
+  <!-- Client Tier -->
+  <rect x="30" y="100" width="160" height="28" rx="14" fill="#0553B1" fill-opacity="0.15" stroke="#027DFD" stroke-width="1" stroke-opacity="0.4"/>
+  <text x="110" y="119" text-anchor="middle" fill="#60a5fa" font-size="12" font-weight="600" letter-spacing="1">CLIENT TIER</text>
+
+  <!-- Backend Tier -->
+  <rect x="30" y="520" width="160" height="28" rx="14" fill="#e3342f" fill-opacity="0.15" stroke="#ff6b6b" stroke-width="1" stroke-opacity="0.4"/>
+  <text x="110" y="539" text-anchor="middle" fill="#ff6b6b" font-size="12" font-weight="600" letter-spacing="1">BACKEND TIER</text>
+
+  <!-- Data Tier -->
+  <rect x="30" y="900" width="160" height="28" rx="14" fill="#336791" fill-opacity="0.15" stroke="#5b9bd5" stroke-width="1" stroke-opacity="0.4"/>
+  <text x="110" y="919" text-anchor="middle" fill="#5b9bd5" font-size="12" font-weight="600" letter-spacing="1">DATA TIER</text>
+
+  <!-- ===================================================== -->
+  <!-- CLIENT TIER — Flutter Mobile App                      -->
+  <!-- ===================================================== -->
+
+  <!-- Flutter App Main Card -->
+  <rect x="100" y="140" width="1200" height="290" rx="16" fill="#1e1e2e" stroke="#027DFD" stroke-width="1.5" stroke-opacity="0.5" filter="url(#cardShadow)"/>
+  <!-- Header bar -->
+  <rect x="100" y="140" width="1200" height="42" rx="16" fill="url(#flutterGrad)" fill-opacity="0.15"/>
+  <rect x="100" y="166" width="1200" height="16" fill="#1e1e2e"/>
+  <!-- Flutter icon -->
+  <circle cx="130" cy="161" r="10" fill="#027DFD" opacity="0.8"/>
+  <text x="130" y="165" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">F</text>
+  <text x="150" y="166" fill="#60a5fa" font-size="16" font-weight="700">Flutter Mobile Application</text>
+  <text x="820" y="166" fill="#94a3b8" font-size="11">(Dart · Native ARM Compilation · Offline-First)</text>
+
+  <!-- Sub-component: UI Layer -->
+  <rect x="130" y="200" width="280" height="210" rx="12" fill="#16162a" stroke="#3b3b5c" stroke-width="1"/>
+  <text x="270" y="224" text-anchor="middle" fill="#c4b5fd" font-size="13" font-weight="600">🎨 UI / UX Layer</text>
+  <line x1="150" y1="234" x2="390" y2="234" stroke="#3b3b5c" stroke-width="0.5"/>
+  <text x="150" y="256" fill="#94a3b8" font-size="11">• Dark Mode Arena Interface</text>
+  <text x="150" y="276" fill="#94a3b8" font-size="11">• Real-Time Chessboard</text>
+  <text x="150" y="296" fill="#94a3b8" font-size="11">• Pressure Metric Gauge</text>
+  <text x="150" y="316" fill="#94a3b8" font-size="11">• BKT Mastery Dashboard</text>
+  <text x="150" y="336" fill="#94a3b8" font-size="11">• Adaptive Lesson Viewer</text>
+  <text x="150" y="356" fill="#94a3b8" font-size="11">• Post-Game Analysis Panel</text>
+  <rect x="150" y="370" width="240" height="22" rx="6" fill="#6366f1" fill-opacity="0.1" stroke="#6366f1" stroke-width="0.5"/>
+  <text x="270" y="385" text-anchor="middle" fill="#818cf8" font-size="10">Designed in Figma · Material 3</text>
+
+  <!-- Sub-component: Stockfish Engine (Edge) -->
+  <rect x="440" y="200" width="280" height="210" rx="12" fill="#16162a" stroke="#8B5CF6" stroke-width="1"/>
+  <text x="580" y="224" text-anchor="middle" fill="#c4b5fd" font-size="13" font-weight="600">♟️ Stockfish Engine (Edge)</text>
+  <line x1="460" y1="234" x2="700" y2="234" stroke="#3b3b5c" stroke-width="0.5"/>
+  <text x="460" y="256" fill="#94a3b8" font-size="11">• C++ Binary via Dart FFI</text>
+  <text x="460" y="276" fill="#94a3b8" font-size="11">• Dart Isolates (Background)</text>
+  <text x="460" y="296" fill="#94a3b8" font-size="11">• UCI Parameter Weighting</text>
+  <text x="460" y="316" fill="#94a3b8" font-size="11">• Heuristic Style Profiles:</text>
+  <!-- Persona badges -->
+  <rect x="470" y="326" width="70" height="20" rx="4" fill="#ef4444" fill-opacity="0.2" stroke="#ef4444" stroke-width="0.5"/>
+  <text x="505" y="340" text-anchor="middle" fill="#fca5a5" font-size="9" font-weight="600">Tactical</text>
+  <rect x="548" y="326" width="76" height="20" rx="4" fill="#3b82f6" fill-opacity="0.2" stroke="#3b82f6" stroke-width="0.5"/>
+  <text x="586" y="340" text-anchor="middle" fill="#93c5fd" font-size="9" font-weight="600">Positional</text>
+  <rect x="632" y="326" width="76" height="20" rx="4" fill="#22c55e" fill-opacity="0.2" stroke="#22c55e" stroke-width="0.5"/>
+  <text x="670" y="340" text-anchor="middle" fill="#86efac" font-size="9" font-weight="600">Universal</text>
+  <text x="460" y="368" fill="#94a3b8" font-size="11">• Oracle-Guided Soft Shielding</text>
+  <rect x="460" y="382" width="240" height="22" rx="6" fill="#8B5CF6" fill-opacity="0.1" stroke="#8B5CF6" stroke-width="0.5"/>
+  <text x="580" y="397" text-anchor="middle" fill="#a78bfa" font-size="10">Avg Latency: 312ms · Offline</text>
+
+  <!-- Sub-component: ONNX Runtime (Edge ML) -->
+  <rect x="750" y="200" width="280" height="210" rx="12" fill="#16162a" stroke="#e67e22" stroke-width="1"/>
+  <text x="890" y="224" text-anchor="middle" fill="#fbbf24" font-size="13" font-weight="600">🧠 ONNX Runtime (Edge ML)</text>
+  <line x1="770" y1="234" x2="1010" y2="234" stroke="#3b3b5c" stroke-width="0.5"/>
+  <text x="770" y="256" fill="#94a3b8" font-size="11">• Scikit-Learn → ONNX Export</text>
+  <text x="770" y="276" fill="#94a3b8" font-size="11">• Random Forest Classifier</text>
+  <text x="770" y="296" fill="#94a3b8" font-size="11">• Mistake Classification:</text>
+  <!-- Classification badges -->
+  <rect x="780" y="306" width="110" height="18" rx="4" fill="#ef4444" fill-opacity="0.15" stroke="#ef4444" stroke-width="0.5"/>
+  <text x="835" y="319" text-anchor="middle" fill="#fca5a5" font-size="9">Tactical Oversight</text>
+  <rect x="898" y="306" width="110" height="18" rx="4" fill="#3b82f6" fill-opacity="0.15" stroke="#3b82f6" stroke-width="0.5"/>
+  <text x="953" y="319" text-anchor="middle" fill="#93c5fd" font-size="9">Positional Error</text>
+  <text x="770" y="350" fill="#94a3b8" font-size="11">• Pre/Post Blunder Analysis</text>
+  <text x="770" y="370" fill="#94a3b8" font-size="11">• Offline Inference on Device</text>
+  <rect x="770" y="382" width="240" height="22" rx="6" fill="#e67e22" fill-opacity="0.1" stroke="#e67e22" stroke-width="0.5"/>
+  <text x="890" y="397" text-anchor="middle" fill="#f39c12" font-size="10">Accuracy: 87.4% · F1: 0.85</text>
+
+  <!-- Sub-component: Deterministic Risk Metrics -->
+  <rect x="1060" y="200" width="220" height="210" rx="12" fill="#16162a" stroke="#6366f1" stroke-width="1"/>
+  <text x="1170" y="224" text-anchor="middle" fill="#c4b5fd" font-size="13" font-weight="600">📊 Risk Metrics Engine</text>
+  <line x1="1080" y1="234" x2="1260" y2="234" stroke="#3b3b5c" stroke-width="0.5"/>
+  <text x="1080" y="256" fill="#94a3b8" font-size="11">• Piece Tension Index</text>
+  <text x="1080" y="276" fill="#94a3b8" font-size="11">• King Safety Score</text>
+  <text x="1080" y="296" fill="#94a3b8" font-size="11">• Time-Pressure Factor</text>
+  <text x="1080" y="316" fill="#94a3b8" font-size="11">• Pawn Structure Health</text>
+  <text x="1080" y="336" fill="#94a3b8" font-size="11">• Centipawn Loss (CPL)</text>
+  <text x="1080" y="356" fill="#94a3b8" font-size="11">• Blunder Probability</text>
+  <rect x="1080" y="382" width="200" height="22" rx="6" fill="#6366f1" fill-opacity="0.1" stroke="#6366f1" stroke-width="0.5"/>
+  <text x="1170" y="397" text-anchor="middle" fill="#818cf8" font-size="10">Deterministic · Real-Time</text>
+
+  <!-- Internal Flutter arrows: Stockfish → ONNX → Risk Metrics -->
+  <path d="M 720 310 L 748 310" stroke="#a78bfa" stroke-width="1.5" fill="none" marker-end="url(#arrowHeadPurple)"/>
+  <path d="M 1030 310 L 1058 310" stroke="#f39c12" stroke-width="1.5" fill="none" marker-end="url(#arrowHeadOrange)"/>
+
+  <!-- ===================================================== -->
+  <!-- ARROWS: CLIENT → BACKEND (with proper spacing)       -->
+  <!-- ===================================================== -->
+
+  <!-- Arrow down: Flutter → Laravel (POST PGN) — right side -->
+  <path d="M 380 430 L 380 555" stroke="#ff6b6b" stroke-width="2" fill="none" marker-end="url(#arrowHeadRed)" stroke-dasharray="6,3"/>
+  <rect x="300" y="480" width="165" height="22" rx="6" fill="#1e1e2e" stroke="#ff6b6b" stroke-width="0.5" stroke-opacity="0.5"/>
+  <text x="382" y="495" text-anchor="middle" fill="#fca5a5" font-size="10">POST /api/match (PGN)</text>
+
+  <!-- Arrow up: Laravel → Flutter (Lessons response) — left side -->
+  <path d="M 220 555 L 220 430" stroke="#6366f1" stroke-width="2" fill="none" marker-end="url(#arrowHead)" stroke-dasharray="6,3"/>
+  <rect x="150" y="480" width="130" height="22" rx="6" fill="#1e1e2e" stroke="#6366f1" stroke-width="0.5" stroke-opacity="0.5"/>
+  <text x="215" y="495" text-anchor="middle" fill="#818cf8" font-size="10">← Lesson Plan JSON</text>
+
+  <!-- SLA Badge (between tiers, right side) -->
+  <rect x="1150" y="468" width="200" height="46" rx="12" fill="#16162a" stroke="#6366f1" stroke-width="1.5"/>
+  <text x="1250" y="488" text-anchor="middle" fill="#c4b5fd" font-size="11" font-weight="600">⏱ Round-Trip SLA</text>
+  <text x="1250" y="506" text-anchor="middle" fill="#22c55e" font-size="13" font-weight="700">≤ 1.1s (Target: 2s)</text>
+
+  <!-- ===================================================== -->
+  <!-- BACKEND TIER — Laravel + FastAPI                      -->
+  <!-- ===================================================== -->
+
+  <!-- Laravel API Gateway -->
+  <rect x="100" y="560" width="600" height="250" rx="16" fill="#1e1e2e" stroke="#ff6b6b" stroke-width="1.5" stroke-opacity="0.5" filter="url(#cardShadow)"/>
+  <rect x="100" y="560" width="600" height="42" rx="16" fill="url(#laravelGrad)" fill-opacity="0.15"/>
+  <rect x="100" y="586" width="600" height="16" fill="#1e1e2e"/>
+  <circle cx="130" cy="581" r="10" fill="#e3342f" opacity="0.8"/>
+  <text x="130" y="585" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">L</text>
+  <text x="150" y="586" fill="#fca5a5" font-size="16" font-weight="700">Laravel 13 API Gateway</text>
+  <text x="470" y="586" fill="#94a3b8" font-size="11">(PHP 8.3 · RESTful · Sanctum Auth)</text>
+
+  <!-- Laravel sub-items -->
+  <rect x="130" y="618" width="250" height="170" rx="10" fill="#16162a" stroke="#3b3b5c" stroke-width="1"/>
+  <text x="255" y="640" text-anchor="middle" fill="#fca5a5" font-size="12" font-weight="600">🔐 Authentication</text>
+  <line x1="150" y1="648" x2="360" y2="648" stroke="#3b3b5c" stroke-width="0.5"/>
+  <text x="150" y="668" fill="#94a3b8" font-size="11">• Laravel Sanctum Tokens</text>
+  <text x="150" y="688" fill="#94a3b8" font-size="11">• Mobile JWT Validation</text>
+  <text x="150" y="708" fill="#94a3b8" font-size="11">• User Session Management</text>
+  <text x="150" y="728" fill="#94a3b8" font-size="11">• DPA / GDPR Compliance</text>
+  <text x="150" y="748" fill="#94a3b8" font-size="11">• Rate Limiting</text>
+
+  <rect x="410" y="618" width="270" height="170" rx="10" fill="#16162a" stroke="#3b3b5c" stroke-width="1"/>
+  <text x="545" y="640" text-anchor="middle" fill="#fca5a5" font-size="12" font-weight="600">🔄 API Routing Engine</text>
+  <line x1="430" y1="648" x2="660" y2="648" stroke="#3b3b5c" stroke-width="0.5"/>
+  <text x="430" y="668" fill="#94a3b8" font-size="11">• POST /api/match (PGN)</text>
+  <text x="430" y="688" fill="#94a3b8" font-size="11">• GET /api/lessons</text>
+  <text x="430" y="708" fill="#94a3b8" font-size="11">• Eloquent ORM Queries</text>
+  <text x="430" y="728" fill="#94a3b8" font-size="11">• Payload Validation</text>
+  <text x="430" y="748" fill="#94a3b8" font-size="11">• FastAPI Microservice Proxy</text>
+
+  <!-- FastAPI BKT Microservice -->
+  <rect x="750" y="560" width="550" height="250" rx="16" fill="#1e1e2e" stroke="#00c9a7" stroke-width="1.5" stroke-opacity="0.5" filter="url(#cardShadow)"/>
+  <rect x="750" y="560" width="550" height="42" rx="16" fill="url(#fastApiGrad)" fill-opacity="0.15"/>
+  <rect x="750" y="586" width="550" height="16" fill="#1e1e2e"/>
+  <circle cx="780" cy="581" r="10" fill="#009485" opacity="0.8"/>
+  <text x="780" y="585" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">⚡</text>
+  <text x="800" y="586" fill="#6ee7b7" font-size="16" font-weight="700">Python FastAPI Microservice</text>
+  <text x="1100" y="586" fill="#94a3b8" font-size="11">(BKT Engine · Decoupled)</text>
+
+  <!-- FastAPI sub-items -->
+  <rect x="780" y="618" width="240" height="170" rx="10" fill="#16162a" stroke="#3b3b5c" stroke-width="1"/>
+  <text x="900" y="640" text-anchor="middle" fill="#6ee7b7" font-size="12" font-weight="600">📈 BKT Computation</text>
+  <line x1="800" y1="648" x2="1000" y2="648" stroke="#3b3b5c" stroke-width="0.5"/>
+  <text x="800" y="668" fill="#94a3b8" font-size="11">• P(Learn) Calculation</text>
+  <text x="800" y="688" fill="#94a3b8" font-size="11">• P(Slip) / P(Guess)</text>
+  <text x="800" y="708" fill="#94a3b8" font-size="11">• Posterior Probability</text>
+  <text x="800" y="728" fill="#94a3b8" font-size="11">• Mastery Matrix Update</text>
+  <text x="800" y="748" fill="#94a3b8" font-size="11">• Corbett-Anderson Model</text>
+
+  <rect x="1050" y="618" width="230" height="170" rx="10" fill="#16162a" stroke="#3b3b5c" stroke-width="1"/>
+  <text x="1165" y="640" text-anchor="middle" fill="#6ee7b7" font-size="12" font-weight="600">📚 Curriculum Engine</text>
+  <line x1="1070" y1="648" x2="1260" y2="648" stroke="#3b3b5c" stroke-width="0.5"/>
+  <text x="1070" y="668" fill="#94a3b8" font-size="11">• Content-Based Filtering</text>
+  <text x="1070" y="688" fill="#94a3b8" font-size="11">• Skill Gap Identification</text>
+  <text x="1070" y="708" fill="#94a3b8" font-size="11">• Lesson Recommendation</text>
+  <text x="1070" y="728" fill="#94a3b8" font-size="11">• Adaptive Difficulty</text>
+  <text x="1070" y="748" fill="#94a3b8" font-size="11">• Cognitive Skill Mapping</text>
+
+  <!-- ===================================================== -->
+  <!-- ARROWS: Laravel ↔ FastAPI (horizontal)               -->
+  <!-- ===================================================== -->
+
+  <!-- Laravel → FastAPI (Classified blunders) -->
+  <path d="M 700 660 L 778 660" stroke="#00c9a7" stroke-width="2" fill="none" marker-end="url(#arrowHeadGreen)"/>
+  <rect x="710" y="638" width="75" height="18" rx="4" fill="#1e1e2e" stroke="#00c9a7" stroke-width="0.5" stroke-opacity="0.5"/>
+  <text x="748" y="651" text-anchor="middle" fill="#6ee7b7" font-size="9">Blunders →</text>
+
+  <!-- FastAPI → Laravel (New BKT matrix / Lesson plan) -->
+  <path d="M 778 740 L 700 740" stroke="#00c9a7" stroke-width="2" fill="none" marker-end="url(#arrowHeadRed)" stroke-dasharray="6,3"/>
+  <rect x="710" y="748" width="78" height="18" rx="4" fill="#1e1e2e" stroke="#00c9a7" stroke-width="0.5" stroke-opacity="0.5"/>
+  <text x="749" y="761" text-anchor="middle" fill="#6ee7b7" font-size="9">← Lessons</text>
+
+  <!-- ===================================================== -->
+  <!-- ARROWS: BACKEND → DATA TIER                          -->
+  <!-- ===================================================== -->
+
+  <!-- Laravel → PostgreSQL -->
+  <path d="M 400 810 L 400 935" stroke="#5b9bd5" stroke-width="2" fill="none" marker-end="url(#arrowHeadBlue)"/>
+  <rect x="345" y="860" width="110" height="18" rx="4" fill="#1e1e2e" stroke="#5b9bd5" stroke-width="0.5" stroke-opacity="0.5"/>
+  <text x="400" y="873" text-anchor="middle" fill="#93c5fd" font-size="9">Eloquent ORM</text>
+
+  <!-- FastAPI → PostgreSQL -->
+  <path d="M 1000 810 L 1000 935" stroke="#5b9bd5" stroke-width="2" fill="none" marker-end="url(#arrowHeadBlue)"/>
+  <rect x="940" y="860" width="120" height="18" rx="4" fill="#1e1e2e" stroke="#5b9bd5" stroke-width="0.5" stroke-opacity="0.5"/>
+  <text x="1000" y="873" text-anchor="middle" fill="#93c5fd" font-size="9">JSONB Update</text>
+
+  <!-- ===================================================== -->
+  <!-- DATA TIER — PostgreSQL                               -->
+  <!-- ===================================================== -->
+
+  <rect x="300" y="940" width="800" height="200" rx="16" fill="#1e1e2e" stroke="#5b9bd5" stroke-width="1.5" stroke-opacity="0.5" filter="url(#cardShadow)"/>
+  <rect x="300" y="940" width="800" height="42" rx="16" fill="url(#pgGrad)" fill-opacity="0.15"/>
+  <rect x="300" y="966" width="800" height="16" fill="#1e1e2e"/>
+  <circle cx="330" cy="961" r="10" fill="#336791" opacity="0.8"/>
+  <text x="330" y="965" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">PG</text>
+  <text x="350" y="966" fill="#93c5fd" font-size="16" font-weight="700">PostgreSQL Database</text>
+  <text x="620" y="966" fill="#94a3b8" font-size="11">(ACID Compliant · Hybrid Relational + JSONB)</text>
+
+  <!-- PostgreSQL sub-items -->
+  <rect x="330" y="998" width="230" height="120" rx="10" fill="#16162a" stroke="#3b3b5c" stroke-width="1"/>
+  <text x="445" y="1020" text-anchor="middle" fill="#93c5fd" font-size="12" font-weight="600">📋 Relational Tables</text>
+  <line x1="350" y1="1028" x2="540" y2="1028" stroke="#3b3b5c" stroke-width="0.5"/>
+  <text x="350" y="1048" fill="#94a3b8" font-size="11">• users (Auth/Sanctum)</text>
+  <text x="350" y="1068" fill="#94a3b8" font-size="11">• matches (History/PGN)</text>
+  <text x="350" y="1088" fill="#94a3b8" font-size="11">• lessons (Catalog)</text>
+  <text x="350" y="1108" fill="#94a3b8" font-size="11">• user_progress</text>
+
+  <rect x="585" y="998" width="230" height="120" rx="10" fill="#16162a" stroke="#f39c12" stroke-width="1"/>
+  <text x="700" y="1020" text-anchor="middle" fill="#fbbf24" font-size="12" font-weight="600">🗂️ JSONB Columns</text>
+  <line x1="605" y1="1028" x2="795" y2="1028" stroke="#3b3b5c" stroke-width="0.5"/>
+  <text x="605" y="1048" fill="#94a3b8" font-size="11">• bkt_matrix (Mastery)</text>
+  <text x="605" y="1068" fill="#94a3b8" font-size="11">• risk_metrics (History)</text>
+  <text x="605" y="1088" fill="#94a3b8" font-size="11">• game_annotations</text>
+  <text x="605" y="1108" fill="#94a3b8" font-size="11">• curriculum_state</text>
+
+  <rect x="840" y="998" width="230" height="120" rx="10" fill="#16162a" stroke="#3b3b5c" stroke-width="1"/>
+  <text x="955" y="1020" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="600">🔒 Data Policies</text>
+  <line x1="860" y1="1028" x2="1050" y2="1028" stroke="#3b3b5c" stroke-width="0.5"/>
+  <text x="860" y="1048" fill="#94a3b8" font-size="11">• Encrypted at Rest</text>
+  <text x="860" y="1068" fill="#94a3b8" font-size="11">• GDPR / DPA Compliant</text>
+  <text x="860" y="1088" fill="#94a3b8" font-size="11">• Anonymized Analytics</text>
+  <text x="860" y="1108" fill="#94a3b8" font-size="11">• User Consent Required</text>
+
+  <!-- ===================================================== -->
+  <!-- LICHESS DATA SOURCE BADGE                            -->
+  <!-- ===================================================== -->
+  <rect x="1150" y="1000" width="150" height="62" rx="12" fill="#16162a" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="1225" y="1022" text-anchor="middle" fill="#94a3b8" font-size="11" font-weight="600">📥 Training Data</text>
+  <text x="1225" y="1040" text-anchor="middle" fill="#60a5fa" font-size="11">Lichess DB</text>
+  <text x="1225" y="1054" text-anchor="middle" fill="#94a3b8" font-size="9">(10K+ Games)</text>
+
+  <!-- ===================================================== -->
+  <!-- DEVOPS / TOOLING STRIP                               -->
+  <!-- ===================================================== -->
+  <rect x="100" y="1155" width="1200" height="34" rx="8" fill="#16162a" stroke="#3b3b5c" stroke-width="1"/>
+  <text x="700" y="1177" text-anchor="middle" fill="#64748b" font-size="11" letter-spacing="1">
+    Git Monorepo · GitHub Actions CI/CD · Obsidian Docs-as-Code · Figma UI/UX · Agile Scrum (2-Week Sprints) · GPLv3 License
+  </text>
+</svg>
