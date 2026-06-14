@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import '../../../core/theme/app_colors.dart';
 
 /// Training Plan card with task list and Start Session CTA.
+/// Accepts optional [planItems] from the coaching API; falls back to demo data.
 class TrainingPlanCard extends StatelessWidget {
-  const TrainingPlanCard({super.key});
+  final List<dynamic>? planItems;
+
+  const TrainingPlanCard({super.key, this.planItems});
 
   @override
   Widget build(BuildContext context) {
     final tt = Theme.of(context).textTheme;
+    final items = _buildItems();
 
     return Container(
       padding: const EdgeInsets.all(20),
@@ -33,7 +37,7 @@ class TrainingPlanCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
-                  '3 Tasks',
+                  '${items.length} Tasks',
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w700,
@@ -46,32 +50,17 @@ class TrainingPlanCard extends StatelessWidget {
           const SizedBox(height: 16),
 
           // ── Task items ──
-          _buildTask(
-            context,
-            icon: Icons.school_rounded,
-            typeLabel: 'LESSON',
-            typeColor: AppColors.primaryBlue,
-            title: 'Pawn Structure Masterclass',
-            subtitle: null,
-          ),
-          const SizedBox(height: 8),
-          _buildTask(
-            context,
-            icon: Icons.extension_rounded,
-            typeLabel: 'PUZZLES',
-            typeColor: AppColors.primaryBlue,
-            title: 'Mid-game Tactical Drills',
-            subtitle: null,
-          ),
-          const SizedBox(height: 8),
-          _buildTask(
-            context,
-            icon: Icons.sports_esports_rounded,
-            typeLabel: 'PRACTICE',
-            typeColor: AppColors.primaryBlue,
-            title: 'Spar with Petrosian',
-            subtitle: 'Focusing on positional play',
-          ),
+          for (var i = 0; i < items.length; i++) ...[
+            if (i > 0) const SizedBox(height: 8),
+            _buildTask(
+              context,
+              icon: items[i]['icon'] as IconData,
+              typeLabel: items[i]['type'] as String,
+              typeColor: AppColors.primaryBlue,
+              title: items[i]['title'] as String,
+              subtitle: items[i]['subtitle'] as String?,
+            ),
+          ],
           const SizedBox(height: 20),
 
           // ── Start Session button ──
@@ -96,6 +85,52 @@ class TrainingPlanCard extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  List<Map<String, dynamic>> _buildItems() {
+    if (planItems == null || planItems!.isEmpty) {
+      // Demo/fallback items
+      return [
+        {
+          'icon': Icons.school_rounded,
+          'type': 'LESSON',
+          'title': 'Pawn Structure Masterclass',
+          'subtitle': null,
+        },
+        {
+          'icon': Icons.extension_rounded,
+          'type': 'PUZZLES',
+          'title': 'Mid-game Tactical Drills',
+          'subtitle': null,
+        },
+        {
+          'icon': Icons.sports_esports_rounded,
+          'type': 'PRACTICE',
+          'title': 'Spar with Petrosian',
+          'subtitle': 'Focusing on positional play',
+        },
+      ];
+    }
+
+    // Map API plan items to UI items
+    return planItems!.map((item) {
+      final map = item as Map<String, dynamic>;
+      final type = (map['type'] ?? 'lesson').toString().toUpperCase();
+      final icon = switch (type) {
+        'LESSON' => Icons.school_rounded,
+        'PUZZLE' || 'PUZZLES' => Icons.extension_rounded,
+        'PRACTICE' || 'SPARRING' => Icons.sports_esports_rounded,
+        _ => Icons.assignment_rounded,
+      };
+      return {
+        'icon': icon,
+        'type': type,
+        'title': map['activity'] ?? map['title'] ?? 'Training Activity',
+        'subtitle': map['day'] != null
+            ? '${map['day']} • ${map['duration_min'] ?? 20} min'
+            : null,
+      };
+    }).toList();
   }
 
   Widget _buildTask(

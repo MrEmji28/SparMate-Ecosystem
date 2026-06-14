@@ -1,0 +1,500 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1520 1820" width="1520" height="1820">
+  <defs>
+    <filter id="shadow" x="-2%" y="-1%" width="104%" height="105%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.35"/>
+    </filter>
+    <style>
+      text { font-family: Inter, 'Segoe UI', system-ui, -apple-system, sans-serif; }
+      .title { font-size: 22px; font-weight: 800; fill: #e2e8f0; }
+      .sub { font-size: 11.5px; fill: #4a5568; }
+      .sec-title { font-size: 14px; font-weight: 700; fill: #e2e8f0; }
+      .sec-sub { font-size: 10px; fill: #64748b; font-weight: 500; }
+      .th { font-size: 10px; font-weight: 700; fill: #64748b; text-transform: uppercase; letter-spacing: 1px; }
+      .route { font-family: 'SF Mono', Menlo, Consolas, monospace; font-size: 11.5px; fill: #c1c9d9; }
+      .desc { font-size: 10.5px; fill: #7a8599; }
+      .status { font-family: 'SF Mono', Menlo, Consolas, monospace; font-size: 10px; fill: #64748b; font-weight: 600; }
+      .leg { font-size: 10px; fill: #64748b; }
+      .auth-badge { font-size: 8px; font-weight: 700; fill: #1a1d2e; }
+      .method-text { font-size: 9.5px; font-weight: 800; fill: white; font-family: 'SF Mono', Menlo, Consolas, monospace; }
+      .badge-label { font-size: 8.5px; font-weight: 700; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1520" height="1820" fill="#0f1117"/>
+
+  <!-- Title -->
+  <text x="760" y="38" text-anchor="middle" class="title">SparMate — API Routing Table</text>
+  <text x="760" y="56" text-anchor="middle" class="sub">Laravel 12 Gateway  ·  FastAPI BKT Microservice  ·  Sanctum Auth  ·  Base: /api/v1</text>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 1: AUTHENTICATION                                        -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <g filter="url(#shadow)">
+    <rect x="40" y="80" width="1440" height="190" rx="10" fill="#1a1d2e" stroke="#2a2e42" stroke-width="1.5"/>
+    <!-- Header -->
+    <rect x="41" y="81" width="1438" height="36" rx="9" fill="#4f46e5"/>
+    <rect x="41" y="100" width="1438" height="17" fill="#4f46e5"/>
+    <text x="60" y="104" class="sec-title">Authentication</text>
+    <text x="250" y="104" class="sec-sub" fill="#c7d2fe">AuthController  ·  4 endpoints</text>
+    <!-- Column headers -->
+    <text x="60" y="136" class="th">Method</text>
+    <text x="140" y="136" class="th">Endpoint</text>
+    <text x="580" y="136" class="th">Auth</text>
+    <text x="660" y="136" class="th">Description</text>
+    <text x="1200" y="136" class="th">Response</text>
+    <line x1="55" y1="142" x2="1465" y2="142" stroke="#2a2e42" stroke-width="0.8"/>
+
+    <!-- POST /register -->
+    <rect x="60" y="152" width="50" height="18" rx="4" fill="#22c55e"/>
+    <text x="85" y="164" text-anchor="middle" class="method-text">POST</text>
+    <text x="140" y="165" class="route">/v1/register</text>
+    <rect x="580" y="153" width="48" height="16" rx="3" fill="#334155"/>
+    <text x="604" y="164" text-anchor="middle" class="badge-label" fill="#94a3b8">Public</text>
+    <text x="660" y="165" class="desc">Register a new user, initialize BKT matrix, return Sanctum token</text>
+    <text x="1200" y="165" class="status">201  { user, token }</text>
+
+    <!-- POST /login -->
+    <rect x="60" y="180" width="50" height="18" rx="4" fill="#22c55e"/>
+    <text x="85" y="192" text-anchor="middle" class="method-text">POST</text>
+    <text x="140" y="193" class="route">/v1/login</text>
+    <rect x="580" y="181" width="48" height="16" rx="3" fill="#334155"/>
+    <text x="604" y="192" text-anchor="middle" class="badge-label" fill="#94a3b8">Public</text>
+    <text x="660" y="193" class="desc">Authenticate with email + password, return Sanctum token</text>
+    <text x="1200" y="193" class="status">200  { user, token }</text>
+
+    <!-- POST /logout -->
+    <rect x="60" y="208" width="50" height="18" rx="4" fill="#22c55e"/>
+    <text x="85" y="220" text-anchor="middle" class="method-text">POST</text>
+    <text x="140" y="221" class="route">/v1/logout</text>
+    <rect x="580" y="209" width="62" height="16" rx="3" fill="#3b2d7c"/>
+    <text x="611" y="220" text-anchor="middle" class="badge-label" fill="#a78bfa">Bearer</text>
+    <text x="660" y="221" class="desc">Revoke current access token</text>
+    <text x="1200" y="221" class="status">200  { message }</text>
+
+    <!-- GET /user -->
+    <rect x="60" y="236" width="50" height="18" rx="4" fill="#3b82f6"/>
+    <text x="85" y="248" text-anchor="middle" class="method-text">GET</text>
+    <text x="140" y="249" class="route">/v1/user</text>
+    <rect x="580" y="237" width="62" height="16" rx="3" fill="#3b2d7c"/>
+    <text x="611" y="248" text-anchor="middle" class="badge-label" fill="#a78bfa">Bearer</text>
+    <text x="660" y="249" class="desc">Return authenticated user profile with BKT matrix</text>
+    <text x="1200" y="249" class="status">200  { user + bktMatrix }</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 2: DASHBOARD                                              -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <g filter="url(#shadow)">
+    <rect x="40" y="290" width="1440" height="100" rx="10" fill="#1a1d2e" stroke="#2a2e42" stroke-width="1.5"/>
+    <rect x="41" y="291" width="1438" height="36" rx="9" fill="#0891b2"/>
+    <rect x="41" y="310" width="1438" height="17" fill="#0891b2"/>
+    <text x="60" y="314" class="sec-title">Dashboard</text>
+    <text x="210" y="314" class="sec-sub" fill="#a5f3fc">DashboardController  ·  1 endpoint</text>
+    <text x="60" y="346" class="th">Method</text>
+    <text x="140" y="346" class="th">Endpoint</text>
+    <text x="580" y="346" class="th">Auth</text>
+    <text x="660" y="346" class="th">Description</text>
+    <text x="1200" y="346" class="th">Response</text>
+    <line x1="55" y1="352" x2="1465" y2="352" stroke="#2a2e42" stroke-width="0.8"/>
+
+    <!-- GET /dashboard -->
+    <rect x="60" y="362" width="50" height="18" rx="4" fill="#3b82f6"/>
+    <text x="85" y="374" text-anchor="middle" class="method-text">GET</text>
+    <text x="140" y="375" class="route">/v1/dashboard</text>
+    <rect x="580" y="363" width="62" height="16" rx="3" fill="#3b2d7c"/>
+    <text x="611" y="374" text-anchor="middle" class="badge-label" fill="#a78bfa">Bearer</text>
+    <text x="660" y="375" class="desc">Home screen aggregate: active lesson, recent match, daily puzzles, coaching, stats</text>
+    <text x="1200" y="375" class="status">200  { user, active_lesson, … }</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 3: LESSONS                                                -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <g filter="url(#shadow)">
+    <rect x="40" y="410" width="1440" height="155" rx="10" fill="#1a1d2e" stroke="#2a2e42" stroke-width="1.5"/>
+    <rect x="41" y="411" width="1438" height="36" rx="9" fill="#059669"/>
+    <rect x="41" y="430" width="1438" height="17" fill="#059669"/>
+    <text x="60" y="434" class="sec-title">Lessons</text>
+    <text x="170" y="434" class="sec-sub" fill="#a7f3d0">LessonController  ·  3 endpoints</text>
+    <text x="60" y="466" class="th">Method</text>
+    <text x="140" y="466" class="th">Endpoint</text>
+    <text x="580" y="466" class="th">Auth</text>
+    <text x="660" y="466" class="th">Description</text>
+    <text x="1200" y="466" class="th">Response</text>
+    <line x1="55" y1="472" x2="1465" y2="472" stroke="#2a2e42" stroke-width="0.8"/>
+
+    <!-- GET /lessons -->
+    <rect x="60" y="482" width="50" height="18" rx="4" fill="#3b82f6"/>
+    <text x="85" y="494" text-anchor="middle" class="method-text">GET</text>
+    <text x="140" y="495" class="route">/v1/lessons</text>
+    <rect x="580" y="483" width="62" height="16" rx="3" fill="#3b2d7c"/>
+    <text x="611" y="494" text-anchor="middle" class="badge-label" fill="#a78bfa">Bearer</text>
+    <text x="660" y="495" class="desc">List all lessons with user progress. Filter: ?category=Opening</text>
+    <text x="1200" y="495" class="status">200  { lessons[], active[], … }</text>
+
+    <!-- GET /lessons/{lesson} -->
+    <rect x="60" y="510" width="50" height="18" rx="4" fill="#3b82f6"/>
+    <text x="85" y="522" text-anchor="middle" class="method-text">GET</text>
+    <text x="140" y="523" class="route">/v1/lessons/{lesson}</text>
+    <rect x="580" y="511" width="62" height="16" rx="3" fill="#3b2d7c"/>
+    <text x="611" y="522" text-anchor="middle" class="badge-label" fill="#a78bfa">Bearer</text>
+    <text x="660" y="523" class="desc">Single lesson with full chapter content + user progress</text>
+    <text x="1200" y="523" class="status">200  { lesson, progress }</text>
+
+    <!-- POST /lessons/{lesson}/progress -->
+    <rect x="60" y="538" width="50" height="18" rx="4" fill="#22c55e"/>
+    <text x="85" y="550" text-anchor="middle" class="method-text">POST</text>
+    <text x="140" y="551" class="route">/v1/lessons/{lesson}/progress</text>
+    <rect x="580" y="539" width="62" height="16" rx="3" fill="#3b2d7c"/>
+    <text x="611" y="550" text-anchor="middle" class="badge-label" fill="#a78bfa">Bearer</text>
+    <text x="660" y="551" class="desc">Update lesson progress. Body: { current_chapter_id, progress: 0.0–1.0 }</text>
+    <text x="1200" y="551" class="status">200  { message, progress }</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 4: GRANDMASTERS                                           -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <g filter="url(#shadow)">
+    <rect x="40" y="585" width="1440" height="128" rx="10" fill="#1a1d2e" stroke="#2a2e42" stroke-width="1.5"/>
+    <rect x="41" y="586" width="1438" height="36" rx="9" fill="#d97706"/>
+    <rect x="41" y="605" width="1438" height="17" fill="#d97706"/>
+    <text x="60" y="609" class="sec-title">Grandmasters</text>
+    <text x="230" y="609" class="sec-sub" fill="#fde68a">GrandmasterController  ·  2 endpoints</text>
+    <text x="60" y="641" class="th">Method</text>
+    <text x="140" y="641" class="th">Endpoint</text>
+    <text x="580" y="641" class="th">Auth</text>
+    <text x="660" y="641" class="th">Description</text>
+    <text x="1200" y="641" class="th">Response</text>
+    <line x1="55" y1="647" x2="1465" y2="647" stroke="#2a2e42" stroke-width="0.8"/>
+
+    <!-- GET /grandmasters -->
+    <rect x="60" y="657" width="50" height="18" rx="4" fill="#3b82f6"/>
+    <text x="85" y="669" text-anchor="middle" class="method-text">GET</text>
+    <text x="140" y="670" class="route">/v1/grandmasters</text>
+    <rect x="580" y="658" width="62" height="16" rx="3" fill="#3b2d7c"/>
+    <text x="611" y="669" text-anchor="middle" class="badge-label" fill="#a78bfa">Bearer</text>
+    <text x="660" y="670" class="desc">List all AI grandmaster personas for the GM Selection screen</text>
+    <text x="1200" y="670" class="status">200  { grandmasters[] }</text>
+
+    <!-- GET /grandmasters/{grandmaster} -->
+    <rect x="60" y="685" width="50" height="18" rx="4" fill="#3b82f6"/>
+    <text x="85" y="697" text-anchor="middle" class="method-text">GET</text>
+    <text x="140" y="698" class="route">/v1/grandmasters/{grandmaster}</text>
+    <rect x="580" y="686" width="62" height="16" rx="3" fill="#3b2d7c"/>
+    <text x="611" y="697" text-anchor="middle" class="badge-label" fill="#a78bfa">Bearer</text>
+    <text x="660" y="698" class="desc">Single grandmaster profile (name, style, strengths, openings)</text>
+    <text x="1200" y="698" class="status">200  { grandmaster }</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 5: SPARRING MATCHES                                       -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <g filter="url(#shadow)">
+    <rect x="40" y="733" width="1440" height="183" rx="10" fill="#1a1d2e" stroke="#2a2e42" stroke-width="1.5"/>
+    <rect x="41" y="734" width="1438" height="36" rx="9" fill="#d97706"/>
+    <rect x="41" y="753" width="1438" height="17" fill="#d97706"/>
+    <text x="60" y="757" class="sec-title">Sparring Matches</text>
+    <text x="270" y="757" class="sec-sub" fill="#fde68a">MatchController  ·  4 endpoints</text>
+    <text x="60" y="789" class="th">Method</text>
+    <text x="140" y="789" class="th">Endpoint</text>
+    <text x="580" y="789" class="th">Auth</text>
+    <text x="660" y="789" class="th">Description</text>
+    <text x="1200" y="789" class="th">Response</text>
+    <line x1="55" y1="795" x2="1465" y2="795" stroke="#2a2e42" stroke-width="0.8"/>
+
+    <!-- GET /matches -->
+    <rect x="60" y="805" width="50" height="18" rx="4" fill="#3b82f6"/>
+    <text x="85" y="817" text-anchor="middle" class="method-text">GET</text>
+    <text x="140" y="818" class="route">/v1/matches</text>
+    <rect x="580" y="806" width="62" height="16" rx="3" fill="#3b2d7c"/>
+    <text x="611" y="817" text-anchor="middle" class="badge-label" fill="#a78bfa">Bearer</text>
+    <text x="660" y="818" class="desc">Paginated match history with grandmaster details (20/page)</text>
+    <text x="1200" y="818" class="status">200  paginated { data[] }</text>
+
+    <!-- POST /matches -->
+    <rect x="60" y="833" width="50" height="18" rx="4" fill="#22c55e"/>
+    <text x="85" y="845" text-anchor="middle" class="method-text">POST</text>
+    <text x="140" y="846" class="route">/v1/matches</text>
+    <rect x="580" y="834" width="62" height="16" rx="3" fill="#3b2d7c"/>
+    <text x="611" y="845" text-anchor="middle" class="badge-label" fill="#a78bfa">Bearer</text>
+    <text x="660" y="846" class="desc">Start a new sparring match. Body: { grandmaster_id }</text>
+    <text x="1200" y="846" class="status">201  { message, match }</text>
+
+    <!-- PUT /matches/{match} -->
+    <rect x="60" y="861" width="50" height="18" rx="4" fill="#f59e0b"/>
+    <text x="85" y="873" text-anchor="middle" class="method-text">PUT</text>
+    <text x="140" y="874" class="route">/v1/matches/{match}</text>
+    <rect x="580" y="862" width="62" height="16" rx="3" fill="#3b2d7c"/>
+    <text x="611" y="873" text-anchor="middle" class="badge-label" fill="#a78bfa">Bearer</text>
+    <text x="660" y="874" class="desc">Finalize match with PGN, result, moves, duration, analysis. Owner-only</text>
+    <text x="1200" y="874" class="status">200  { message, match }</text>
+
+    <!-- POST /matches/{match}/analyze -->
+    <rect x="60" y="889" width="50" height="18" rx="4" fill="#22c55e"/>
+    <text x="85" y="901" text-anchor="middle" class="method-text">POST</text>
+    <text x="140" y="902" class="route">/v1/matches/{match}/analyze</text>
+    <rect x="580" y="890" width="62" height="16" rx="3" fill="#3b2d7c"/>
+    <text x="611" y="901" text-anchor="middle" class="badge-label" fill="#a78bfa">Bearer</text>
+    <text x="660" y="902" class="desc">Trigger BKT analysis via FastAPI microservice. Owner-only</text>
+    <text x="1200" y="902" class="status">200  { new_matrix }</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 6: PUZZLES                                                -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <g filter="url(#shadow)">
+    <rect x="40" y="936" width="1440" height="155" rx="10" fill="#1a1d2e" stroke="#2a2e42" stroke-width="1.5"/>
+    <rect x="41" y="937" width="1438" height="36" rx="9" fill="#dc2626"/>
+    <rect x="41" y="956" width="1438" height="17" fill="#dc2626"/>
+    <text x="60" y="960" class="sec-title">Puzzles</text>
+    <text x="160" y="960" class="sec-sub" fill="#fecaca">PuzzleController  ·  3 endpoints</text>
+    <text x="60" y="992" class="th">Method</text>
+    <text x="140" y="992" class="th">Endpoint</text>
+    <text x="580" y="992" class="th">Auth</text>
+    <text x="660" y="992" class="th">Description</text>
+    <text x="1200" y="992" class="th">Response</text>
+    <line x1="55" y1="998" x2="1465" y2="998" stroke="#2a2e42" stroke-width="0.8"/>
+
+    <!-- GET /puzzles/daily -->
+    <rect x="60" y="1008" width="50" height="18" rx="4" fill="#3b82f6"/>
+    <text x="85" y="1020" text-anchor="middle" class="method-text">GET</text>
+    <text x="140" y="1021" class="route">/v1/puzzles/daily</text>
+    <rect x="580" y="1009" width="62" height="16" rx="3" fill="#3b2d7c"/>
+    <text x="611" y="1020" text-anchor="middle" class="badge-label" fill="#a78bfa">Bearer</text>
+    <text x="660" y="1021" class="desc">5 daily puzzles matched to user ELO, excluding today's attempts</text>
+    <text x="1200" y="1021" class="status">200  { puzzles[], stats }</text>
+
+    <!-- GET /puzzles/recent -->
+    <rect x="60" y="1036" width="50" height="18" rx="4" fill="#3b82f6"/>
+    <text x="85" y="1048" text-anchor="middle" class="method-text">GET</text>
+    <text x="140" y="1049" class="route">/v1/puzzles/recent</text>
+    <rect x="580" y="1037" width="62" height="16" rx="3" fill="#3b2d7c"/>
+    <text x="611" y="1048" text-anchor="middle" class="badge-label" fill="#a78bfa">Bearer</text>
+    <text x="660" y="1049" class="desc">Last 20 puzzle attempts with puzzle details</text>
+    <text x="1200" y="1049" class="status">200  { recent_attempts[] }</text>
+
+    <!-- POST /puzzles/{puzzle}/attempt -->
+    <rect x="60" y="1064" width="50" height="18" rx="4" fill="#22c55e"/>
+    <text x="85" y="1076" text-anchor="middle" class="method-text">POST</text>
+    <text x="140" y="1077" class="route">/v1/puzzles/{puzzle}/attempt</text>
+    <rect x="580" y="1065" width="62" height="16" rx="3" fill="#3b2d7c"/>
+    <text x="611" y="1076" text-anchor="middle" class="badge-label" fill="#a78bfa">Bearer</text>
+    <text x="660" y="1077" class="desc">Record puzzle attempt. Body: { solved, time_seconds }. Updates streak</text>
+    <text x="1200" y="1077" class="status">200  { message, attempt }</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 7: COACHING ENGINE                                        -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <g filter="url(#shadow)">
+    <rect x="40" y="1111" width="1440" height="128" rx="10" fill="#1a1d2e" stroke="#2a2e42" stroke-width="1.5"/>
+    <rect x="41" y="1112" width="1438" height="36" rx="9" fill="#7c3aed"/>
+    <rect x="41" y="1131" width="1438" height="17" fill="#7c3aed"/>
+    <text x="60" y="1135" class="sec-title">Coaching Engine</text>
+    <text x="250" y="1135" class="sec-sub" fill="#ddd6fe">CoachingController  ·  2 endpoints</text>
+    <text x="60" y="1167" class="th">Method</text>
+    <text x="140" y="1167" class="th">Endpoint</text>
+    <text x="580" y="1167" class="th">Auth</text>
+    <text x="660" y="1167" class="th">Description</text>
+    <text x="1200" y="1167" class="th">Response</text>
+    <line x1="55" y1="1173" x2="1465" y2="1173" stroke="#2a2e42" stroke-width="0.8"/>
+
+    <!-- GET /coaching/plan -->
+    <rect x="60" y="1183" width="50" height="18" rx="4" fill="#3b82f6"/>
+    <text x="85" y="1195" text-anchor="middle" class="method-text">GET</text>
+    <text x="140" y="1196" class="route">/v1/coaching/plan</text>
+    <rect x="580" y="1184" width="62" height="16" rx="3" fill="#3b2d7c"/>
+    <text x="611" y="1195" text-anchor="middle" class="badge-label" fill="#a78bfa">Bearer</text>
+    <text x="660" y="1196" class="desc">Current training plan with BKT matrix and weakest skills analysis</text>
+    <text x="1200" y="1196" class="status">200  { bkt_matrix, plan, … }</text>
+
+    <!-- POST /coaching/refresh -->
+    <rect x="60" y="1211" width="50" height="18" rx="4" fill="#22c55e"/>
+    <text x="85" y="1223" text-anchor="middle" class="method-text">POST</text>
+    <text x="140" y="1224" class="route">/v1/coaching/refresh</text>
+    <rect x="580" y="1212" width="62" height="16" rx="3" fill="#3b2d7c"/>
+    <text x="611" y="1223" text-anchor="middle" class="badge-label" fill="#a78bfa">Bearer</text>
+    <text x="660" y="1224" class="desc">Regenerate training plan via FastAPI. Fallback if ML unavailable</text>
+    <text x="1200" y="1224" class="status">200  { training_plan }</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 8: ANALYTICS                                              -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <g filter="url(#shadow)">
+    <rect x="40" y="1259" width="1440" height="100" rx="10" fill="#1a1d2e" stroke="#2a2e42" stroke-width="1.5"/>
+    <rect x="41" y="1260" width="1438" height="36" rx="9" fill="#0d9488"/>
+    <rect x="41" y="1279" width="1438" height="17" fill="#0d9488"/>
+    <text x="60" y="1283" class="sec-title">Analytics</text>
+    <text x="190" y="1283" class="sec-sub" fill="#99f6e4">AnalyticsController  ·  1 endpoint</text>
+    <text x="60" y="1315" class="th">Method</text>
+    <text x="140" y="1315" class="th">Endpoint</text>
+    <text x="580" y="1315" class="th">Auth</text>
+    <text x="660" y="1315" class="th">Description</text>
+    <text x="1200" y="1315" class="th">Response</text>
+    <line x1="55" y1="1321" x2="1465" y2="1321" stroke="#2a2e42" stroke-width="0.8"/>
+
+    <!-- GET /analytics/overview -->
+    <rect x="60" y="1331" width="50" height="18" rx="4" fill="#3b82f6"/>
+    <text x="85" y="1343" text-anchor="middle" class="method-text">GET</text>
+    <text x="140" y="1344" class="route">/v1/analytics/overview</text>
+    <rect x="580" y="1332" width="62" height="16" rx="3" fill="#3b2d7c"/>
+    <text x="611" y="1343" text-anchor="middle" class="badge-label" fill="#a78bfa">Bearer</text>
+    <text x="660" y="1344" class="desc">Rating history, W/L/D stats, phase accuracy, insights, top opponents</text>
+    <text x="1200" y="1344" class="status">200  { rating, matches, … }</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 9: FASTAPI BKT MICROSERVICE                              -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <g filter="url(#shadow)">
+    <rect x="40" y="1400" width="1440" height="168" rx="10" fill="#1a1d2e" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="6,3"/>
+    <rect x="41" y="1401" width="1438" height="36" rx="9" fill="#92400e"/>
+    <rect x="41" y="1420" width="1438" height="17" fill="#92400e"/>
+    <text x="60" y="1424" class="sec-title">FastAPI BKT Microservice</text>
+    <text x="350" y="1424" class="sec-sub" fill="#fde68a">Python 3.11 · Port 8000 · Internal only (called by Laravel)</text>
+    <!-- microservice badge -->
+    <rect x="1330" y="1408" width="120" height="18" rx="4" fill="#78350f" stroke="#f59e0b" stroke-width="0.8"/>
+    <text x="1390" y="1420" text-anchor="middle" class="badge-label" fill="#fbbf24">MICROSERVICE</text>
+    <text x="60" y="1456" class="th">Method</text>
+    <text x="140" y="1456" class="th">Endpoint</text>
+    <text x="580" y="1456" class="th">Auth</text>
+    <text x="660" y="1456" class="th">Description</text>
+    <text x="1200" y="1456" class="th">Response</text>
+    <line x1="55" y1="1462" x2="1465" y2="1462" stroke="#2a2e42" stroke-width="0.8"/>
+
+    <!-- GET /health -->
+    <rect x="60" y="1472" width="50" height="18" rx="4" fill="#3b82f6"/>
+    <text x="85" y="1484" text-anchor="middle" class="method-text">GET</text>
+    <text x="140" y="1485" class="route">/health</text>
+    <rect x="580" y="1473" width="56" height="16" rx="3" fill="#1e3a2f"/>
+    <text x="608" y="1484" text-anchor="middle" class="badge-label" fill="#4ade80">Internal</text>
+    <text x="660" y="1485" class="desc">Health check — confirms service is online</text>
+    <text x="1200" y="1485" class="status">200  { status, version }</text>
+
+    <!-- POST /api/v1/update-mastery -->
+    <rect x="60" y="1500" width="50" height="18" rx="4" fill="#22c55e"/>
+    <text x="85" y="1512" text-anchor="middle" class="method-text">POST</text>
+    <text x="140" y="1513" class="route">/api/v1/update-mastery</text>
+    <rect x="580" y="1501" width="56" height="16" rx="3" fill="#1e3a2f"/>
+    <text x="608" y="1512" text-anchor="middle" class="badge-label" fill="#4ade80">Internal</text>
+    <text x="660" y="1513" class="desc">Bayesian posterior update from classified blunders → new BKT matrix</text>
+    <text x="1200" y="1513" class="status">200  { new_matrix, updated[] }</text>
+
+    <!-- POST /api/v1/generate-plan -->
+    <rect x="60" y="1528" width="50" height="18" rx="4" fill="#22c55e"/>
+    <text x="85" y="1540" text-anchor="middle" class="method-text">POST</text>
+    <text x="140" y="1541" class="route">/api/v1/generate-plan</text>
+    <rect x="580" y="1529" width="56" height="16" rx="3" fill="#1e3a2f"/>
+    <text x="608" y="1540" text-anchor="middle" class="badge-label" fill="#4ade80">Internal</text>
+    <text x="660" y="1541" class="desc">Generate personalized weekly training plan from BKT matrix + ELO</text>
+    <text x="1200" y="1541" class="status">200  { plan_items[], focus[] }</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- SUMMARY STATS                                                     -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <g filter="url(#shadow)">
+    <rect x="40" y="1600" width="1440" height="80" rx="10" fill="#141625" stroke="#2a2e42" stroke-width="1"/>
+
+    <!-- Total Endpoints -->
+    <text x="140" y="1636" text-anchor="middle" font-size="28" font-weight="800" fill="#6366f1">21</text>
+    <text x="140" y="1656" text-anchor="middle" font-size="10" fill="#64748b" font-weight="600">TOTAL ENDPOINTS</text>
+
+    <!-- separator -->
+    <line x1="280" y1="1618" x2="280" y2="1666" stroke="#2a2e42" stroke-width="1"/>
+
+    <!-- GET -->
+    <rect x="330" y="1624" width="42" height="16" rx="3" fill="#3b82f6"/>
+    <text x="351" y="1636" text-anchor="middle" class="method-text" font-size="8.5">GET</text>
+    <text x="386" y="1636" font-size="18" font-weight="700" fill="#c1c9d9">9</text>
+    <text x="345" y="1656" font-size="9" fill="#64748b">Read</text>
+
+    <!-- POST -->
+    <rect x="440" y="1624" width="42" height="16" rx="3" fill="#22c55e"/>
+    <text x="461" y="1636" text-anchor="middle" class="method-text" font-size="8.5">POST</text>
+    <text x="498" y="1636" font-size="18" font-weight="700" fill="#c1c9d9">11</text>
+    <text x="465" y="1656" font-size="9" fill="#64748b">Create/Action</text>
+
+    <!-- PUT -->
+    <rect x="560" y="1624" width="42" height="16" rx="3" fill="#f59e0b"/>
+    <text x="581" y="1636" text-anchor="middle" class="method-text" font-size="8.5">PUT</text>
+    <text x="616" y="1636" font-size="18" font-weight="700" fill="#c1c9d9">1</text>
+    <text x="582" y="1656" font-size="9" fill="#64748b">Update</text>
+
+    <!-- separator -->
+    <line x1="680" y1="1618" x2="680" y2="1666" stroke="#2a2e42" stroke-width="1"/>
+
+    <!-- Public -->
+    <rect x="730" y="1624" width="48" height="16" rx="3" fill="#334155"/>
+    <text x="754" y="1636" text-anchor="middle" class="badge-label" fill="#94a3b8">Public</text>
+    <text x="792" y="1636" font-size="16" font-weight="700" fill="#c1c9d9">2</text>
+
+    <!-- Bearer -->
+    <rect x="840" y="1624" width="55" height="16" rx="3" fill="#3b2d7c"/>
+    <text x="868" y="1636" text-anchor="middle" class="badge-label" fill="#a78bfa">Bearer</text>
+    <text x="910" y="1636" font-size="16" font-weight="700" fill="#c1c9d9">16</text>
+
+    <!-- Internal -->
+    <rect x="960" y="1624" width="56" height="16" rx="3" fill="#1e3a2f"/>
+    <text x="988" y="1636" text-anchor="middle" class="badge-label" fill="#4ade80">Internal</text>
+    <text x="1030" y="1636" font-size="16" font-weight="700" fill="#c1c9d9">3</text>
+
+    <!-- separator -->
+    <line x1="1090" y1="1618" x2="1090" y2="1666" stroke="#2a2e42" stroke-width="1"/>
+
+    <!-- Controllers -->
+    <text x="1200" y="1636" text-anchor="middle" font-size="22" font-weight="800" fill="#059669">8</text>
+    <text x="1200" y="1656" text-anchor="middle" font-size="10" fill="#64748b" font-weight="600">CONTROLLERS</text>
+
+    <!-- Services -->
+    <text x="1370" y="1636" text-anchor="middle" font-size="22" font-weight="800" fill="#d97706">2</text>
+    <text x="1370" y="1656" text-anchor="middle" font-size="10" fill="#64748b" font-weight="600">SERVICES</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- ARCHITECTURE FLOW                                                 -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <g>
+    <text x="760" y="1720" text-anchor="middle" font-size="10" font-weight="700" fill="#475569" letter-spacing="1.5px">REQUEST FLOW</text>
+
+    <!-- Flutter App -->
+    <rect x="120" y="1738" width="160" height="36" rx="8" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="200" y="1761" text-anchor="middle" font-size="11" font-weight="700" fill="#93c5fd">Flutter App</text>
+
+    <!-- Arrow 1 -->
+    <line x1="280" y1="1756" x2="380" y2="1756" stroke="#3d4559" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+    <text x="330" y="1748" text-anchor="middle" font-size="8.5" fill="#64748b">HTTPS + Bearer</text>
+
+    <!-- Laravel Gateway -->
+    <rect x="380" y="1738" width="280" height="36" rx="8" fill="#1e293b" stroke="#4f46e5" stroke-width="1.5"/>
+    <text x="520" y="1761" text-anchor="middle" font-size="11" font-weight="700" fill="#a5b4fc">Laravel 12 API Gateway</text>
+
+    <!-- Arrow 2 -->
+    <line x1="660" y1="1756" x2="780" y2="1756" stroke="#3d4559" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+    <text x="720" y="1748" text-anchor="middle" font-size="8.5" fill="#64748b">SQLite</text>
+
+    <!-- Database -->
+    <rect x="780" y="1738" width="140" height="36" rx="8" fill="#1e293b" stroke="#059669" stroke-width="1.5"/>
+    <text x="850" y="1761" text-anchor="middle" font-size="11" font-weight="700" fill="#6ee7b7">Database</text>
+
+    <!-- Arrow 3 (from Laravel down to FastAPI) -->
+    <line x1="520" y1="1774" x2="520" y2="1790" stroke="#3d4559" stroke-width="1.5"/>
+    <line x1="520" y1="1790" x2="1130" y2="1790" stroke="#3d4559" stroke-width="1.5" stroke-dasharray="5,3"/>
+    <line x1="1130" y1="1790" x2="1130" y2="1774" stroke="#3d4559" stroke-width="1.5"/>
+    <text x="825" y="1786" text-anchor="middle" font-size="8.5" fill="#64748b">HTTP POST (internal)</text>
+
+    <!-- FastAPI -->
+    <rect x="1040" y="1738" width="260" height="36" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="5,3"/>
+    <text x="1170" y="1761" text-anchor="middle" font-size="11" font-weight="700" fill="#fcd34d">FastAPI BKT Microservice</text>
+
+    <!-- Arrow markers -->
+    <defs>
+      <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+        <polygon points="0 0, 8 3, 0 6" fill="#3d4559"/>
+      </marker>
+    </defs>
+  </g>
+
+</svg>

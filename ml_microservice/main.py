@@ -1,18 +1,21 @@
 """
-SparMate BKT Microservice — FastAPI Application
+SparMate ML Microservice — FastAPI Application
 
-This microservice handles the heavy mathematical logic for Bayesian
-Knowledge Tracing, keeping the Laravel gateway fast. It processes
-classified blunders from sparring matches and generates personalized
-training plans.
+This microservice handles:
+1. Blunder Classification (Sprint 5-6): Classifies chess mistakes into
+   8 cognitive skill categories using a Random Forest / ONNX model.
+2. Bayesian Knowledge Tracing (Sprint 4): Tracks student mastery of
+   chess skills using Corbett & Anderson (1995) methodology.
+3. Training Plan Generation: Creates personalized weekly training plans.
 
 Architecture (from Milestone 2):
-    Flutter App → Laravel Gateway → FastAPI BKT Microservice → PostgreSQL
+    Flutter App → Laravel Gateway → FastAPI ML Microservice → PostgreSQL
 
 Endpoints:
-    POST /api/v1/update-mastery  — Update BKT matrix after a match
-    POST /api/v1/generate-plan   — Generate a training plan from BKT data
-    GET  /health                 — Health check
+    POST /api/v1/classify-match    — Classify blunders in a completed match
+    POST /api/v1/update-mastery    — Update BKT matrix after a match
+    POST /api/v1/generate-plan     — Generate a training plan from BKT data
+    GET  /health                   — Health check
 """
 
 from fastapi import FastAPI, HTTPException
@@ -23,17 +26,24 @@ from models import (
     UpdateMasteryResponse,
     GeneratePlanRequest,
     GeneratePlanResponse,
+    ClassifyMatchRequest,
+    ClassifyMatchResponse,
+    ClassifiedBlunder,
     HealthResponse,
     PlanItem,
 )
 from bkt_engine import process_match_blunders, generate_training_plan
+from classifier import get_classifier
 
 # ── App Configuration ─────────────────────────────────────────────────────
 
 app = FastAPI(
-    title="SparMate BKT Microservice",
-    description="Bayesian Knowledge Tracing engine for adaptive chess coaching.",
-    version="1.0.0",
+    title="SparMate ML Microservice",
+    description=(
+        "Blunder classification and Bayesian Knowledge Tracing engine "
+        "for adaptive chess coaching."
+    ),
+    version="2.0.0",
 )
 
 # Allow Laravel to communicate from any origin during development
@@ -52,10 +62,65 @@ app.add_middleware(
 @app.get("/health", response_model=HealthResponse)
 def health_check():
     """Basic health check endpoint."""
-    return HealthResponse()
+    classifier = get_classifier()
+    return HealthResponse(
+        status="online",
+        service=f"SparMate ML Microservice (classifier: {classifier.backend})",
+    )
 
 
-# ── BKT Mastery Update ───────────────────────────────────────────────────
+# ── Blunder Classification (Sprint 5-6) ─────────────────────────────────
+
+@app.post("/api/v1/classify-match", response_model=ClassifyMatchResponse)
+async def classify_match(payload: ClassifyMatchRequest):
+    """
+    Classify all mistakes in a completed sparring match.
+
+    Receives move-level analysis data from the Stockfish engine (via Laravel)
+    and classifies each mistake into one of 8 BKT cognitive skill categories.
+
+    This implements the ML pipeline from Milestone 2, Section 4.4:
+    1. Extract features from pre/post-blunder positions
+    2. Run inference through the trained Random Forest / ONNX model
+    3. Return classified blunders with categories and severities
+
+    The classifications are then fed into the BKT engine to update
+    the user's mastery matrix.
+    """
+    if not payload.move_analyses:
+        raise HTTPException(status_code=400, detail="move_analyses is required")
+
+    classifier = get_classifier()
+
+    # Convert Pydantic models to dicts for the classifier
+    move_dicts = [m.model_dump() for m in payload.move_analyses]
+
+    # Classify
+    classified = classifier.classify_match(move_dicts)
+
+    # Convert to response models
+    blunders = [
+        ClassifiedBlunder(
+            category=b["category"],
+            move=b["move"],
+            severity=b["severity"],
+            confidence=b.get("confidence", 0.0),
+            cp_loss=b.get("cp_loss", 0.0),
+        )
+        for b in classified
+    ]
+
+    return ClassifyMatchResponse(
+        user_id=payload.user_id,
+        match_id=payload.match_id,
+        classified_blunders=blunders,
+        total_moves_analyzed=len(payload.move_analyses),
+        blunders_found=len(blunders),
+        classifier_backend=classifier.backend,
+    )
+
+
+# ── BKT Mastery Update (Sprint 4) ───────────────────────────────────────
 
 @app.post("/api/v1/update-mastery", response_model=UpdateMasteryResponse)
 async def update_mastery(payload: UpdateMasteryRequest):

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../../core/state/app_state.dart';
 import '../../../core/theme/app_colors.dart';
 import '../widgets/grandmaster_hero_card.dart';
 import '../widgets/active_lesson_card.dart';
@@ -7,8 +9,27 @@ import '../widgets/coaching_engine_card.dart';
 import '../widgets/daily_puzzles_card.dart';
 import '../widgets/tactics_card.dart';
 
-class HomeScreen extends StatelessWidget {
+/// Home screen — the main dashboard.
+/// Fetches coaching and analytics data on init via Provider.
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final state = context.read<AppState>();
+      if (state.isAuthenticated) {
+        state.fetchCoachingPlan();
+        state.fetchAnalytics();
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../../core/state/app_state.dart';
 import '../../../core/theme/app_colors.dart';
 import '../widgets/rating_overview_card.dart';
 import '../widgets/phase_accuracy_card.dart';
@@ -6,12 +8,32 @@ import '../widgets/match_results_card.dart';
 import '../widgets/insights_card.dart';
 import '../widgets/top_opponents_card.dart';
 
-class AnalyticsScreen extends StatelessWidget {
+/// Analytics screen — wired to live API data via Provider.
+/// Fetches analytics overview on init and passes data to child widgets.
+class AnalyticsScreen extends StatefulWidget {
   const AnalyticsScreen({super.key});
+
+  @override
+  State<AnalyticsScreen> createState() => _AnalyticsScreenState();
+}
+
+class _AnalyticsScreenState extends State<AnalyticsScreen> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final state = context.read<AppState>();
+      if (state.isAuthenticated) {
+        state.fetchAnalytics();
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final tt = Theme.of(context).textTheme;
+    final state = context.watch<AppState>();
+    final analytics = state.analyticsData;
 
     return Scaffold(
       backgroundColor: AppColors.scaffoldBg,
@@ -82,15 +104,25 @@ class AnalyticsScreen extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(16, 12, 16, 100),
               sliver: SliverList(
                 delegate: SliverChildListDelegate([
-                  const RatingOverviewCard(),
+                  RatingOverviewCard(
+                    ratingData: analytics?['rating'] as Map<String, dynamic>?,
+                  ),
                   const SizedBox(height: 16),
-                  const PhaseAccuracyCard(),
+                  PhaseAccuracyCard(
+                    phaseData: analytics?['phase_accuracy'] as Map<String, dynamic>?,
+                  ),
                   const SizedBox(height: 16),
-                  const MatchResultsCard(),
+                  MatchResultsCard(
+                    matchData: analytics?['matches'] as Map<String, dynamic>?,
+                  ),
                   const SizedBox(height: 16),
-                  const InsightsCard(),
+                  InsightsCard(
+                    insights: analytics?['insights'] as List<dynamic>?,
+                  ),
                   const SizedBox(height: 16),
-                  const TopOpponentsCard(),
+                  TopOpponentsCard(
+                    opponents: analytics?['top_opponents'] as List<dynamic>?,
+                  ),
                 ]),
               ),
             ),

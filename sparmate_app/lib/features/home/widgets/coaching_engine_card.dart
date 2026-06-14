@@ -1,15 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../../core/state/app_state.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../coaching/screens/coaching_screen.dart';
 
 /// Coaching Engine card showing weekly focus areas with percentage chips,
 /// a NEW INSIGHTS badge, and personalized feedback text.
+/// Reads live BKT data from AppState Provider when available.
 class CoachingEngineCard extends StatelessWidget {
   const CoachingEngineCard({super.key});
 
   @override
   Widget build(BuildContext context) {
     final tt = Theme.of(context).textTheme;
+    final state = context.watch<AppState>();
+    final bktSkills = state.bktMatrix?['skills'] as Map<String, dynamic>?;
+    final directive = state.trainingPlan?['primary_directive'] as String?;
+
+    // Build focus chips from live BKT or use defaults
+    final chips = _buildChips(bktSkills);
+    final feedbackText = directive != null
+        ? 'Personalized feedback: "$directive"'
+        : 'Personalized feedback: "Focus on pawn structure in the mid-game."';
 
     return GestureDetector(
       onTap: () => Navigator.of(context).push(
@@ -66,7 +78,7 @@ class CoachingEngineCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  _insightsBadge(),
+                  _insightsBadge(isLive: bktSkills != null),
                   const SizedBox(height: 4),
                   GestureDetector(
                     onTap: () => Navigator.of(context).push(
@@ -90,17 +102,13 @@ class CoachingEngineCard extends StatelessWidget {
           Wrap(
             spacing: 8,
             runSpacing: 8,
-            children: const [
-              _FocusChip(label: 'Opening', value: '80%'),
-              _FocusChip(label: 'Tactics', value: '62%'),
-              _FocusChip(label: 'Endgame', value: '45%'),
-            ],
+            children: chips,
           ),
           const SizedBox(height: 16),
 
           // ── Feedback ──
           Text(
-            'Personalized feedback: "Focus on pawn structure in the mid-game."',
+            feedbackText,
             style: tt.bodyMedium?.copyWith(
               color: AppColors.textMedium,
               fontStyle: FontStyle.normal,
@@ -113,19 +121,42 @@ class CoachingEngineCard extends StatelessWidget {
     );
   }
 
-  Widget _insightsBadge() {
+  List<Widget> _buildChips(Map<String, dynamic>? bktSkills) {
+    if (bktSkills == null) {
+      return const [
+        _FocusChip(label: 'Opening', value: '80%'),
+        _FocusChip(label: 'Tactics', value: '62%'),
+        _FocusChip(label: 'Endgame', value: '45%'),
+      ];
+    }
+
+    // Sort by mastery ascending (weakest first), show top 3
+    final entries = bktSkills.entries.toList()
+      ..sort((a, b) => (a.value as num).compareTo(b.value as num));
+
+    return entries.take(3).map((e) {
+      final label = e.key.replaceAll('_', ' ');
+      final capitalizedLabel = label.split(' ').map((w) =>
+        w.isNotEmpty ? '${w[0].toUpperCase()}${w.substring(1)}' : w
+      ).join(' ');
+      final mastery = ((e.value as num) * 100).toInt();
+      return _FocusChip(label: capitalizedLabel, value: '$mastery%');
+    }).toList();
+  }
+
+  Widget _insightsBadge({bool isLive = false}) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
       decoration: BoxDecoration(
-        color: AppColors.insightsGreen.withValues(alpha: 0.12),
+        color: (isLive ? AppColors.successGreen : AppColors.insightsGreen).withValues(alpha: 0.12),
         borderRadius: BorderRadius.circular(6),
         border: Border.all(
-          color: AppColors.insightsGreen.withValues(alpha: 0.3),
+          color: (isLive ? AppColors.successGreen : AppColors.insightsGreen).withValues(alpha: 0.3),
           width: 0.5,
         ),
       ),
-      child: const Text(
-        'NEW INSIGHTS',
+      child: Text(
+        isLive ? 'LIVE DATA' : 'NEW INSIGHTS',
         style: TextStyle(
           color: AppColors.successGreen,
           fontSize: 9,

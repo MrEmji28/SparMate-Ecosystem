@@ -1,3 +1,12 @@
 fastapi>=0.115.0
 uvicorn[standard]>=0.34.0
 pydantic>=2.0.0
+
+# ML Classification Pipeline (Sprint 5-6)
+numpy>=1.26.0
+scikit-learn>=1.5.0
+joblib>=1.4.0
+
+# ONNX Edge Deployment (Sprint 6)
+skl2onnx>=1.17.0
+onnxruntime>=1.18.0

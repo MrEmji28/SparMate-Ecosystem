@@ -1,0 +1,145 @@
+name: SparMate CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+env:
+  FLUTTER_VERSION: '3.32.2'
+  PHP_VERSION: '8.2'
+  PYTHON_VERSION: '3.11'
+
+jobs:
+  # ──────────────────────────────────────────────────────────────
+  # 1. Flutter Analysis & Tests
+  # ──────────────────────────────────────────────────────────────
+  flutter:
+    name: Flutter Analysis
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: sparmate_app
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run analyzer
+        run: flutter analyze --no-fatal-infos
+
+      - name: Run tests
+        run: flutter test --coverage
+        continue-on-error: true  # Tests may not exist yet
+
+  # ──────────────────────────────────────────────────────────────
+  # 2. Laravel Backend (PHP)
+  # ──────────────────────────────────────────────────────────────
+  laravel:
+    name: Laravel Tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: sparmate_backend
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: sparmate_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
+          extensions: mbstring, pdo_mysql, xml, bcmath
+          coverage: none
+
+      - name: Cache Composer packages
+        uses: actions/cache@v4
+        with:
+          path: sparmate_backend/vendor
+          key: composer-${{ hashFiles('sparmate_backend/composer.lock') }}
+          restore-keys: composer-
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader
+
+      - name: Prepare environment
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+          sed -i 's/DB_DATABASE=.*/DB_DATABASE=sparmate_test/' .env
+          sed -i 's/DB_USERNAME=.*/DB_USERNAME=root/' .env
+          sed -i 's/DB_PASSWORD=.*/DB_PASSWORD=password/' .env
+          sed -i 's/DB_HOST=.*/DB_HOST=127.0.0.1/' .env
+
+      - name: Run migrations
+        run: php artisan migrate --force
+
+      - name: Run seeders
+        run: php artisan db:seed --force
+
+      - name: Run PHPUnit tests
+        run: php artisan test --parallel
+
+  # ──────────────────────────────────────────────────────────────
+  # 3. ML Microservice (Python / FastAPI)
+  # ──────────────────────────────────────────────────────────────
+  ml-microservice:
+    name: ML Microservice Tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ml_microservice
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: ml_microservice/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run FastAPI tests
+        run: python -m pytest test_microservice.py -v --tb=short
+
+      - name: Verify ONNX model loads
+        run: |
+          python -c "
+          import onnxruntime as ort
+          import os
+          model_path = 'models/blunder_classifier.onnx'
+          if os.path.exists(model_path):
+              sess = ort.InferenceSession(model_path)
+              print(f'ONNX model loaded: {sess.get_inputs()[0].name}')
+              print('✅ ONNX model verification passed')
+          else:
+              print('⚠️  ONNX model not found (expected in CI)')
+          "

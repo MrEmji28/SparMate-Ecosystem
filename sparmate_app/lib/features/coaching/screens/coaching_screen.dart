@@ -1,16 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../../core/state/app_state.dart';
 import '../../../core/theme/app_colors.dart';
 import '../widgets/primary_directive_card.dart';
 import '../widgets/weekly_focus_card.dart';
 import '../widgets/training_plan_card.dart';
 
-/// Full Coaching Engine detail screen — navigated to from the home card.
-class CoachingScreen extends StatelessWidget {
+/// Full Coaching Engine detail screen — wired to live BKT data via Provider.
+class CoachingScreen extends StatefulWidget {
   const CoachingScreen({super.key});
+
+  @override
+  State<CoachingScreen> createState() => _CoachingScreenState();
+}
+
+class _CoachingScreenState extends State<CoachingScreen> {
+  @override
+  void initState() {
+    super.initState();
+    // Fetch coaching plan data when screen loads
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<AppState>().fetchCoachingPlan();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final tt = Theme.of(context).textTheme;
+    final state = context.watch<AppState>();
 
     return Scaffold(
       backgroundColor: AppColors.scaffoldBg,
@@ -39,6 +56,24 @@ class CoachingScreen extends StatelessWidget {
                       ),
                     ),
                     const Spacer(),
+                    // Refresh button
+                    IconButton(
+                      onPressed: state.isLoading
+                          ? null
+                          : () => state.refreshCoachingPlan(),
+                      icon: state.isLoading
+                          ? SizedBox(
+                              width: 18,
+                              height: 18,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                color: AppColors.primaryBlue,
+                              ),
+                            )
+                          : const Icon(Icons.refresh_rounded, color: AppColors.primaryBlue),
+                      splashRadius: 22,
+                      tooltip: 'Refresh Coaching Plan',
+                    ),
                     Container(
                       width: 38,
                       height: 38,
@@ -82,11 +117,17 @@ class CoachingScreen extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
               sliver: SliverList(
                 delegate: SliverChildListDelegate([
-                  const PrimaryDirectiveCard(),
+                  PrimaryDirectiveCard(
+                    directive: state.trainingPlan?['primary_directive'] as String?,
+                  ),
                   const SizedBox(height: 16),
-                  const WeeklyFocusCard(),
+                  WeeklyFocusCard(
+                    bktMatrix: state.bktMatrix?['skills'] as Map<String, dynamic>?,
+                  ),
                   const SizedBox(height: 16),
-                  const TrainingPlanCard(),
+                  TrainingPlanCard(
+                    planItems: state.trainingPlan?['plan_items'] as List<dynamic>?,
+                  ),
                 ]),
               ),
             ),

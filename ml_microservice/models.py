@@ -1,21 +1,24 @@
 """
-Pydantic models for the SparMate BKT Microservice.
+Pydantic models for the SparMate ML Microservice.
 
 These models enforce type safety on the data flowing between
-the Laravel gateway and the FastAPI BKT engine.
+the Laravel gateway and the FastAPI engine. Covers both the
+BKT mastery tracking (Sprint 4) and blunder classification (Sprint 5-6).
 """
 
 from pydantic import BaseModel, Field
 from typing import Optional
 
 
-# ── Request Models ────────────────────────────────────────────────────────
+# ── BKT Request Models ───────────────────────────────────────────────────
 
 class ClassifiedBlunder(BaseModel):
     """A single mistake classified by the ML pipeline."""
     category: str = Field(..., description="BKT skill category, e.g. 'tactical_oversight'")
     move: int = Field(..., description="Move number where the blunder occurred")
     severity: str = Field("mistake", description="Severity: 'blunder', 'mistake', or 'inaccuracy'")
+    confidence: float = Field(0.0, description="Classification confidence (0-1)")
+    cp_loss: float = Field(0.0, description="Centipawn loss for this move")
 
 
 class UpdateMasteryRequest(BaseModel):
@@ -38,7 +41,57 @@ class GeneratePlanRequest(BaseModel):
     elo_rating: int = 1200
 
 
-# ── Response Models ───────────────────────────────────────────────────────
+# ── Classification Request Models ────────────────────────────────────────
+
+class MoveAnalysis(BaseModel):
+    """
+    Raw move-level data from the Stockfish engine analysis.
+    Sent from Flutter → Laravel → FastAPI for classification.
+    """
+    eval_before: float = Field(..., description="Engine eval (centipawns) before the move")
+    eval_after: float = Field(..., description="Engine eval (centipawns) after the move")
+    move_number: int = Field(..., description="Move number in the game")
+    total_pieces: int = Field(24, description="Total pieces on the board")
+    has_queens: bool = Field(True, description="Whether both queens are on the board")
+    pieces_en_prise: int = Field(0, description="Number of undefended pieces")
+    hanging_value: int = Field(0, description="Value of hanging pieces (centipawns)")
+    capture_available: bool = Field(False, description="Whether a capture was available")
+    check_available: bool = Field(False, description="Whether a check was available")
+    own_king_exposure: float = Field(0.0, description="King exposure score (0-1)")
+    own_king_pawn_shield: int = Field(3, description="Pawn shield quality (0-3)")
+    king_has_castled: bool = Field(True, description="Whether the player has castled")
+    doubled_pawns: int = Field(0, description="Number of doubled pawns")
+    isolated_pawns: int = Field(0, description="Number of isolated pawns")
+    passed_pawns: int = Field(0, description="Number of passed pawns")
+    pawn_structure_changed: bool = Field(False, description="If pawn structure changed")
+    piece_mobility: float = Field(0.5, description="Piece mobility score (0-1)")
+    pieces_developed: int = Field(6, description="Number of developed pieces (0-8)")
+    time_remaining_pct: float = Field(0.75, description="Clock remaining (0-1)")
+    time_pressure: bool = Field(False, description="Whether under severe time pressure")
+
+
+class ClassifyMatchRequest(BaseModel):
+    """Request payload to classify all mistakes in a completed match."""
+    user_id: int
+    match_id: int = Field(0, description="Match ID from the Laravel database")
+    move_analyses: list[MoveAnalysis] = Field(
+        ...,
+        description="List of move-level analysis data from the engine"
+    )
+
+
+class ClassifyMatchResponse(BaseModel):
+    """Response containing classified blunders from the match."""
+    status: str = "success"
+    user_id: int
+    match_id: int = 0
+    classified_blunders: list[ClassifiedBlunder] = Field(default_factory=list)
+    total_moves_analyzed: int = 0
+    blunders_found: int = 0
+    classifier_backend: str = "heuristic"
+
+
+# ── BKT Response Models ─────────────────────────────────────────────────
 
 class UpdateMasteryResponse(BaseModel):
     """Response containing the updated BKT matrix."""
@@ -68,5 +121,6 @@ class GeneratePlanResponse(BaseModel):
 class HealthResponse(BaseModel):
     """Health check response."""
     status: str = "online"
-    service: str = "SparMate BKT Microservice"
-    version: str = "1.0.0"
+    service: str = "SparMate ML Microservice"
+    version: str = "2.0.0"
+

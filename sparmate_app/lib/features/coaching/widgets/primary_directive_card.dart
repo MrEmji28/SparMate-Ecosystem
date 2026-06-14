@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import '../../../core/theme/app_colors.dart';
 
 /// Primary Directive card with AI coaching quote and recent game indicators.
+/// Accepts optional [directive] from the BKT coaching engine API.
 class PrimaryDirectiveCard extends StatelessWidget {
-  const PrimaryDirectiveCard({super.key});
+  final String? directive;
+
+  const PrimaryDirectiveCard({super.key, this.directive});
 
   @override
   Widget build(BuildContext context) {
     final tt = Theme.of(context).textTheme;
+    final displayDirective = directive ?? 'Focus on pawn structure in the mid-game.';
 
     return Container(
       padding: const EdgeInsets.all(20),
@@ -51,18 +55,40 @@ class PrimaryDirectiveCard extends StatelessWidget {
                         ),
                         children: [
                           TextSpan(
-                            text: '"Focus on pawn structure in the mid-game." ',
+                            text: '"$displayDirective" ',
                             style: TextStyle(
                               fontWeight: FontWeight.w700,
                               color: AppColors.textDark,
                             ),
                           ),
-                          const TextSpan(
-                            text: 'Your recent matches show a tendency to create isolated pawns under pressure.',
+                          TextSpan(
+                            text: directive != null
+                                ? 'Based on your BKT mastery analysis.'
+                                : 'Your recent matches show a tendency to create isolated pawns under pressure.',
                           ),
                         ],
                       ),
                     ),
+                    if (directive != null)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 6),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          decoration: BoxDecoration(
+                            color: AppColors.successGreen.withValues(alpha: 0.1),
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Text(
+                            'LIVE FROM API',
+                            style: TextStyle(
+                              fontSize: 9,
+                              fontWeight: FontWeight.w700,
+                              letterSpacing: 0.8,
+                              color: AppColors.successGreen,
+                            ),
+                          ),
+                        ),
+                      ),
                   ],
                 ),
               ),

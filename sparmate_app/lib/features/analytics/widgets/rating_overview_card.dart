@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import '../../../core/theme/app_colors.dart';
 
 /// Rating Overview card with current rating, trend badge, and a 30-day line chart.
+/// Accepts optional [ratingData] from the analytics API.
 class RatingOverviewCard extends StatelessWidget {
-  const RatingOverviewCard({super.key});
+  final Map<String, dynamic>? ratingData;
+
+  const RatingOverviewCard({super.key, this.ratingData});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +38,7 @@ class RatingOverviewCard extends StatelessWidget {
               ),
               // Current rating
               Text(
-                '1845',
+                '${ratingData?['current'] ?? 1845}',
                 style: tt.headlineLarge?.copyWith(
                   fontWeight: FontWeight.w800,
                   fontSize: 36,

@@ -3,14 +3,26 @@ import '../../../core/theme/app_colors.dart';
 
 /// Phase Accuracy card showing Opening, Tactics, and Endgame accuracy
 /// as horizontal progress bars.
+/// Accepts optional [phaseData] from the analytics API.
 class PhaseAccuracyCard extends StatelessWidget {
-  const PhaseAccuracyCard({super.key});
+  final Map<String, dynamic>? phaseData;
 
-  static const _phases = [
-    _Phase('Opening', 0.80, '80%', Color(0xFF3D5AFE)),
-    _Phase('Tactics', 0.62, '62%', Color(0xFFE53935)),
-    _Phase('Endgame', 0.45, '45%', Color(0xFF43A047)),
-  ];
+  const PhaseAccuracyCard({super.key, this.phaseData});
+
+  List<_Phase> get _phases {
+    if (phaseData != null) {
+      return [
+        _Phase('Opening', (phaseData!['opening'] as num? ?? 80) / 100, '${phaseData!['opening'] ?? 80}%', const Color(0xFF3D5AFE)),
+        _Phase('Middlegame', (phaseData!['middlegame'] as num? ?? 62) / 100, '${phaseData!['middlegame'] ?? 62}%', const Color(0xFFE53935)),
+        _Phase('Endgame', (phaseData!['endgame'] as num? ?? 45) / 100, '${phaseData!['endgame'] ?? 45}%', const Color(0xFF43A047)),
+      ];
+    }
+    return const [
+      _Phase('Opening', 0.80, '80%', Color(0xFF3D5AFE)),
+      _Phase('Tactics', 0.62, '62%', Color(0xFFE53935)),
+      _Phase('Endgame', 0.45, '45%', Color(0xFF43A047)),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {

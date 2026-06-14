@@ -4,11 +4,20 @@ import '../models/grandmaster.dart';
 import '../widgets/gm_profile_card.dart';
 import '../widgets/game_board_card.dart';
 import '../widgets/game_info_card.dart';
+import '../widgets/pressure_gauge.dart';
 
 /// Sparring screen for playing against a specific Grandmaster AI persona.
-class SparringScreen extends StatelessWidget {
+class SparringScreen extends StatefulWidget {
   final Grandmaster gm;
   const SparringScreen({super.key, required this.gm});
+
+  @override
+  State<SparringScreen> createState() => _SparringScreenState();
+}
+
+class _SparringScreenState extends State<SparringScreen> {
+  // Real-time pressure metrics (updated from engine analysis)
+  double _pressure = 0.15;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +42,7 @@ class SparringScreen extends StatelessWidget {
                       splashRadius: 22,
                     ),
                     Text(
-                      'Spar with ${gm.name}',
+                      'Spar with ${widget.gm.name}',
                       style: tt.headlineSmall?.copyWith(
                         fontWeight: FontWeight.w800,
                         color: AppColors.primaryNavy,
@@ -63,11 +72,22 @@ class SparringScreen extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(16, 20, 16, 32),
               sliver: SliverList(
                 delegate: SliverChildListDelegate([
-                  GmProfileCard(gm: gm),
+                  GmProfileCard(gm: widget.gm),
                   const SizedBox(height: 16),
-                  GameBoardCard(gm: gm),
+                  // ── Game Board + Pressure Gauge Row ──
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(child: GameBoardCard(gm: widget.gm)),
+                      const SizedBox(width: 12),
+                      PressureGauge(
+                        pressure: _pressure,
+                        size: 100,
+                      ),
+                    ],
+                  ),
                   const SizedBox(height: 16),
-                  GameInfoCard(gm: gm),
+                  GameInfoCard(gm: widget.gm),
                 ]),
               ),
             ),
@@ -77,3 +97,4 @@ class SparringScreen extends StatelessWidget {
     );
   }
 }
+

@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1600 1320" font-family="Segoe UI, Arial, Helvetica, sans-serif">
+  <defs>
+    <style>
+      .title { font-size: 28px; font-weight: 700; fill: #e2e8f0; }
+      .subtitle { font-size: 14px; fill: #94a3b8; }
+      .actor-label { font-size: 13px; font-weight: 600; fill: #fff; text-anchor: middle; }
+      .actor-sublabel { font-size: 10px; font-weight: 400; fill: #fff; text-anchor: middle; }
+      .uc-text { font-size: 11px; fill: #f1f5f9; text-anchor: middle; dominant-baseline: central; }
+      .uc-text-sm { font-size: 9.5px; fill: #f1f5f9; text-anchor: middle; dominant-baseline: central; }
+      .subsystem-label { font-size: 14px; font-weight: 700; }
+      .relation-label { font-size: 9px; font-style: italic; text-anchor: middle; }
+      .legend-text { font-size: 11px; fill: #cbd5e1; }
+      .legend-title { font-size: 13px; font-weight: 700; fill: #e2e8f0; }
+    </style>
+    <linearGradient id="uc-auth" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4c1d95"/>
+      <stop offset="100%" stop-color="#2d1b69"/>
+    </linearGradient>
+    <linearGradient id="uc-dash" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0c4a6e"/>
+      <stop offset="100%" stop-color="#1b3a4b"/>
+    </linearGradient>
+    <linearGradient id="uc-learn" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14532d"/>
+      <stop offset="100%" stop-color="#1b4332"/>
+    </linearGradient>
+    <linearGradient id="uc-arena" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7f1d1d"/>
+      <stop offset="100%" stop-color="#4a1d1d"/>
+    </linearGradient>
+    <linearGradient id="uc-puzzle" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#713f12"/>
+      <stop offset="100%" stop-color="#4a3b1d"/>
+    </linearGradient>
+    <linearGradient id="uc-coach" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#312e81"/>
+      <stop offset="100%" stop-color="#1d3a4a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1600" height="1320" rx="12" fill="#0f172a"/>
+
+  <!-- Title -->
+  <text x="800" y="42" text-anchor="middle" class="title">SparMate - Use Case Diagram</text>
+  <text x="800" y="62" text-anchor="middle" class="subtitle">Intelligent Chess Coaching Ecosystem</text>
+
+  <!-- ================================================================== -->
+  <!-- ACTORS -->
+  <!-- ================================================================== -->
+
+  <!-- Student Actor (Left) -->
+  <circle cx="50" cy="530" r="8" fill="none" stroke="#e94560" stroke-width="2"/>
+  <line x1="50" y1="538" x2="50" y2="558" stroke="#e94560" stroke-width="2"/>
+  <line x1="36" y1="546" x2="64" y2="546" stroke="#e94560" stroke-width="2"/>
+  <line x1="50" y1="558" x2="38" y2="575" stroke="#e94560" stroke-width="2"/>
+  <line x1="50" y1="558" x2="62" y2="575" stroke="#e94560" stroke-width="2"/>
+  <text x="50" y="592" class="actor-label">Student</text>
+  <text x="50" y="606" class="actor-sublabel">(Player)</text>
+
+  <!-- Laravel Actor (Right Top) -->
+  <circle cx="1540" cy="210" r="8" fill="none" stroke="#e94560" stroke-width="2"/>
+  <line x1="1540" y1="218" x2="1540" y2="238" stroke="#e94560" stroke-width="2"/>
+  <line x1="1526" y1="226" x2="1554" y2="226" stroke="#e94560" stroke-width="2"/>
+  <line x1="1540" y1="238" x2="1528" y2="255" stroke="#e94560" stroke-width="2"/>
+  <line x1="1540" y1="238" x2="1552" y2="255" stroke="#e94560" stroke-width="2"/>
+  <text x="1540" y="272" class="actor-label">Laravel API</text>
+  <text x="1540" y="286" class="actor-sublabel">Gateway</text>
+
+  <!-- FastAPI Actor (Right Middle) -->
+  <circle cx="1540" cy="530" r="8" fill="none" stroke="#e94560" stroke-width="2"/>
+  <line x1="1540" y1="538" x2="1540" y2="558" stroke="#e94560" stroke-width="2"/>
+  <line x1="1526" y1="546" x2="1554" y2="546" stroke="#e94560" stroke-width="2"/>
+  <line x1="1540" y1="558" x2="1528" y2="575" stroke="#e94560" stroke-width="2"/>
+  <line x1="1540" y1="558" x2="1552" y2="575" stroke="#e94560" stroke-width="2"/>
+  <text x="1540" y="592" class="actor-label">FastAPI BKT</text>
+  <text x="1540" y="606" class="actor-sublabel">Microservice</text>
+
+  <!-- Stockfish Actor (Right Bottom) -->
+  <circle cx="1540" cy="840" r="8" fill="none" stroke="#e94560" stroke-width="2"/>
+  <line x1="1540" y1="848" x2="1540" y2="868" stroke="#e94560" stroke-width="2"/>
+  <line x1="1526" y1="856" x2="1554" y2="856" stroke="#e94560" stroke-width="2"/>
+  <line x1="1540" y1="868" x2="1528" y2="885" stroke="#e94560" stroke-width="2"/>
+  <line x1="1540" y1="868" x2="1552" y2="885" stroke="#e94560" stroke-width="2"/>
+  <text x="1540" y="902" class="actor-label">Stockfish</text>
+  <text x="1540" y="916" class="actor-sublabel">Engine (Edge)</text>
+
+  <!-- ================================================================== -->
+  <!-- SYSTEM BOUNDARY -->
+  <!-- ================================================================== -->
+  <rect x="110" y="80" width="1380" height="1200" rx="16" fill="none" stroke="#334155" stroke-width="2" stroke-dasharray="8,4"/>
+  <text x="800" y="105" text-anchor="middle" font-size="16" font-weight="700" fill="#64748b">SparMate System</text>
+
+  <!-- ================================================================== -->
+  <!-- AUTHENTICATION SUBSYSTEM -->
+  <!-- ================================================================== -->
+  <rect x="130" y="115" width="430" height="170" rx="10" fill="#1a0a30" fill-opacity="0.6" stroke="#8b5cf6" stroke-width="1.5"/>
+  <text x="345" y="138" text-anchor="middle" class="subsystem-label" fill="#a78bfa">Authentication</text>
+
+  <ellipse cx="215" cy="185" rx="72" ry="22" fill="url(#uc-auth)" stroke="#8b5cf6" stroke-width="1.2"/>
+  <text x="215" y="185" class="uc-text">Register Account</text>
+
+  <ellipse cx="390" cy="185" rx="72" ry="22" fill="url(#uc-auth)" stroke="#8b5cf6" stroke-width="1.2"/>
+  <text x="390" y="185" class="uc-text">Login</text>
+
+  <ellipse cx="215" cy="245" rx="72" ry="22" fill="url(#uc-auth)" stroke="#8b5cf6" stroke-width="1.2"/>
+  <text x="215" y="245" class="uc-text">Logout</text>
+
+  <ellipse cx="390" cy="245" rx="72" ry="22" fill="url(#uc-auth)" stroke="#8b5cf6" stroke-width="1.2"/>
+  <text x="390" y="245" class="uc-text">View Profile</text>
+
+  <!-- ================================================================== -->
+  <!-- DASHBOARD SUBSYSTEM -->
+  <!-- ================================================================== -->
+  <rect x="580" y="115" width="540" height="170" rx="10" fill="#0a1929" fill-opacity="0.6" stroke="#38bdf8" stroke-width="1.5"/>
+  <text x="850" y="138" text-anchor="middle" class="subsystem-label" fill="#7dd3fc">Dashboard</text>
+
+  <ellipse cx="670" cy="185" rx="72" ry="22" fill="url(#uc-dash)" stroke="#38bdf8" stroke-width="1.2"/>
+  <text x="670" y="185" class="uc-text">View Dashboard</text>
+
+  <ellipse cx="850" cy="165" rx="72" ry="18" fill="url(#uc-dash)" stroke="#38bdf8" stroke-width="0.8" opacity="0.7"/>
+  <text x="850" y="165" class="uc-text-sm">Active Lesson Summary</text>
+
+  <ellipse cx="1030" cy="165" rx="72" ry="18" fill="url(#uc-dash)" stroke="#38bdf8" stroke-width="0.8" opacity="0.7"/>
+  <text x="1030" y="165" class="uc-text-sm">Recent Match Result</text>
+
+  <ellipse cx="850" cy="210" rx="72" ry="18" fill="url(#uc-dash)" stroke="#38bdf8" stroke-width="0.8" opacity="0.7"/>
+  <text x="850" y="210" class="uc-text-sm">Daily Puzzle Progress</text>
+
+  <ellipse cx="1030" cy="210" rx="72" ry="18" fill="url(#uc-dash)" stroke="#38bdf8" stroke-width="0.8" opacity="0.7"/>
+  <text x="1030" y="210" class="uc-text-sm">Coaching Summary</text>
+
+  <ellipse cx="940" cy="255" rx="72" ry="18" fill="url(#uc-dash)" stroke="#38bdf8" stroke-width="0.8" opacity="0.7"/>
+  <text x="940" y="255" class="uc-text-sm">Win/Loss/Draw Stats</text>
+
+  <!-- Dashboard include lines -->
+  <line x1="742" y1="180" x2="778" y2="170" stroke="#38bdf8" stroke-width="0.8" stroke-dasharray="4,3" opacity="0.5"/>
+  <line x1="742" y1="190" x2="778" y2="205" stroke="#38bdf8" stroke-width="0.8" stroke-dasharray="4,3" opacity="0.5"/>
+  <line x1="742" y1="185" x2="870" y2="248" stroke="#38bdf8" stroke-width="0.8" stroke-dasharray="4,3" opacity="0.5"/>
+  <line x1="742" y1="178" x2="958" y2="168" stroke="#38bdf8" stroke-width="0.8" stroke-dasharray="4,3" opacity="0.5"/>
+  <line x1="742" y1="183" x2="958" y2="205" stroke="#38bdf8" stroke-width="0.8" stroke-dasharray="4,3" opacity="0.5"/>
+
+  <!-- ================================================================== -->
+  <!-- LEARNING MODULE SUBSYSTEM -->
+  <!-- ================================================================== -->
+  <rect x="130" y="305" width="540" height="190" rx="10" fill="#0a2918" fill-opacity="0.6" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="400" y="328" text-anchor="middle" class="subsystem-label" fill="#86efac">Learning Module</text>
+
+  <ellipse cx="230" cy="370" rx="82" ry="22" fill="url(#uc-learn)" stroke="#4ade80" stroke-width="1.2"/>
+  <text x="230" y="370" class="uc-text">Browse Lesson Catalog</text>
+
+  <ellipse cx="465" cy="370" rx="82" ry="22" fill="url(#uc-learn)" stroke="#4ade80" stroke-width="1.2"/>
+  <text x="465" y="370" class="uc-text">Filter by Category</text>
+
+  <ellipse cx="230" cy="430" rx="82" ry="22" fill="url(#uc-learn)" stroke="#4ade80" stroke-width="1.2"/>
+  <text x="230" y="430" class="uc-text">View Lesson Detail</text>
+
+  <ellipse cx="465" cy="430" rx="82" ry="22" fill="url(#uc-learn)" stroke="#4ade80" stroke-width="1.2"/>
+  <text x="465" y="430" class="uc-text">Read Chapter Content</text>
+
+  <ellipse cx="345" cy="470" rx="82" ry="22" fill="url(#uc-learn)" stroke="#4ade80" stroke-width="1.2"/>
+  <text x="345" y="470" class="uc-text">Update Lesson Progress</text>
+
+  <!-- ================================================================== -->
+  <!-- SPARRING ARENA SUBSYSTEM -->
+  <!-- ================================================================== -->
+  <rect x="130" y="515" width="660" height="270" rx="10" fill="#290a0a" fill-opacity="0.6" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="460" y="538" text-anchor="middle" class="subsystem-label" fill="#fca5a5">Sparring Arena</text>
+
+  <ellipse cx="240" cy="580" rx="88" ry="22" fill="url(#uc-arena)" stroke="#ef4444" stroke-width="1.2"/>
+  <text x="240" y="580" class="uc-text">Browse GM Personas</text>
+
+  <ellipse cx="490" cy="580" rx="88" ry="22" fill="url(#uc-arena)" stroke="#ef4444" stroke-width="1.2"/>
+  <text x="490" y="580" class="uc-text">Select AI Opponent</text>
+
+  <ellipse cx="240" cy="635" rx="88" ry="22" fill="url(#uc-arena)" stroke="#ef4444" stroke-width="1.2"/>
+  <text x="240" y="635" class="uc-text">Start Sparring Match</text>
+
+  <ellipse cx="490" cy="635" rx="88" ry="22" fill="url(#uc-arena)" stroke="#ef4444" stroke-width="1.2"/>
+  <text x="490" y="635" class="uc-text">Play Chess Against AI</text>
+
+  <ellipse cx="680" cy="635" rx="88" ry="22" fill="url(#uc-arena)" stroke="#ef4444" stroke-width="1.2"/>
+  <text x="680" y="635" class="uc-text-sm">View Pressure Metric</text>
+
+  <ellipse cx="240" cy="695" rx="88" ry="22" fill="url(#uc-arena)" stroke="#ef4444" stroke-width="1.2"/>
+  <text x="240" y="695" class="uc-text">View Match History</text>
+
+  <ellipse cx="490" cy="695" rx="88" ry="22" fill="url(#uc-arena)" stroke="#ef4444" stroke-width="1.2"/>
+  <text x="490" y="695" class="uc-text-sm">Complete and Submit PGN</text>
+
+  <ellipse cx="490" cy="750" rx="88" ry="22" fill="url(#uc-arena)" stroke="#ef4444" stroke-width="1.2"/>
+  <text x="490" y="750" class="uc-text-sm">Trigger BKT Analysis</text>
+
+  <!-- Arena relationships -->
+  <line x1="328" y1="635" x2="402" y2="635" stroke="#ef4444" stroke-width="0.8" stroke-dasharray="4,3"/>
+  <text x="365" y="628" class="relation-label" fill="#fca5a5">includes</text>
+
+  <line x1="490" y1="657" x2="490" y2="673" stroke="#ef4444" stroke-width="0.8" stroke-dasharray="4,3"/>
+  <text x="525" y="668" class="relation-label" fill="#fca5a5">extends</text>
+
+  <line x1="490" y1="717" x2="490" y2="728" stroke="#ef4444" stroke-width="0.8" stroke-dasharray="4,3"/>
+  <text x="525" y="725" class="relation-label" fill="#fca5a5">extends</text>
+
+  <line x1="578" y1="635" x2="592" y2="635" stroke="#ef4444" stroke-width="0.8" stroke-dasharray="4,3"/>
+  <text x="587" y="626" class="relation-label" fill="#fca5a5">incl.</text>
+
+  <!-- ================================================================== -->
+  <!-- PUZZLE TRAINING SUBSYSTEM -->
+  <!-- ================================================================== -->
+  <rect x="130" y="805" width="540" height="190" rx="10" fill="#291f0a" fill-opacity="0.6" stroke="#facc15" stroke-width="1.5"/>
+  <text x="400" y="828" text-anchor="middle" class="subsystem-label" fill="#fde68a">Puzzle Training</text>
+
+  <ellipse cx="230" cy="870" rx="82" ry="22" fill="url(#uc-puzzle)" stroke="#facc15" stroke-width="1.2"/>
+  <text x="230" y="870" class="uc-text">View Daily Puzzles</text>
+
+  <ellipse cx="465" cy="870" rx="82" ry="22" fill="url(#uc-puzzle)" stroke="#facc15" stroke-width="1.2"/>
+  <text x="465" y="870" class="uc-text">Solve Tactical Puzzle</text>
+
+  <ellipse cx="230" cy="930" rx="82" ry="22" fill="url(#uc-puzzle)" stroke="#facc15" stroke-width="1.2"/>
+  <text x="230" y="930" class="uc-text">Submit Puzzle Attempt</text>
+
+  <ellipse cx="465" cy="930" rx="82" ry="22" fill="url(#uc-puzzle)" stroke="#facc15" stroke-width="1.2"/>
+  <text x="465" y="930" class="uc-text">View Puzzle History</text>
+
+  <ellipse cx="345" cy="970" rx="82" ry="22" fill="url(#uc-puzzle)" stroke="#facc15" stroke-width="1.2"/>
+  <text x="345" y="970" class="uc-text">Track Daily Streak</text>
+
+  <!-- Puzzle relationships -->
+  <line x1="465" y1="892" x2="310" y2="916" stroke="#facc15" stroke-width="0.8" stroke-dasharray="4,3"/>
+  <text x="395" y="898" class="relation-label" fill="#fde68a">includes</text>
+
+  <line x1="280" y1="948" x2="310" y2="958" stroke="#facc15" stroke-width="0.8" stroke-dasharray="4,3"/>
+  <text x="270" y="958" class="relation-label" fill="#fde68a">extends</text>
+
+  <!-- ================================================================== -->
+  <!-- ADAPTIVE COACHING SUBSYSTEM -->
+  <!-- ================================================================== -->
+  <rect x="700" y="805" width="770" height="455" rx="10" fill="#0a1929" fill-opacity="0.6" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="1085" y="828" text-anchor="middle" class="subsystem-label" fill="#c4b5fd">Adaptive Coaching and Analytics</text>
+
+  <ellipse cx="820" cy="875" rx="90" ry="22" fill="url(#uc-coach)" stroke="#a78bfa" stroke-width="1.2"/>
+  <text x="820" y="875" class="uc-text-sm">View BKT Mastery Matrix</text>
+
+  <ellipse cx="1060" cy="875" rx="90" ry="22" fill="url(#uc-coach)" stroke="#a78bfa" stroke-width="1.2"/>
+  <text x="1060" y="875" class="uc-text">View Training Plan</text>
+
+  <ellipse cx="1310" cy="875" rx="90" ry="22" fill="url(#uc-coach)" stroke="#a78bfa" stroke-width="1.2"/>
+  <text x="1310" y="875" class="uc-text">Refresh Training Plan</text>
+
+  <ellipse cx="820" cy="940" rx="90" ry="22" fill="url(#uc-coach)" stroke="#a78bfa" stroke-width="1.2"/>
+  <text x="820" y="940" class="uc-text-sm">View Performance Analytics</text>
+
+  <ellipse cx="1060" cy="940" rx="90" ry="22" fill="url(#uc-coach)" stroke="#a78bfa" stroke-width="1.2"/>
+  <text x="1060" y="940" class="uc-text">View Phase Accuracy</text>
+
+  <ellipse cx="1310" cy="940" rx="90" ry="22" fill="url(#uc-coach)" stroke="#a78bfa" stroke-width="1.2"/>
+  <text x="1310" y="940" class="uc-text">View Coaching Insights</text>
+
+  <ellipse cx="820" cy="1005" rx="90" ry="22" fill="url(#uc-coach)" stroke="#a78bfa" stroke-width="1.2"/>
+  <text x="820" y="1005" class="uc-text">View Top Opponents</text>
+
+  <ellipse cx="1060" cy="1005" rx="90" ry="22" fill="url(#uc-coach)" stroke="#a78bfa" stroke-width="1.2"/>
+  <text x="1060" y="1005" class="uc-text-sm">Classify Player Mistakes</text>
+
+  <ellipse cx="1060" cy="1075" rx="90" ry="22" fill="url(#uc-coach)" stroke="#a78bfa" stroke-width="1.2"/>
+  <text x="1060" y="1075" class="uc-text-sm">Update BKT Probabilities</text>
+
+  <ellipse cx="1060" cy="1140" rx="90" ry="22" fill="url(#uc-coach)" stroke="#a78bfa" stroke-width="1.2"/>
+  <text x="1060" y="1140" class="uc-text-sm">Generate Personalized Plan</text>
+
+  <!-- Coaching relationships -->
+  <line x1="910" y1="940" x2="970" y2="940" stroke="#a78bfa" stroke-width="0.8" stroke-dasharray="4,3"/>
+  <text x="940" y="934" class="relation-label" fill="#c4b5fd">includes</text>
+
+  <line x1="878" y1="955" x2="1230" y2="938" stroke="#a78bfa" stroke-width="0.8" stroke-dasharray="4,3"/>
+  <text x="1050" y="930" class="relation-label" fill="#c4b5fd">includes</text>
+
+  <line x1="820" y1="962" x2="820" y2="983" stroke="#a78bfa" stroke-width="0.8" stroke-dasharray="4,3"/>
+  <text x="855" y="975" class="relation-label" fill="#c4b5fd">includes</text>
+
+  <line x1="1060" y1="1027" x2="1060" y2="1053" stroke="#a78bfa" stroke-width="0.8" stroke-dasharray="4,3"/>
+  <text x="1100" y="1045" class="relation-label" fill="#c4b5fd">includes</text>
+
+  <line x1="1310" y1="897" x2="1130" y2="1130" stroke="#a78bfa" stroke-width="0.8" stroke-dasharray="4,3"/>
+  <text x="1240" y="1020" class="relation-label" fill="#c4b5fd">includes</text>
+
+  <!-- ================================================================== -->
+  <!-- STUDENT ASSOCIATION LINES -->
+  <!-- ================================================================== -->
+  <line x1="70" y1="540" x2="148" y2="185" stroke="#8b5cf6" stroke-width="1" opacity="0.5"/>
+  <line x1="70" y1="540" x2="148" y2="245" stroke="#8b5cf6" stroke-width="1" opacity="0.5"/>
+  <line x1="70" y1="540" x2="318" y2="185" stroke="#8b5cf6" stroke-width="1" opacity="0.3"/>
+  <line x1="70" y1="540" x2="318" y2="245" stroke="#8b5cf6" stroke-width="1" opacity="0.3"/>
+  <line x1="70" y1="540" x2="598" y2="185" stroke="#38bdf8" stroke-width="1" opacity="0.4"/>
+  <line x1="70" y1="550" x2="148" y2="370" stroke="#4ade80" stroke-width="1" opacity="0.5"/>
+  <line x1="70" y1="550" x2="148" y2="430" stroke="#4ade80" stroke-width="1" opacity="0.5"/>
+  <line x1="70" y1="550" x2="383" y2="370" stroke="#4ade80" stroke-width="1" opacity="0.3"/>
+  <line x1="70" y1="550" x2="383" y2="430" stroke="#4ade80" stroke-width="1" opacity="0.3"/>
+  <line x1="70" y1="555" x2="263" y2="470" stroke="#4ade80" stroke-width="1" opacity="0.4"/>
+  <line x1="70" y1="560" x2="152" y2="580" stroke="#ef4444" stroke-width="1" opacity="0.5"/>
+  <line x1="70" y1="560" x2="152" y2="635" stroke="#ef4444" stroke-width="1" opacity="0.5"/>
+  <line x1="70" y1="560" x2="152" y2="695" stroke="#ef4444" stroke-width="1" opacity="0.5"/>
+  <line x1="70" y1="560" x2="402" y2="580" stroke="#ef4444" stroke-width="1" opacity="0.3"/>
+  <line x1="70" y1="570" x2="148" y2="870" stroke="#facc15" stroke-width="1" opacity="0.4"/>
+  <line x1="70" y1="570" x2="383" y2="870" stroke="#facc15" stroke-width="1" opacity="0.3"/>
+  <line x1="70" y1="570" x2="383" y2="930" stroke="#facc15" stroke-width="1" opacity="0.3"/>
+  <line x1="70" y1="575" x2="730" y2="875" stroke="#a78bfa" stroke-width="1" opacity="0.4"/>
+  <line x1="70" y1="575" x2="970" y2="875" stroke="#a78bfa" stroke-width="1" opacity="0.3"/>
+  <line x1="70" y1="575" x2="1220" y2="875" stroke="#a78bfa" stroke-width="1" opacity="0.3"/>
+  <line x1="70" y1="575" x2="730" y2="940" stroke="#a78bfa" stroke-width="1" opacity="0.3"/>
+
+  <!-- ================================================================== -->
+  <!-- LARAVEL ASSOCIATION LINES -->
+  <!-- ================================================================== -->
+  <line x1="1520" y1="230" x2="462" y2="185" stroke="#8b5cf6" stroke-width="1" opacity="0.3"/>
+  <line x1="1520" y1="230" x2="462" y2="245" stroke="#8b5cf6" stroke-width="1" opacity="0.3"/>
+  <line x1="1520" y1="230" x2="742" y2="185" stroke="#38bdf8" stroke-width="1" opacity="0.3"/>
+  <line x1="1520" y1="240" x2="547" y2="370" stroke="#4ade80" stroke-width="1" opacity="0.3"/>
+  <line x1="1520" y1="240" x2="427" y2="470" stroke="#4ade80" stroke-width="1" opacity="0.3"/>
+  <line x1="1520" y1="250" x2="578" y2="635" stroke="#ef4444" stroke-width="1" opacity="0.3"/>
+  <line x1="1520" y1="250" x2="578" y2="695" stroke="#ef4444" stroke-width="1" opacity="0.3"/>
+  <line x1="1520" y1="250" x2="578" y2="750" stroke="#ef4444" stroke-width="1" opacity="0.3"/>
+  <line x1="1520" y1="255" x2="312" y2="870" stroke="#facc15" stroke-width="1" opacity="0.3"/>
+  <line x1="1520" y1="255" x2="312" y2="930" stroke="#facc15" stroke-width="1" opacity="0.3"/>
+  <line x1="1520" y1="260" x2="910" y2="875" stroke="#a78bfa" stroke-width="1" opacity="0.3"/>
+  <line x1="1520" y1="260" x2="1400" y2="875" stroke="#a78bfa" stroke-width="1" opacity="0.3"/>
+  <line x1="1520" y1="260" x2="910" y2="940" stroke="#a78bfa" stroke-width="1" opacity="0.3"/>
+
+  <!-- ================================================================== -->
+  <!-- FASTAPI ASSOCIATION LINES -->
+  <!-- ================================================================== -->
+  <line x1="1520" y1="555" x2="578" y2="750" stroke="#ef4444" stroke-width="1.2" opacity="0.5"/>
+  <line x1="1520" y1="555" x2="1150" y2="1075" stroke="#a78bfa" stroke-width="1.2" opacity="0.5"/>
+  <line x1="1520" y1="555" x2="1150" y2="1140" stroke="#a78bfa" stroke-width="1.2" opacity="0.5"/>
+
+  <!-- ================================================================== -->
+  <!-- STOCKFISH ASSOCIATION LINES -->
+  <!-- ================================================================== -->
+  <line x1="1520" y1="860" x2="578" y2="635" stroke="#ef4444" stroke-width="1.2" opacity="0.5"/>
+  <line x1="1520" y1="860" x2="768" y2="635" stroke="#ef4444" stroke-width="1.2" opacity="0.4"/>
+  <line x1="1520" y1="870" x2="1150" y2="1005" stroke="#a78bfa" stroke-width="1.2" opacity="0.5"/>
+
+  <!-- ================================================================== -->
+  <!-- LEGEND -->
+  <!-- ================================================================== -->
+  <rect x="1140" y="305" width="330" height="185" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="1305" y="330" text-anchor="middle" class="legend-title">Legend</text>
+
+  <!-- Actor icon in legend -->
+  <circle cx="1172" cy="348" r="5" fill="none" stroke="#e94560" stroke-width="1.5"/>
+  <line x1="1172" y1="353" x2="1172" y2="365" stroke="#e94560" stroke-width="1.5"/>
+  <line x1="1163" y1="358" x2="1181" y2="358" stroke="#e94560" stroke-width="1.5"/>
+  <line x1="1172" y1="365" x2="1165" y2="375" stroke="#e94560" stroke-width="1.5"/>
+  <line x1="1172" y1="365" x2="1179" y2="375" stroke="#e94560" stroke-width="1.5"/>
+  <text x="1200" y="363" class="legend-text">Actor</text>
+
+  <!-- Use Case ellipse in legend -->
+  <ellipse cx="1172" cy="398" rx="20" ry="12" fill="url(#uc-auth)" stroke="#8b5cf6" stroke-width="1"/>
+  <text x="1200" y="402" class="legend-text">Use Case</text>
+
+  <!-- Association line in legend -->
+  <line x1="1155" y1="425" x2="1190" y2="425" stroke="#64748b" stroke-width="1.2"/>
+  <text x="1200" y="429" class="legend-text">Association</text>
+
+  <!-- Include/Extend line in legend -->
+  <line x1="1155" y1="450" x2="1190" y2="450" stroke="#64748b" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="1200" y="454" class="legend-text">includes / extends</text>
+
+  <!-- System Boundary in legend -->
+  <rect x="1155" y="465" width="30" height="16" rx="3" fill="none" stroke="#334155" stroke-width="1" stroke-dasharray="4,2"/>
+  <text x="1200" y="478" class="legend-text">System Boundary</text>
+
+</svg>

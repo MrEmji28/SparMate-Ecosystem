@@ -1,0 +1,78 @@
+======================================================================
+SparMate Blunder Classifier — Evaluation Report
+======================================================================
+
+Dataset: 10,000 intermediate-level chess game blunders
+Training set: 8000 samples
+Test set:     2000 samples
+Features:     43
+Classes:      8
+
+──────────────────────────────────────────────────
+Model: Random Forest
+──────────────────────────────────────────────────
+  Accuracy:          99.9%
+  F1 (macro):        0.9988
+  F1 (weighted):     0.9990
+  Precision (macro): 0.9992
+  Recall (macro):    0.9984
+
+                      precision    recall  f1-score   support
+
+  tactical_oversight      1.000     1.000     1.000       440
+    positional_error      0.993     1.000     0.997       300
+endgame_fundamentals      1.000     1.000     1.000       200
+      opening_theory      1.000     1.000     1.000       260
+         king_safety      1.000     1.000     1.000       240
+      pawn_structure      1.000     1.000     1.000       200
+  piece_coordination      1.000     0.988     0.994       160
+     time_management      1.000     1.000     1.000       200
+
+            accuracy                          0.999      2000
+           macro avg      0.999     0.998     0.999      2000
+        weighted avg      0.999     0.999     0.999      2000
+
+
+──────────────────────────────────────────────────
+Model: SVM (RBF Kernel)
+──────────────────────────────────────────────────
+  Accuracy:          99.7%
+  F1 (macro):        0.9968
+  F1 (weighted):     0.9970
+  Precision (macro): 0.9969
+  Recall (macro):    0.9967
+
+                      precision    recall  f1-score   support
+
+  tactical_oversight      1.000     1.000     1.000       440
+    positional_error      0.990     0.990     0.990       300
+endgame_fundamentals      1.000     1.000     1.000       200
+      opening_theory      1.000     1.000     1.000       260
+         king_safety      1.000     1.000     1.000       240
+      pawn_structure      0.985     0.990     0.988       200
+  piece_coordination      1.000     0.994     0.997       160
+     time_management      1.000     1.000     1.000       200
+
+            accuracy                          0.997      2000
+           macro avg      0.997     0.997     0.997      2000
+        weighted avg      0.997     0.997     0.997      2000
+
+
+──────────────────────────────────────────────────
+Top Feature Importances (Random Forest)
+──────────────────────────────────────────────────
+  game_phase                     0.0847  ████████
+  own_king_pawn_shield           0.0577  █████
+  time_remaining_pct             0.0573  █████
+  own_king_exposure              0.0542  █████
+  time_delta                     0.0513  █████
+  piece_mobility                 0.0468  ████
+  doubled_pawns                  0.0425  ████
+  move_number                    0.0406  ████
+  fork_potential                 0.0387  ███
+  total_pieces                   0.0381  ███
+  pawn_islands                   0.0366  ███
+  hanging_material_value         0.0360  ███
+  material_total                 0.0351  ███
+  pieces_en_prise                0.0270  ██
+  cp_loss                        0.0267  ██

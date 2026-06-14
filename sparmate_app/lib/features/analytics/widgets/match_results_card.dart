@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 import '../../../core/theme/app_colors.dart';
 
 /// Match Results card with a donut chart showing W/L/D distribution.
+/// Accepts optional [matchData] from the analytics API.
 class MatchResultsCard extends StatelessWidget {
-  const MatchResultsCard({super.key});
+  final Map<String, dynamic>? matchData;
 
-  static const _wins = 65;
-  static const _losses = 35;
-  static const _draws = 20;
-  static const _total = _wins + _losses + _draws; // 120
+  const MatchResultsCard({super.key, this.matchData});
+
+  int get _wins => (matchData?['wins'] as int?) ?? 65;
+  int get _losses => (matchData?['losses'] as int?) ?? 35;
+  int get _draws => (matchData?['draws'] as int?) ?? 20;
+  int get _total => _wins + _losses + _draws;
 
   static const _winColor = Color(0xFF43A047);
   static const _lossColor = Color(0xFFE53935);

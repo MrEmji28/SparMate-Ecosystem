@@ -1,0 +1,398 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 880" width="1800" height="880">
+  <defs>
+    <filter id="shadow" x="-3%" y="-3%" width="106%" height="110%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.35"/>
+    </filter>
+    <style>
+      .box { fill: #1a1d2e; stroke: #2a2e42; stroke-width: 1.5; }
+      .hdr { font-family: Inter, 'Segoe UI', system-ui, sans-serif; font-size: 12px; font-weight: 700; fill: #fff; text-anchor: middle; }
+      .col { font-family: 'SF Mono', Menlo, Consolas, monospace; font-size: 11px; fill: #c1c9d9; }
+      .typ { font-family: 'SF Mono', Menlo, Consolas, monospace; font-size: 9.5px; fill: #555e72; text-anchor: end; }
+      .rel { fill: none; stroke: #3d4559; stroke-width: 1.5; stroke-linejoin: round; }
+      .lbl { font-family: Inter, system-ui, sans-serif; font-size: 9.5px; font-weight: 700; fill: #6b7a91; }
+      .title { font-family: Inter, 'Segoe UI', system-ui, sans-serif; font-size: 22px; font-weight: 800; fill: #e2e8f0; }
+      .sub { font-family: Inter, system-ui, sans-serif; font-size: 11.5px; fill: #4a5568; }
+      .leg { font-family: Inter, system-ui, sans-serif; font-size: 10px; fill: #64748b; }
+      .cl { font-family: Inter, system-ui, sans-serif; font-size: 9px; font-weight: 700; fill: #3d4a5e; letter-spacing: 1.2px; text-transform: uppercase; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1800" height="880" fill="#0f1117" rx="0"/>
+
+  <!-- Title -->
+  <text x="900" y="36" text-anchor="middle" class="title">SparMate — Entity Relationship Diagram</text>
+  <text x="900" y="54" text-anchor="middle" class="sub">Chess Training Platform  ·  Laravel 12  ·  SQLite  ·  Sanctum Auth</text>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- CLUSTER BACKGROUNDS                                            -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <rect x="18" y="66" width="650" height="362" rx="14" fill="#059669" opacity="0.03"/>
+  <text x="34" y="78" class="cl" fill="#10b981" opacity="0.5">Learning</text>
+
+  <rect x="1115" y="66" width="655" height="290" rx="14" fill="#d97706" opacity="0.03"/>
+  <text x="1735" y="78" text-anchor="end" class="cl" fill="#f59e0b" opacity="0.5">Sparring</text>
+
+  <rect x="68" y="516" width="290" height="295" rx="14" fill="#7c3aed" opacity="0.03"/>
+  <text x="84" y="528" class="cl" fill="#a78bfa" opacity="0.5">ML / Adaptive</text>
+
+  <rect x="1115" y="516" width="655" height="170" rx="14" fill="#dc2626" opacity="0.03"/>
+  <text x="1735" y="528" text-anchor="end" class="cl" fill="#f87171" opacity="0.5">Puzzles</text>
+
+  <rect x="535" y="681" width="665" height="150" rx="14" fill="#475569" opacity="0.03"/>
+  <text x="551" y="693" class="cl" fill="#94a3b8" opacity="0.4">Authentication</text>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- RELATIONSHIP LINES (drawn first, behind entities)              -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <!-- 1. LESSON → CHAPTER (1:N) -->
+  <path d="M162,242 L162,290" class="rel"/>
+  <text x="172" y="252" class="lbl">1</text>
+  <text x="172" y="288" class="lbl">N</text>
+
+  <!-- 2. LESSON → ULP via lesson_id (1:N) -->
+  <path d="M295,160 L330,160 L330,256 L365,256" class="rel"/>
+  <text x="302" y="156" class="lbl">1</text>
+  <text x="358" y="252" class="lbl" text-anchor="end">N</text>
+
+  <!-- 3. CHAPTER → ULP via current_chapter_id (1:N) -->
+  <path d="M295,370 L345,370 L345,275 L365,275" class="rel" stroke-dasharray="6,3"/>
+  <text x="302" y="366" class="lbl">1</text>
+  <text x="358" y="271" class="lbl" text-anchor="end">N</text>
+
+  <!-- 4. USER → ULP via user_id (1:N) -->
+  <path d="M710,160 L683,160 L683,237 L655,237" class="rel"/>
+  <text x="703" y="156" class="lbl" text-anchor="end">1</text>
+  <text x="662" y="234" class="lbl">N</text>
+
+  <!-- 5. USER → SPARRING_MATCH via user_id (1:N) -->
+  <path d="M975,160 L1053,160 L1053,237 L1130,237" class="rel"/>
+  <text x="982" y="156" class="lbl">1</text>
+  <text x="1123" y="234" class="lbl" text-anchor="end">N</text>
+
+  <!-- 6. GRANDMASTER → SPARRING_MATCH via grandmaster_id (1:N) -->
+  <path d="M1490,170 L1455,170 L1455,256 L1420,256" class="rel"/>
+  <text x="1483" y="166" class="lbl" text-anchor="end">1</text>
+  <text x="1427" y="253" class="lbl">N</text>
+
+  <!-- 7. USER → PUZZLE_ATTEMPT via user_id (1:N) -->
+  <path d="M930,242 L930,587 L1130,587" class="rel"/>
+  <text x="936" y="260" class="lbl">1</text>
+  <text x="1123" y="584" class="lbl" text-anchor="end">N</text>
+
+  <!-- 8. PUZZLE → PUZZLE_ATTEMPT via puzzle_id (1:N) -->
+  <path d="M1490,606 L1395,606" class="rel"/>
+  <text x="1483" y="603" class="lbl" text-anchor="end">1</text>
+  <text x="1402" y="603" class="lbl">N</text>
+
+  <!-- 9. USER → USER_BKT_MATRIX via user_id (1:1) -->
+  <path d="M740,242 L740,587 L345,587" class="rel"/>
+  <text x="746" y="260" class="lbl">1</text>
+  <text x="352" y="584" class="lbl">1</text>
+
+  <!-- 10. USER → TRAINING_PLAN via user_id (1:N) -->
+  <path d="M770,242 L770,727 L345,727" class="rel"/>
+  <text x="776" y="260" class="lbl">1</text>
+  <text x="352" y="724" class="lbl">N</text>
+
+  <!-- 11. USER → PERSONAL_ACCESS_TOKEN (polymorphic 1:N) -->
+  <path d="M840,242 L840,660 L695,660 L695,695" class="rel" stroke-dasharray="6,3"/>
+  <text x="846" y="260" class="lbl">1</text>
+  <text x="701" y="692" class="lbl">N</text>
+
+  <!-- 12. USER → SESSION via user_id (1:N) -->
+  <path d="M870,242 L870,660 L1053,660 L1053,695" class="rel"/>
+  <text x="876" y="260" class="lbl">1</text>
+  <text x="1059" y="692" class="lbl">N</text>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- ENTITY: lessons                                                -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g filter="url(#shadow)">
+    <rect x="30" y="80" width="265" height="162" rx="8" class="box"/>
+    <path d="M38,80 H287 Q295,80 295,88 V109 H30 V88 Q30,80 38,80 Z" fill="#059669"/>
+    <text x="163" y="99" class="hdr">lessons</text>
+    <!-- id -->
+    <circle cx="44" cy="114" r="3.5" fill="#fbbf24"/><text x="54" y="118" class="col">id</text><text x="285" y="118" class="typ">BIGINT</text>
+    <!-- title -->
+    <text x="54" y="137" class="col">title</text><text x="285" y="137" class="typ">VARCHAR</text>
+    <!-- slug -->
+    <text x="54" y="156" class="col">slug</text><text x="285" y="156" class="typ">VARCHAR · UK</text>
+    <!-- category -->
+    <text x="54" y="175" class="col">category</text><text x="285" y="175" class="typ">VARCHAR</text>
+    <!-- difficulty -->
+    <text x="54" y="194" class="col">difficulty</text><text x="285" y="194" class="typ">VARCHAR</text>
+    <!-- sort_order -->
+    <text x="54" y="213" class="col">sort_order</text><text x="285" y="213" class="typ">INT</text>
+    <!-- chapter_count -->
+    <text x="54" y="232" class="col">chapter_count</text><text x="285" y="232" class="typ">INT</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- ENTITY: chapters                                               -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g filter="url(#shadow)">
+    <rect x="30" y="290" width="265" height="124" rx="8" class="box"/>
+    <path d="M38,290 H287 Q295,290 295,298 V319 H30 V298 Q30,290 38,290 Z" fill="#059669"/>
+    <text x="163" y="309" class="hdr">chapters</text>
+    <!-- id -->
+    <circle cx="44" cy="324" r="3.5" fill="#fbbf24"/><text x="54" y="328" class="col">id</text><text x="285" y="328" class="typ">BIGINT</text>
+    <!-- lesson_id -->
+    <circle cx="44" cy="343" r="3.5" fill="#60a5fa"/><text x="54" y="347" class="col">lesson_id</text><text x="285" y="347" class="typ">BIGINT FK</text>
+    <!-- title -->
+    <text x="54" y="366" class="col">title</text><text x="285" y="366" class="typ">VARCHAR</text>
+    <!-- sort_order -->
+    <text x="54" y="385" class="col">sort_order</text><text x="285" y="385" class="typ">INT</text>
+    <!-- content -->
+    <text x="54" y="404" class="col">content</text><text x="285" y="404" class="typ">JSON</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- ENTITY: user_lesson_progress                                   -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g filter="url(#shadow)">
+    <rect x="365" y="180" width="290" height="143" rx="8" class="box"/>
+    <path d="M373,180 H647 Q655,180 655,188 V209 H365 V188 Q365,180 373,180 Z" fill="#0891b2"/>
+    <text x="510" y="199" class="hdr">user_lesson_progress</text>
+    <!-- id -->
+    <circle cx="379" cy="214" r="3.5" fill="#fbbf24"/><text x="389" y="218" class="col">id</text><text x="645" y="218" class="typ">BIGINT</text>
+    <!-- user_id -->
+    <circle cx="379" cy="233" r="3.5" fill="#60a5fa"/><text x="389" y="237" class="col">user_id</text><text x="645" y="237" class="typ">BIGINT FK</text>
+    <!-- lesson_id -->
+    <circle cx="379" cy="252" r="3.5" fill="#60a5fa"/><text x="389" y="256" class="col">lesson_id</text><text x="645" y="256" class="typ">BIGINT FK</text>
+    <!-- current_chapter_id -->
+    <circle cx="379" cy="271" r="3.5" fill="#60a5fa"/><text x="389" y="275" class="col">current_chapter_id</text><text x="645" y="275" class="typ">BIGINT FK?</text>
+    <!-- progress -->
+    <text x="389" y="294" class="col">progress</text><text x="645" y="294" class="typ">FLOAT</text>
+    <!-- completed_at -->
+    <text x="389" y="313" class="col">completed_at</text><text x="645" y="313" class="typ">TIMESTAMP?</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- ENTITY: users  (CENTRAL)                                      -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g filter="url(#shadow)">
+    <rect x="710" y="80" width="265" height="162" rx="8" fill="#1a1d2e" stroke="#4f46e5" stroke-width="2"/>
+    <path d="M718,80 H967 Q975,80 975,88 V109 H710 V88 Q710,80 718,80 Z" fill="#4f46e5"/>
+    <text x="843" y="99" class="hdr">users</text>
+    <!-- id -->
+    <circle cx="724" cy="114" r="3.5" fill="#fbbf24"/><text x="734" y="118" class="col">id</text><text x="965" y="118" class="typ">BIGINT</text>
+    <!-- name -->
+    <text x="734" y="137" class="col">name</text><text x="965" y="137" class="typ">VARCHAR</text>
+    <!-- email -->
+    <text x="734" y="156" class="col">email</text><text x="965" y="156" class="typ">VARCHAR · UK</text>
+    <!-- password -->
+    <text x="734" y="175" class="col">password</text><text x="965" y="175" class="typ">VARCHAR</text>
+    <!-- elo_rating -->
+    <text x="734" y="194" class="col">elo_rating</text><text x="965" y="194" class="typ">INT (1200)</text>
+    <!-- avatar_url -->
+    <text x="734" y="213" class="col">avatar_url</text><text x="965" y="213" class="typ">VARCHAR?</text>
+    <!-- streak_days -->
+    <text x="734" y="232" class="col">streak_days</text><text x="965" y="232" class="typ">INT (0)</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- ENTITY: grandmasters                                           -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g filter="url(#shadow)">
+    <rect x="1490" y="80" width="265" height="181" rx="8" class="box"/>
+    <path d="M1498,80 H1747 Q1755,80 1755,88 V109 H1490 V88 Q1490,80 1498,80 Z" fill="#d97706"/>
+    <text x="1623" y="99" class="hdr">grandmasters</text>
+    <!-- id -->
+    <circle cx="1504" cy="114" r="3.5" fill="#fbbf24"/><text x="1514" y="118" class="col">id</text><text x="1745" y="118" class="typ">BIGINT</text>
+    <!-- name -->
+    <text x="1514" y="137" class="col">name</text><text x="1745" y="137" class="typ">VARCHAR</text>
+    <!-- full_name -->
+    <text x="1514" y="156" class="col">full_name</text><text x="1745" y="156" class="typ">VARCHAR</text>
+    <!-- title -->
+    <text x="1514" y="175" class="col">title</text><text x="1745" y="175" class="typ">VARCHAR</text>
+    <!-- style -->
+    <text x="1514" y="194" class="col">style</text><text x="1745" y="194" class="typ">VARCHAR</text>
+    <!-- elo_rating -->
+    <text x="1514" y="213" class="col">elo_rating</text><text x="1745" y="213" class="typ">INT</text>
+    <!-- strengths -->
+    <text x="1514" y="232" class="col">strengths</text><text x="1745" y="232" class="typ">JSON[]</text>
+    <!-- openings -->
+    <text x="1514" y="251" class="col">openings</text><text x="1745" y="251" class="typ">JSON[]</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- ENTITY: sparring_matches                                       -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g filter="url(#shadow)">
+    <rect x="1130" y="180" width="290" height="162" rx="8" class="box"/>
+    <path d="M1138,180 H1412 Q1420,180 1420,188 V209 H1130 V188 Q1130,180 1138,180 Z" fill="#d97706"/>
+    <text x="1275" y="199" class="hdr">sparring_matches</text>
+    <!-- id -->
+    <circle cx="1144" cy="214" r="3.5" fill="#fbbf24"/><text x="1154" y="218" class="col">id</text><text x="1410" y="218" class="typ">BIGINT</text>
+    <!-- user_id -->
+    <circle cx="1144" cy="233" r="3.5" fill="#60a5fa"/><text x="1154" y="237" class="col">user_id</text><text x="1410" y="237" class="typ">BIGINT FK</text>
+    <!-- grandmaster_id -->
+    <circle cx="1144" cy="252" r="3.5" fill="#60a5fa"/><text x="1154" y="256" class="col">grandmaster_id</text><text x="1410" y="256" class="typ">BIGINT FK</text>
+    <!-- pgn -->
+    <text x="1154" y="275" class="col">pgn</text><text x="1410" y="275" class="typ">TEXT?</text>
+    <!-- result -->
+    <text x="1154" y="294" class="col">result</text><text x="1410" y="294" class="typ">VARCHAR</text>
+    <!-- move_count -->
+    <text x="1154" y="313" class="col">move_count</text><text x="1410" y="313" class="typ">INT</text>
+    <!-- analysis -->
+    <text x="1154" y="332" class="col">analysis</text><text x="1410" y="332" class="typ">JSON?</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- ENTITY: user_bkt_matrices                                      -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g filter="url(#shadow)">
+    <rect x="80" y="530" width="265" height="86" rx="8" class="box"/>
+    <path d="M88,530 H337 Q345,530 345,538 V559 H80 V538 Q80,530 88,530 Z" fill="#7c3aed"/>
+    <text x="213" y="549" class="hdr">user_bkt_matrices</text>
+    <!-- id -->
+    <circle cx="94" cy="564" r="3.5" fill="#fbbf24"/><text x="104" y="568" class="col">id</text><text x="335" y="568" class="typ">BIGINT</text>
+    <!-- user_id -->
+    <circle cx="94" cy="583" r="3.5" fill="#60a5fa"/><text x="104" y="587" class="col">user_id</text><text x="335" y="587" class="typ">BIGINT FK·UK</text>
+    <!-- matrix -->
+    <text x="104" y="606" class="col">matrix</text><text x="335" y="606" class="typ">JSON</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- ENTITY: training_plans                                         -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g filter="url(#shadow)">
+    <rect x="80" y="670" width="265" height="124" rx="8" class="box"/>
+    <path d="M88,670 H337 Q345,670 345,678 V699 H80 V678 Q80,670 88,670 Z" fill="#7c3aed"/>
+    <text x="213" y="689" class="hdr">training_plans</text>
+    <!-- id -->
+    <circle cx="94" cy="704" r="3.5" fill="#fbbf24"/><text x="104" y="708" class="col">id</text><text x="335" y="708" class="typ">BIGINT</text>
+    <!-- user_id -->
+    <circle cx="94" cy="723" r="3.5" fill="#60a5fa"/><text x="104" y="727" class="col">user_id</text><text x="335" y="727" class="typ">BIGINT FK</text>
+    <!-- primary_directive -->
+    <text x="104" y="746" class="col">primary_directive</text><text x="335" y="746" class="typ">TEXT</text>
+    <!-- weekly_focus -->
+    <text x="104" y="765" class="col">weekly_focus</text><text x="335" y="765" class="typ">JSON[]</text>
+    <!-- plan_items -->
+    <text x="104" y="784" class="col">plan_items</text><text x="335" y="784" class="typ">JSON[]</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- ENTITY: puzzle_attempts                                        -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g filter="url(#shadow)">
+    <rect x="1130" y="530" width="265" height="124" rx="8" class="box"/>
+    <path d="M1138,530 H1387 Q1395,530 1395,538 V559 H1130 V538 Q1130,530 1138,530 Z" fill="#dc2626"/>
+    <text x="1263" y="549" class="hdr">puzzle_attempts</text>
+    <!-- id -->
+    <circle cx="1144" cy="564" r="3.5" fill="#fbbf24"/><text x="1154" y="568" class="col">id</text><text x="1385" y="568" class="typ">BIGINT</text>
+    <!-- user_id -->
+    <circle cx="1144" cy="583" r="3.5" fill="#60a5fa"/><text x="1154" y="587" class="col">user_id</text><text x="1385" y="587" class="typ">BIGINT FK</text>
+    <!-- puzzle_id -->
+    <circle cx="1144" cy="602" r="3.5" fill="#60a5fa"/><text x="1154" y="606" class="col">puzzle_id</text><text x="1385" y="606" class="typ">BIGINT FK</text>
+    <!-- solved -->
+    <text x="1154" y="625" class="col">solved</text><text x="1385" y="625" class="typ">BOOL</text>
+    <!-- time_seconds -->
+    <text x="1154" y="644" class="col">time_seconds</text><text x="1385" y="644" class="typ">INT</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- ENTITY: puzzles                                                -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g filter="url(#shadow)">
+    <rect x="1490" y="530" width="265" height="143" rx="8" class="box"/>
+    <path d="M1498,530 H1747 Q1755,530 1755,538 V559 H1490 V538 Q1490,530 1498,530 Z" fill="#dc2626"/>
+    <text x="1623" y="549" class="hdr">puzzles</text>
+    <!-- id -->
+    <circle cx="1504" cy="564" r="3.5" fill="#fbbf24"/><text x="1514" y="568" class="col">id</text><text x="1745" y="568" class="typ">BIGINT</text>
+    <!-- fen -->
+    <text x="1514" y="587" class="col">fen</text><text x="1745" y="587" class="typ">VARCHAR</text>
+    <!-- solution_moves -->
+    <text x="1514" y="606" class="col">solution_moves</text><text x="1745" y="606" class="typ">JSON[]</text>
+    <!-- category -->
+    <text x="1514" y="625" class="col">category</text><text x="1745" y="625" class="typ">VARCHAR</text>
+    <!-- difficulty -->
+    <text x="1514" y="644" class="col">difficulty</text><text x="1745" y="644" class="typ">VARCHAR</text>
+    <!-- rating -->
+    <text x="1514" y="663" class="col">rating</text><text x="1745" y="663" class="typ">INT (1500)</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- ENTITY: personal_access_tokens                                 -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g filter="url(#shadow)">
+    <rect x="550" y="695" width="290" height="124" rx="8" class="box"/>
+    <path d="M558,695 H832 Q840,695 840,703 V724 H550 V703 Q550,695 558,695 Z" fill="#475569"/>
+    <text x="695" y="714" class="hdr">personal_access_tokens</text>
+    <!-- id -->
+    <circle cx="564" cy="729" r="3.5" fill="#fbbf24"/><text x="574" y="733" class="col">id</text><text x="830" y="733" class="typ">BIGINT</text>
+    <!-- tokenable_type -->
+    <text x="574" y="752" class="col">tokenable_type</text><text x="830" y="752" class="typ">VARCHAR</text>
+    <!-- tokenable_id -->
+    <text x="574" y="771" class="col">tokenable_id</text><text x="830" y="771" class="typ">BIGINT</text>
+    <!-- token -->
+    <text x="574" y="790" class="col">token</text><text x="830" y="790" class="typ">VARCHAR(64) · UK</text>
+    <!-- abilities -->
+    <text x="574" y="809" class="col">abilities</text><text x="830" y="809" class="typ">TEXT?</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- ENTITY: sessions                                               -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g filter="url(#shadow)">
+    <rect x="920" y="695" width="265" height="124" rx="8" class="box"/>
+    <path d="M928,695 H1177 Q1185,695 1185,703 V724 H920 V703 Q920,695 928,695 Z" fill="#475569"/>
+    <text x="1053" y="714" class="hdr">sessions</text>
+    <!-- id -->
+    <circle cx="934" cy="729" r="3.5" fill="#fbbf24"/><text x="944" y="733" class="col">id</text><text x="1175" y="733" class="typ">VARCHAR</text>
+    <!-- user_id -->
+    <circle cx="934" cy="748" r="3.5" fill="#60a5fa"/><text x="944" y="752" class="col">user_id</text><text x="1175" y="752" class="typ">BIGINT FK?</text>
+    <!-- ip_address -->
+    <text x="944" y="771" class="col">ip_address</text><text x="1175" y="771" class="typ">VARCHAR(45)</text>
+    <!-- payload -->
+    <text x="944" y="790" class="col">payload</text><text x="1175" y="790" class="typ">LONGTEXT</text>
+    <!-- last_activity -->
+    <text x="944" y="809" class="col">last_activity</text><text x="1175" y="809" class="typ">INT</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- LEGEND                                                         -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <line x1="30" y1="840" x2="1770" y2="840" stroke="#1e2235" stroke-width="1"/>
+
+  <!-- PK -->
+  <circle cx="50" cy="860" r="4" fill="#fbbf24"/>
+  <text x="60" y="864" class="leg">Primary Key (PK)</text>
+
+  <!-- FK -->
+  <circle cx="210" cy="860" r="4" fill="#60a5fa"/>
+  <text x="220" y="864" class="leg">Foreign Key (FK)</text>
+
+  <!-- Solid line = required FK -->
+  <line x1="370" y1="860" x2="405" y2="860" stroke="#3d4559" stroke-width="1.5"/>
+  <text x="412" y="864" class="leg">Required relationship</text>
+
+  <!-- Dashed line = nullable/polymorphic FK -->
+  <line x1="580" y1="860" x2="615" y2="860" stroke="#3d4559" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="622" y="864" class="leg">Nullable / polymorphic</text>
+
+  <!-- Cardinality labels -->
+  <text x="800" y="864" class="leg" font-weight="700">1</text>
+  <text x="814" y="864" class="leg">= one</text>
+  <text x="870" y="864" class="leg" font-weight="700">N</text>
+  <text x="884" y="864" class="leg">= many</text>
+
+  <!-- Cluster legend -->
+  <rect x="970" y="854" width="10" height="10" rx="2" fill="#4f46e5"/>
+  <text x="986" y="863" class="leg">Core</text>
+  <rect x="1040" y="854" width="10" height="10" rx="2" fill="#059669"/>
+  <text x="1056" y="863" class="leg">Learning</text>
+  <rect x="1130" y="854" width="10" height="10" rx="2" fill="#0891b2"/>
+  <text x="1146" y="863" class="leg">Bridge</text>
+  <rect x="1210" y="854" width="10" height="10" rx="2" fill="#d97706"/>
+  <text x="1226" y="863" class="leg">Sparring</text>
+  <rect x="1310" y="854" width="10" height="10" rx="2" fill="#dc2626"/>
+  <text x="1326" y="863" class="leg">Puzzles</text>
+  <rect x="1400" y="854" width="10" height="10" rx="2" fill="#7c3aed"/>
+  <text x="1416" y="863" class="leg">ML</text>
+  <rect x="1460" y="854" width="10" height="10" rx="2" fill="#475569"/>
+  <text x="1476" y="863" class="leg">Auth</text>
+
+</svg>

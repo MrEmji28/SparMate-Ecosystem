@@ -2,19 +2,16 @@ import 'package:flutter/material.dart';
 import '../../../core/theme/app_colors.dart';
 
 /// Top Opponents card listing grandmaster opponents and win rates.
+/// Accepts optional [opponents] from the analytics API.
 class TopOpponentsCard extends StatelessWidget {
-  const TopOpponentsCard({super.key});
+  final List<dynamic>? opponents;
 
-  static const _opponents = [
-    _Opponent('To', 'GM Torre', 'Attacking Style', '68%', Color(0xFF1565C0)),
-    _Opponent('Ta', 'GM Tal', 'Tactical Master', '42%', Color(0xFF6A1B9A)),
-    _Opponent('Pe', 'GM Petrosian', 'Positional', '55%', Color(0xFF2E7D32)),
-    _Opponent('Ca', 'GM Carlsen', 'Universal', '30%', Color(0xFF00838F)),
-  ];
+  const TopOpponentsCard({super.key, this.opponents});
 
   @override
   Widget build(BuildContext context) {
     final tt = Theme.of(context).textTheme;
+    final items = _buildOpponentList();
 
     return Container(
       padding: const EdgeInsets.all(20),
@@ -36,13 +33,44 @@ class TopOpponentsCard extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           // ── Opponent rows ──
-          ..._opponents.asMap().entries.map((e) {
-            final isLast = e.key == _opponents.length - 1;
-            return _buildRow(context, e.value, isLast);
-          }),
+          for (var i = 0; i < items.length; i++)
+            _buildRow(context, items[i], i == items.length - 1),
         ],
       ),
     );
+  }
+
+  List<_Opponent> _buildOpponentList() {
+    if (opponents != null && opponents!.isNotEmpty) {
+      // Color palette for opponents
+      const colors = [
+        Color(0xFF1565C0),
+        Color(0xFF6A1B9A),
+        Color(0xFF2E7D32),
+        Color(0xFF00838F),
+        Color(0xFFE65100),
+      ];
+
+      return opponents!.asMap().entries.map((entry) {
+        final map = entry.value as Map<String, dynamic>;
+        final gm = map['grandmaster'] as Map<String, dynamic>?;
+        final name = gm?['full_name'] ?? gm?['name'] ?? 'Unknown';
+        final style = gm?['style'] ?? 'Unknown';
+        final winRate = map['win_rate'] ?? 0;
+        final initials = (name as String).split(' ').map((w) => w.isNotEmpty ? w[0] : '').take(2).join();
+        final color = colors[entry.key % colors.length];
+
+        return _Opponent(initials, 'GM $name', style, '$winRate%', color);
+      }).toList();
+    }
+
+    // Default fallback
+    return const [
+      _Opponent('To', 'GM Torre', 'Attacking Style', '68%', Color(0xFF1565C0)),
+      _Opponent('Ta', 'GM Tal', 'Tactical Master', '42%', Color(0xFF6A1B9A)),
+      _Opponent('Pe', 'GM Petrosian', 'Positional', '55%', Color(0xFF2E7D32)),
+      _Opponent('Ca', 'GM Carlsen', 'Universal', '30%', Color(0xFF00838F)),
+    ];
   }
 
   Widget _buildRow(BuildContext context, _Opponent opp, bool isLast) {

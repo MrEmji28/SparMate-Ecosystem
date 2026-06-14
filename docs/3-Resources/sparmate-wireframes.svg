@@ -1,0 +1,1025 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4800 3800" font-family="'Inter', 'SF Pro Text', 'Roboto', Arial, sans-serif">
+  <defs>
+    <!-- Color palette -->
+    <linearGradient id="heroGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1B2063"/>
+      <stop offset="50%" style="stop-color:#2E3FA8"/>
+      <stop offset="100%" style="stop-color:#3D54D9"/>
+    </linearGradient>
+    <linearGradient id="avatarBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2A3BB7"/>
+      <stop offset="100%" style="stop-color:#5C6BC0"/>
+    </linearGradient>
+    <linearGradient id="splashGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f1137"/>
+      <stop offset="100%" style="stop-color:#1B2063"/>
+    </linearGradient>
+    <linearGradient id="tealGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00838F" stop-opacity="0.85"/>
+      <stop offset="100%" style="stop-color:#00838F" stop-opacity="0.6"/>
+    </linearGradient>
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6A1B9A" stop-opacity="0.85"/>
+      <stop offset="100%" style="stop-color:#6A1B9A" stop-opacity="0.6"/>
+    </linearGradient>
+    <linearGradient id="redGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E53935" stop-opacity="0.85"/>
+      <stop offset="100%" style="stop-color:#E53935" stop-opacity="0.6"/>
+    </linearGradient>
+    <filter id="phoneShadow" x="-5%" y="-3%" width="115%" height="110%">
+      <feDropShadow dx="0" dy="6" stdDeviation="12" flood-color="#000" flood-opacity="0.15"/>
+    </filter>
+    <filter id="cardShadow" x="-3%" y="-3%" width="108%" height="112%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.08"/>
+    </filter>
+    <clipPath id="phoneClip1"><rect x="60" y="140" width="390" height="844" rx="0"/></clipPath>
+    <clipPath id="phoneClip2"><rect x="530" y="140" width="390" height="844" rx="0"/></clipPath>
+    <clipPath id="phoneClip3"><rect x="1000" y="140" width="390" height="844" rx="0"/></clipPath>
+    <clipPath id="phoneClip4"><rect x="1470" y="140" width="390" height="844" rx="0"/></clipPath>
+    <clipPath id="phoneClip5"><rect x="1940" y="140" width="390" height="844" rx="0"/></clipPath>
+    <clipPath id="phoneClip6"><rect x="60" y="1200" width="390" height="844" rx="0"/></clipPath>
+    <clipPath id="phoneClip7"><rect x="530" y="1200" width="390" height="844" rx="0"/></clipPath>
+    <clipPath id="phoneClip8"><rect x="1000" y="1200" width="390" height="844" rx="0"/></clipPath>
+    <clipPath id="phoneClip9"><rect x="1470" y="1200" width="390" height="844" rx="0"/></clipPath>
+    <clipPath id="phoneClip10"><rect x="1940" y="1200" width="390" height="844" rx="0"/></clipPath>
+
+    <!-- Arrow marker -->
+    <marker id="arrow" markerWidth="12" markerHeight="8" refX="10" refY="4" orient="auto" fill="#6366f1">
+      <polygon points="0 0, 12 4, 0 8"/>
+    </marker>
+    <marker id="arrowGray" markerWidth="12" markerHeight="8" refX="10" refY="4" orient="auto" fill="#94a3b8">
+      <polygon points="0 0, 12 4, 0 8"/>
+    </marker>
+  </defs>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <!-- CANVAS BACKGROUND                                                      -->
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <rect width="4800" height="3800" fill="#f8f9fc"/>
+
+  <!-- Title -->
+  <text x="60" y="50" fill="#1B2063" font-size="32" font-weight="800" letter-spacing="-0.5">SparMate — UI Wireframes &amp; Prototype</text>
+  <text x="60" y="78" fill="#5A5F7D" font-size="14" letter-spacing="0.5">Figma-Ready Screens · 10 Views · Mobile 390×844pt · Design System: Navy/Blue/White</text>
+  <line x1="60" y1="95" x2="2380" y2="95" stroke="#E4E7F2" stroke-width="1"/>
+
+  <!-- Row Labels -->
+  <text x="60" y="125" fill="#1B2063" font-size="13" font-weight="700" letter-spacing="1">ROW 1 — PRIMARY FLOW</text>
+  <text x="60" y="1185" fill="#1B2063" font-size="13" font-weight="700" letter-spacing="1">ROW 2 — SECONDARY SCREENS</text>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <!-- SCREEN 1: SPLASH / LOGIN                                              -->
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <g>
+    <!-- Phone frame -->
+    <rect x="60" y="140" width="390" height="844" rx="32" fill="url(#splashGrad)" filter="url(#phoneShadow)"/>
+    <!-- Status bar -->
+    <text x="80" y="174" fill="#fff" font-size="11" font-weight="600" opacity="0.7">9:41</text>
+    <rect x="360" y="163" width="20" height="10" rx="2" fill="#fff" fill-opacity="0.5"/>
+    <rect x="338" y="163" width="16" height="10" rx="2" fill="#fff" fill-opacity="0.3"/>
+
+    <!-- Logo area -->
+    <rect x="195" y="340" width="120" height="120" rx="28" fill="#2A3BB7" fill-opacity="0.4" stroke="#5C6BC0" stroke-width="1.5"/>
+    <text x="255" y="395" text-anchor="middle" fill="#fff" font-size="40">♞</text>
+    <text x="255" y="418" text-anchor="middle" fill="#fff" font-size="11" font-weight="600" letter-spacing="2">SPARMATE</text>
+
+    <text x="255" y="510" text-anchor="middle" fill="#fff" font-size="22" font-weight="700">Welcome Back</text>
+    <text x="255" y="535" text-anchor="middle" fill="#9EA3BE" font-size="12">Your adaptive chess coaching ecosystem</text>
+
+    <!-- Email field -->
+    <rect x="100" y="570" width="310" height="48" rx="12" fill="#fff" fill-opacity="0.08" stroke="#5C6BC0" stroke-width="0.8"/>
+    <text x="130" y="599" fill="#9EA3BE" font-size="13">📧  Email address</text>
+
+    <!-- Password field -->
+    <rect x="100" y="630" width="310" height="48" rx="12" fill="#fff" fill-opacity="0.08" stroke="#5C6BC0" stroke-width="0.8"/>
+    <text x="130" y="659" fill="#9EA3BE" font-size="13">🔒  Password</text>
+
+    <!-- Login button -->
+    <rect x="100" y="700" width="310" height="50" rx="14" fill="#fff"/>
+    <text x="255" y="731" text-anchor="middle" fill="#1B2063" font-size="15" font-weight="700">Sign In</text>
+
+    <!-- Register link -->
+    <text x="255" y="780" text-anchor="middle" fill="#9EA3BE" font-size="12">Don't have an account? <tspan fill="#5C6BC0" font-weight="600">Register</tspan></text>
+
+    <!-- Sanctum badge -->
+    <rect x="160" y="820" width="190" height="22" rx="6" fill="#fff" fill-opacity="0.06"/>
+    <text x="255" y="835" text-anchor="middle" fill="#9EA3BE" font-size="9" letter-spacing="0.5">🔐 Secured by Laravel Sanctum</text>
+  </g>
+  <text x="255" y="1010" text-anchor="middle" fill="#1B2063" font-size="13" font-weight="700">1. Splash / Login</text>
+  <text x="255" y="1028" text-anchor="middle" fill="#5A5F7D" font-size="10">Authentication</text>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <!-- SCREEN 2: HOME DASHBOARD                                              -->
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <g>
+    <rect x="530" y="140" width="390" height="844" rx="32" fill="#F0F2F8" filter="url(#phoneShadow)"/>
+    <!-- Status bar -->
+    <text x="550" y="174" fill="#1A1D3B" font-size="11" font-weight="600">9:41</text>
+    <rect x="830" y="163" width="20" height="10" rx="2" fill="#1A1D3B" fill-opacity="0.5"/>
+
+    <!-- App bar -->
+    <rect x="550" y="192" width="32" height="32" rx="8" fill="#1B2063"/>
+    <text x="566" y="213" text-anchor="middle" fill="#fff" font-size="14">👤</text>
+    <text x="596" y="213" fill="#1B2063" font-size="18" font-weight="800">SparMate</text>
+    <circle cx="891" cy="208" r="19" fill="url(#avatarBlue)" stroke="#E4E7F2" stroke-width="2"/>
+    <text x="891" y="213" text-anchor="middle" fill="#fff" font-size="12">👤</text>
+
+    <!-- Hero Card - Grandmaster Sparring -->
+    <rect x="546" y="240" width="358" height="200" rx="20" fill="url(#heroGrad)" filter="url(#cardShadow)"/>
+    <text x="566" y="270" fill="#fff" font-size="12" font-weight="600">👥  Spar with Grandmasters</text>
+    <!-- LIVE badge -->
+    <rect x="840" y="254" width="50" height="20" rx="10" fill="#fff" fill-opacity="0.15"/>
+    <circle cx="854" cy="264" r="3.5" fill="#E53935"/>
+    <text x="868" y="269" fill="#fff" font-size="9" font-weight="700">LIVE</text>
+    <text x="566" y="292" fill="#fff" font-size="11" opacity="0.82">Engage with tailored AI personas</text>
+
+    <!-- GM avatars row -->
+    <circle cx="590" cy="330" r="22" fill="#1565C0" stroke="#fff" stroke-width="2" stroke-opacity="0.5"/>
+    <text x="590" y="335" text-anchor="middle" fill="#fff" font-size="12">🛡</text>
+    <text x="590" y="363" text-anchor="middle" fill="#fff" font-size="9">Torre</text>
+
+    <circle cx="650" cy="330" r="22" fill="#6A1B9A" stroke="#fff" stroke-width="2" stroke-opacity="0.5"/>
+    <text x="650" y="335" text-anchor="middle" fill="#fff" font-size="12">🔥</text>
+    <text x="650" y="363" text-anchor="middle" fill="#fff" font-size="9">Tal</text>
+
+    <circle cx="710" cy="330" r="22" fill="#2E7D32" stroke="#fff" stroke-width="2" stroke-opacity="0.5"/>
+    <text x="710" y="335" text-anchor="middle" fill="#fff" font-size="12">🛡</text>
+    <text x="710" y="363" text-anchor="middle" fill="#fff" font-size="9">Petrosian</text>
+
+    <circle cx="770" cy="330" r="22" fill="#00838F" stroke="#fff" stroke-width="2" stroke-opacity="0.5"/>
+    <text x="770" y="335" text-anchor="middle" fill="#fff" font-size="12">⭐</text>
+    <text x="770" y="363" text-anchor="middle" fill="#fff" font-size="9">Carlsen</text>
+
+    <!-- Start Session button -->
+    <rect x="566" y="396" width="318" height="34" rx="10" fill="#fff"/>
+    <text x="725" y="418" text-anchor="middle" fill="#1B2063" font-size="12" font-weight="700">Start Session</text>
+
+    <!-- Two cards row -->
+    <!-- Active Lesson -->
+    <rect x="546" y="454" width="172" height="106" rx="14" fill="#fff" stroke="#E4E7F2" stroke-width="0.5" filter="url(#cardShadow)"/>
+    <rect x="560" y="468" width="28" height="28" rx="7" fill="#3949AB" fill-opacity="0.12"/>
+    <text x="574" y="487" text-anchor="middle" fill="#3949AB" font-size="12">📖</text>
+    <text x="560" y="514" fill="#1A1D3B" font-size="11" font-weight="700">Active Lesson</text>
+    <text x="560" y="528" fill="#5A5F7D" font-size="9">Sicilian Defense</text>
+    <rect x="560" y="538" width="130" height="4" rx="2" fill="#E0E3F0"/>
+    <rect x="560" y="538" width="84" height="4" rx="2" fill="#3949AB"/>
+    <text x="700" y="544" fill="#3949AB" font-size="9" font-weight="700">65%</text>
+
+    <!-- Analytics mini -->
+    <rect x="730" y="454" width="172" height="106" rx="14" fill="#fff" stroke="#E4E7F2" stroke-width="0.5" filter="url(#cardShadow)"/>
+    <rect x="744" y="468" width="28" height="28" rx="7" fill="#2196F3" fill-opacity="0.12"/>
+    <text x="758" y="487" text-anchor="middle" fill="#2196F3" font-size="12">📊</text>
+    <text x="744" y="514" fill="#1A1D3B" font-size="11" font-weight="700">Analytics</text>
+    <text x="744" y="528" fill="#2196F3" font-size="15" font-weight="800">1,547</text>
+    <text x="808" y="528" fill="#43A047" font-size="9" font-weight="600">▲ +24</text>
+    <text x="744" y="544" fill="#9EA3BE" font-size="9">Rapid Rating</text>
+
+    <!-- Coaching Engine Card -->
+    <rect x="546" y="574" width="358" height="80" rx="14" fill="#fff" stroke="#E4E7F2" stroke-width="0.5" filter="url(#cardShadow)"/>
+    <rect x="562" y="588" width="36" height="36" rx="10" fill="#3D5AFE" fill-opacity="0.12"/>
+    <text x="580" y="612" text-anchor="middle" fill="#3D5AFE" font-size="16">🧠</text>
+    <text x="610" y="606" fill="#1A1D3B" font-size="12" font-weight="700">Coaching Engine</text>
+    <text x="610" y="622" fill="#5A5F7D" font-size="10">BKT Analysis — Prioritize: Endgame Fundamentals</text>
+    <text x="610" y="638" fill="#43A047" font-size="9" font-weight="600">● Active</text>
+
+    <!-- Daily Puzzles Card -->
+    <rect x="546" y="668" width="358" height="72" rx="14" fill="#fff" stroke="#E4E7F2" stroke-width="0.5" filter="url(#cardShadow)"/>
+    <rect x="562" y="680" width="36" height="36" rx="10" fill="#E53935" fill-opacity="0.12"/>
+    <text x="580" y="704" text-anchor="middle" fill="#E53935" font-size="16">🧩</text>
+    <text x="610" y="700" fill="#1A1D3B" font-size="12" font-weight="700">Daily Puzzles</text>
+    <text x="610" y="716" fill="#5A5F7D" font-size="10">3/5 Solved · Streak: 12 days 🔥</text>
+    <rect x="610" y="724" width="200" height="4" rx="2" fill="#E0E3F0"/>
+    <rect x="610" y="724" width="120" height="4" rx="2" fill="#E53935"/>
+
+    <!-- Tactics Card -->
+    <rect x="546" y="754" width="358" height="64" rx="14" fill="#fff" stroke="#E4E7F2" stroke-width="0.5" filter="url(#cardShadow)"/>
+    <rect x="562" y="766" width="36" height="36" rx="10" fill="#FF6F00" fill-opacity="0.12"/>
+    <text x="580" y="790" text-anchor="middle" fill="#FF6F00" font-size="16">⚡</text>
+    <text x="610" y="788" fill="#1A1D3B" font-size="12" font-weight="700">Tactics Trainer</text>
+    <text x="610" y="804" fill="#5A5F7D" font-size="10">Quick tactical exercises · Pin &amp; Fork drills</text>
+
+    <!-- Bottom Nav -->
+    <rect x="530" y="930" width="390" height="54" rx="0 0 32 32" fill="#fff"/>
+    <line x1="530" y1="930" x2="920" y2="930" stroke="#E4E7F2" stroke-width="0.5"/>
+    <text x="590" y="956" text-anchor="middle" fill="#2A3BB7" font-size="9" font-weight="700">🏠</text>
+    <text x="590" y="968" text-anchor="middle" fill="#2A3BB7" font-size="8" font-weight="700">Home</text>
+    <text x="670" y="956" text-anchor="middle" fill="#B0B4CC" font-size="9">🎮</text>
+    <text x="670" y="968" text-anchor="middle" fill="#B0B4CC" font-size="8">Play</text>
+    <text x="750" y="956" text-anchor="middle" fill="#B0B4CC" font-size="9">🎓</text>
+    <text x="750" y="968" text-anchor="middle" fill="#B0B4CC" font-size="8">Lessons</text>
+    <text x="830" y="956" text-anchor="middle" fill="#B0B4CC" font-size="9">📊</text>
+    <text x="830" y="968" text-anchor="middle" fill="#B0B4CC" font-size="8">Analytics</text>
+  </g>
+  <text x="725" y="1010" text-anchor="middle" fill="#1B2063" font-size="13" font-weight="700">2. Home Dashboard</text>
+  <text x="725" y="1028" text-anchor="middle" fill="#5A5F7D" font-size="10">Main Hub · Bottom Nav</text>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <!-- SCREEN 3: GM SELECTION                                                 -->
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <g>
+    <rect x="1000" y="140" width="390" height="844" rx="32" fill="#F0F2F8" filter="url(#phoneShadow)"/>
+    <text x="1020" y="174" fill="#1A1D3B" font-size="11" font-weight="600">9:41</text>
+
+    <!-- App bar -->
+    <text x="1030" y="210" fill="#1B2063" font-size="18">←</text>
+    <text x="1060" y="211" fill="#1B2063" font-size="17" font-weight="800">Choose Opponent</text>
+    <circle cx="1361" cy="204" r="19" fill="url(#avatarBlue)" stroke="#E4E7F2" stroke-width="2"/>
+
+    <text x="1040" y="245" fill="#5A5F7D" font-size="11">Select a Grandmaster AI persona to begin sparring.</text>
+
+    <!-- GM Card 1: Torre -->
+    <rect x="1016" y="264" width="358" height="86" rx="14" fill="#fff" stroke="#E4E7F2" stroke-width="0.5" filter="url(#cardShadow)"/>
+    <circle cx="1048" cy="307" r="24" fill="#1565C0" stroke="#1565C0" stroke-width="1" stroke-opacity="0.3"/>
+    <text x="1048" y="313" text-anchor="middle" fill="#fff" font-size="14">🛡</text>
+    <text x="1086" y="296" fill="#1A1D3B" font-size="12" font-weight="700">GM Eugene Torre 🇵🇭</text>
+    <text x="1086" y="312" fill="#1565C0" font-size="10" font-weight="600">Solid Attacker</text>
+    <rect x="1086" y="320" width="85" height="16" rx="4" fill="#1565C0" fill-opacity="0.08"/>
+    <text x="1091" y="332" fill="#1565C0" font-size="8" font-weight="600">Positional Prep</text>
+    <rect x="1176" y="320" width="75" height="16" rx="4" fill="#1565C0" fill-opacity="0.08"/>
+    <text x="1181" y="332" fill="#1565C0" font-size="8" font-weight="600">Tactical Strikes</text>
+    <text x="1330" y="300" text-anchor="end" fill="#1A1D3B" font-size="13" font-weight="800">2540</text>
+    <text x="1330" y="314" text-anchor="end" fill="#9EA3BE" font-size="9">ELO</text>
+    <text x="1356" y="307" fill="#9EA3BE" font-size="16">›</text>
+
+    <!-- GM Card 2: Tal -->
+    <rect x="1016" y="362" width="358" height="86" rx="14" fill="#fff" stroke="#E4E7F2" stroke-width="0.5" filter="url(#cardShadow)"/>
+    <circle cx="1048" cy="405" r="24" fill="#6A1B9A" stroke="#6A1B9A" stroke-width="1" stroke-opacity="0.3"/>
+    <text x="1048" y="411" text-anchor="middle" fill="#fff" font-size="14">🔥</text>
+    <text x="1086" y="394" fill="#1A1D3B" font-size="12" font-weight="700">GM Mikhail Tal 🇱🇻</text>
+    <text x="1086" y="410" fill="#6A1B9A" font-size="10" font-weight="600">Tactical Magician</text>
+    <rect x="1086" y="418" width="90" height="16" rx="4" fill="#6A1B9A" fill-opacity="0.08"/>
+    <text x="1091" y="430" fill="#6A1B9A" font-size="8" font-weight="600">Sacrificial Attacks</text>
+    <rect x="1180" y="418" width="95" height="16" rx="4" fill="#6A1B9A" fill-opacity="0.08"/>
+    <text x="1185" y="430" fill="#6A1B9A" font-size="8" font-weight="600">Complex Combos</text>
+    <text x="1330" y="398" text-anchor="end" fill="#1A1D3B" font-size="13" font-weight="800">2700</text>
+    <text x="1330" y="412" text-anchor="end" fill="#9EA3BE" font-size="9">ELO</text>
+    <text x="1356" y="405" fill="#9EA3BE" font-size="16">›</text>
+
+    <!-- GM Card 3: Petrosian -->
+    <rect x="1016" y="460" width="358" height="86" rx="14" fill="#fff" stroke="#E4E7F2" stroke-width="0.5" filter="url(#cardShadow)"/>
+    <circle cx="1048" cy="503" r="24" fill="#2E7D32" stroke="#2E7D32" stroke-width="1" stroke-opacity="0.3"/>
+    <text x="1048" y="509" text-anchor="middle" fill="#fff" font-size="14">🛡</text>
+    <text x="1086" y="492" fill="#1A1D3B" font-size="12" font-weight="700">GM Tigran Petrosian 🇦🇲</text>
+    <text x="1086" y="508" fill="#2E7D32" font-size="10" font-weight="600">Prophylactic Master</text>
+    <rect x="1086" y="516" width="65" height="16" rx="4" fill="#2E7D32" fill-opacity="0.08"/>
+    <text x="1091" y="528" fill="#2E7D32" font-size="8" font-weight="600">Prophylaxis</text>
+    <rect x="1156" y="516" width="100" height="16" rx="4" fill="#2E7D32" fill-opacity="0.08"/>
+    <text x="1161" y="528" fill="#2E7D32" font-size="8" font-weight="600">Exchange Sacrifices</text>
+    <text x="1330" y="496" text-anchor="end" fill="#1A1D3B" font-size="13" font-weight="800">2650</text>
+    <text x="1330" y="510" text-anchor="end" fill="#9EA3BE" font-size="9">ELO</text>
+    <text x="1356" y="503" fill="#9EA3BE" font-size="16">›</text>
+
+    <!-- GM Card 4: Carlsen -->
+    <rect x="1016" y="558" width="358" height="86" rx="14" fill="#fff" stroke="#E4E7F2" stroke-width="0.5" filter="url(#cardShadow)"/>
+    <circle cx="1048" cy="601" r="24" fill="#00838F" stroke="#00838F" stroke-width="1" stroke-opacity="0.3"/>
+    <text x="1048" y="607" text-anchor="middle" fill="#fff" font-size="14">⭐</text>
+    <text x="1086" y="590" fill="#1A1D3B" font-size="12" font-weight="700">GM Magnus Carlsen 🇳🇴</text>
+    <text x="1086" y="606" fill="#00838F" font-size="10" font-weight="600">Universal Genius</text>
+    <rect x="1086" y="614" width="90" height="16" rx="4" fill="#00838F" fill-opacity="0.08"/>
+    <text x="1091" y="626" fill="#00838F" font-size="8" font-weight="600">Endgame Mastery</text>
+    <rect x="1180" y="614" width="80" height="16" rx="4" fill="#00838F" fill-opacity="0.08"/>
+    <text x="1185" y="626" fill="#00838F" font-size="8" font-weight="600">Universal Style</text>
+    <text x="1330" y="594" text-anchor="end" fill="#1A1D3B" font-size="13" font-weight="800">2882</text>
+    <text x="1330" y="608" text-anchor="end" fill="#9EA3BE" font-size="9">ELO</text>
+    <text x="1356" y="601" fill="#9EA3BE" font-size="16">›</text>
+  </g>
+  <text x="1195" y="1010" text-anchor="middle" fill="#1B2063" font-size="13" font-weight="700">3. GM Selection</text>
+  <text x="1195" y="1028" text-anchor="middle" fill="#5A5F7D" font-size="10">Choose Opponent</text>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <!-- SCREEN 4: SPARRING ARENA                                               -->
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <g>
+    <rect x="1470" y="140" width="390" height="844" rx="32" fill="#F0F2F8" filter="url(#phoneShadow)"/>
+    <text x="1490" y="174" fill="#1A1D3B" font-size="11" font-weight="600">9:41</text>
+
+    <!-- App bar -->
+    <text x="1500" y="210" fill="#1B2063" font-size="18">←</text>
+    <text x="1530" y="211" fill="#1B2063" font-size="15" font-weight="800">Spar with Tal</text>
+    <circle cx="1831" cy="204" r="19" fill="url(#avatarBlue)" stroke="#E4E7F2" stroke-width="2"/>
+
+    <!-- GM Profile mini card -->
+    <rect x="1486" y="232" width="358" height="70" rx="14" fill="#fff" stroke="#E4E7F2" stroke-width="0.5" filter="url(#cardShadow)"/>
+    <circle cx="1520" cy="267" r="20" fill="#6A1B9A" stroke="#6A1B9A" stroke-width="1" stroke-opacity="0.3"/>
+    <text x="1520" y="273" text-anchor="middle" fill="#fff" font-size="12">🔥</text>
+    <text x="1552" y="258" fill="#1A1D3B" font-size="12" font-weight="700">GM Mikhail Tal</text>
+    <text x="1552" y="274" fill="#6A1B9A" font-size="10" font-weight="600">Tactical Magician</text>
+    <text x="1552" y="290" fill="#5A5F7D" font-size="9" font-style="italic">"Take your opponent into a deep, dark forest..."</text>
+
+    <!-- Chess Board -->
+    <rect x="1486" y="316" width="358" height="358" rx="14" fill="#fff" stroke="#E4E7F2" stroke-width="0.5" filter="url(#cardShadow)"/>
+    <text x="1500" y="340" fill="#1A1D3B" font-size="11" font-weight="700">Board</text>
+    <!-- 8x8 grid -->
+    <g>
+      <!-- Simplified board rendering -->
+      <rect x="1508" y="348" width="316" height="316" rx="4" fill="#E8EAF6"/>
+      <!-- Dark squares pattern (simplified) -->
+      <g fill="#5C6BC0" fill-opacity="0.3">
+        <rect x="1508" y="348" width="39.5" height="39.5"/>
+        <rect x="1587" y="348" width="39.5" height="39.5"/>
+        <rect x="1666" y="348" width="39.5" height="39.5"/>
+        <rect x="1745" y="348" width="39.5" height="39.5"/>
+        <rect x="1547.5" y="387.5" width="39.5" height="39.5"/>
+        <rect x="1626.5" y="387.5" width="39.5" height="39.5"/>
+        <rect x="1705.5" y="387.5" width="39.5" height="39.5"/>
+        <rect x="1784.5" y="387.5" width="39.5" height="39.5"/>
+        <rect x="1508" y="427" width="39.5" height="39.5"/>
+        <rect x="1587" y="427" width="39.5" height="39.5"/>
+        <rect x="1666" y="427" width="39.5" height="39.5"/>
+        <rect x="1745" y="427" width="39.5" height="39.5"/>
+        <rect x="1547.5" y="466.5" width="39.5" height="39.5"/>
+        <rect x="1626.5" y="466.5" width="39.5" height="39.5"/>
+        <rect x="1705.5" y="466.5" width="39.5" height="39.5"/>
+        <rect x="1784.5" y="466.5" width="39.5" height="39.5"/>
+      </g>
+      <!-- Some piece placeholders -->
+      <text x="1528" y="378" text-anchor="middle" font-size="22">♜</text>
+      <text x="1567" y="378" text-anchor="middle" font-size="22">♞</text>
+      <text x="1607" y="378" text-anchor="middle" font-size="22">♝</text>
+      <text x="1647" y="378" text-anchor="middle" font-size="22">♛</text>
+      <text x="1687" y="378" text-anchor="middle" font-size="22">♚</text>
+      <text x="1727" y="378" text-anchor="middle" font-size="22">♝</text>
+      <text x="1767" y="378" text-anchor="middle" font-size="22">♞</text>
+      <text x="1804" y="378" text-anchor="middle" font-size="22">♜</text>
+      <!-- White pieces -->
+      <text x="1528" y="654" text-anchor="middle" font-size="22">♖</text>
+      <text x="1567" y="654" text-anchor="middle" font-size="22">♘</text>
+      <text x="1607" y="654" text-anchor="middle" font-size="22">♗</text>
+      <text x="1647" y="654" text-anchor="middle" font-size="22">♕</text>
+      <text x="1687" y="654" text-anchor="middle" font-size="22">♔</text>
+      <text x="1727" y="654" text-anchor="middle" font-size="22">♗</text>
+      <text x="1767" y="654" text-anchor="middle" font-size="22">♘</text>
+      <text x="1804" y="654" text-anchor="middle" font-size="22">♖</text>
+    </g>
+
+    <!-- Pressure Gauge / Game Info -->
+    <rect x="1486" y="688" width="358" height="110" rx="14" fill="#fff" stroke="#E4E7F2" stroke-width="0.5" filter="url(#cardShadow)"/>
+    <text x="1506" y="712" fill="#1A1D3B" font-size="11" font-weight="700">⚡ Pressure Analysis</text>
+    <rect x="1506" y="722" width="318" height="8" rx="4" fill="#E0E3F0"/>
+    <rect x="1506" y="722" width="200" height="8" rx="4" fill="#E53935"/>
+    <text x="1714" y="730" fill="#E53935" font-size="9" font-weight="700">63%</text>
+    <text x="1506" y="750" fill="#5A5F7D" font-size="9">King Safety: High Risk · Piece Tension: 4 Hangers</text>
+
+    <rect x="1506" y="760" width="100" height="24" rx="6" fill="#E53935" fill-opacity="0.1"/>
+    <text x="1556" y="776" text-anchor="middle" fill="#E53935" font-size="9" font-weight="600">⚠ Blunder Risk</text>
+    <rect x="1614" y="760" width="80" height="24" rx="6" fill="#FF6F00" fill-opacity="0.1"/>
+    <text x="1654" y="776" text-anchor="middle" fill="#FF6F00" font-size="9" font-weight="600">🕐 7:23</text>
+    <rect x="1702" y="760" width="100" height="24" rx="6" fill="#2E7D32" fill-opacity="0.1"/>
+    <text x="1752" y="776" text-anchor="middle" fill="#2E7D32" font-size="9" font-weight="600">Eval: +1.2</text>
+
+    <!-- Edge inference badge -->
+    <rect x="1556" y="800" width="220" height="18" rx="6" fill="#3D5AFE" fill-opacity="0.06"/>
+    <text x="1666" y="813" text-anchor="middle" fill="#3D5AFE" font-size="8">Stockfish C++ via Dart FFI · 312ms · Offline</text>
+  </g>
+  <text x="1665" y="1010" text-anchor="middle" fill="#1B2063" font-size="13" font-weight="700">4. Sparring Arena</text>
+  <text x="1665" y="1028" text-anchor="middle" fill="#5A5F7D" font-size="10">Live Game + Pressure Gauge</text>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <!-- SCREEN 5: LESSONS CATALOG                                              -->
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <g>
+    <rect x="1940" y="140" width="390" height="844" rx="32" fill="#F0F2F8" filter="url(#phoneShadow)"/>
+    <text x="1960" y="174" fill="#1A1D3B" font-size="11" font-weight="600">9:41</text>
+
+    <!-- App bar -->
+    <rect x="1960" y="192" width="32" height="32" rx="8" fill="#1B2063"/>
+    <text x="1976" y="213" text-anchor="middle" fill="#fff" font-size="14">👤</text>
+    <text x="2006" y="213" fill="#1B2063" font-size="18" font-weight="800">SparMate</text>
+    <circle cx="2301" cy="208" r="19" fill="url(#avatarBlue)" stroke="#E4E7F2" stroke-width="2"/>
+
+    <text x="1972" y="250" fill="#1A1D3B" font-size="22" font-weight="800">Lessons</text>
+
+    <!-- Search bar -->
+    <rect x="1956" y="262" width="358" height="38" rx="10" fill="#fff" stroke="#E4E7F2" stroke-width="0.5"/>
+    <text x="1978" y="286" fill="#9EA3BE" font-size="11">🔍  Search lessons...</text>
+
+    <!-- Category chips -->
+    <rect x="1956" y="310" width="50" height="28" rx="8" fill="#1B2063"/>
+    <text x="1981" y="329" text-anchor="middle" fill="#fff" font-size="10" font-weight="600">All</text>
+    <rect x="2012" y="310" width="72" height="28" rx="8" fill="#fff" stroke="#E4E7F2" stroke-width="0.5"/>
+    <text x="2048" y="329" text-anchor="middle" fill="#5A5F7D" font-size="10">Opening</text>
+    <rect x="2090" y="310" width="86" height="28" rx="8" fill="#fff" stroke="#E4E7F2" stroke-width="0.5"/>
+    <text x="2133" y="329" text-anchor="middle" fill="#5A5F7D" font-size="10">Middlegame</text>
+    <rect x="2182" y="310" width="72" height="28" rx="8" fill="#fff" stroke="#E4E7F2" stroke-width="0.5"/>
+    <text x="2218" y="329" text-anchor="middle" fill="#5A5F7D" font-size="10">Endgame</text>
+
+    <!-- Continue Learning -->
+    <text x="1972" y="362" fill="#1A1D3B" font-size="13" font-weight="700">Continue Learning</text>
+    <rect x="1956" y="374" width="358" height="72" rx="14" fill="#fff" stroke="#3949AB" stroke-width="0.8" filter="url(#cardShadow)"/>
+    <rect x="1972" y="388" width="40" height="40" rx="10" fill="#3949AB" fill-opacity="0.1"/>
+    <text x="1992" y="413" text-anchor="middle" fill="#3949AB" font-size="18">🛡</text>
+    <text x="2024" y="404" fill="#1A1D3B" font-size="12" font-weight="700">Sicilian Defense</text>
+    <text x="2024" y="418" fill="#9EA3BE" font-size="9">Chapter 8: Pawn Structures</text>
+    <rect x="2024" y="428" width="200" height="4" rx="2" fill="#E0E3F0"/>
+    <rect x="2024" y="428" width="130" height="4" rx="2" fill="#3949AB"/>
+    <text x="2232" y="434" fill="#3949AB" font-size="9" font-weight="700">65%</text>
+    <text x="2280" y="414" fill="#3949AB" font-size="22">▶</text>
+
+    <!-- Recommended -->
+    <text x="1972" y="470" fill="#1A1D3B" font-size="13" font-weight="700">Recommended for You</text>
+    <text x="2292" y="470" fill="#2A3BB7" font-size="11" font-weight="600">See All</text>
+
+    <!-- Recommended cards (horizontal) -->
+    <rect x="1956" y="482" width="140" height="120" rx="12" fill="url(#tealGrad)" filter="url(#cardShadow)"/>
+    <rect x="1968" y="494" width="26" height="26" rx="7" fill="#fff" fill-opacity="0.2"/>
+    <text x="1981" y="512" text-anchor="middle" fill="#fff" font-size="10">🏰</text>
+    <rect x="1968" y="556" width="52" height="14" rx="4" fill="#fff" fill-opacity="0.2"/>
+    <text x="1994" y="566" text-anchor="middle" fill="#fff" font-size="7" font-weight="700">ENDGAME</text>
+    <text x="1968" y="582" fill="#fff" font-size="11" font-weight="700">Rook Endgames</text>
+    <text x="1968" y="596" fill="#fff" font-size="9" opacity="0.7">12 Chapters</text>
+
+    <rect x="2104" y="482" width="140" height="120" rx="12" fill="url(#purpleGrad)" filter="url(#cardShadow)"/>
+    <rect x="2116" y="494" width="26" height="26" rx="7" fill="#fff" fill-opacity="0.2"/>
+    <text x="2129" y="512" text-anchor="middle" fill="#fff" font-size="10">🚪</text>
+    <rect x="2116" y="556" width="52" height="14" rx="4" fill="#fff" fill-opacity="0.2"/>
+    <text x="2142" y="566" text-anchor="middle" fill="#fff" font-size="7" font-weight="700">OPENING</text>
+    <text x="2116" y="582" fill="#fff" font-size="11" font-weight="700">King's Indian</text>
+    <text x="2116" y="596" fill="#fff" font-size="9" opacity="0.7">10 Chapters</text>
+
+    <rect x="2252" y="482" width="80" height="120" rx="12" fill="url(#redGrad)" filter="url(#cardShadow)"/>
+    <text x="2270" y="510" fill="#fff" font-size="10">⚡</text>
+
+    <!-- All Lessons -->
+    <text x="1972" y="628" fill="#1A1D3B" font-size="13" font-weight="700">All Lessons</text>
+
+    <!-- Lesson list items -->
+    <rect x="1956" y="638" width="358" height="46" rx="10" fill="#fff" stroke="#E4E7F2" stroke-width="0.5"/>
+    <rect x="1966" y="648" width="28" height="28" rx="7" fill="#3949AB" fill-opacity="0.1"/>
+    <text x="1980" y="667" text-anchor="middle" fill="#3949AB" font-size="10">🛡</text>
+    <text x="2002" y="661" fill="#1A1D3B" font-size="11" font-weight="600">Sicilian Defense</text>
+    <text x="2002" y="674" fill="#9EA3BE" font-size="8">Opening · 12 Chapters</text>
+
+    <rect x="1956" y="690" width="358" height="46" rx="10" fill="#fff" stroke="#E4E7F2" stroke-width="0.5"/>
+    <rect x="1966" y="700" width="28" height="28" rx="7" fill="#1565C0" fill-opacity="0.1"/>
+    <text x="1980" y="719" text-anchor="middle" fill="#1565C0" font-size="10">🚪</text>
+    <text x="2002" y="713" fill="#1A1D3B" font-size="11" font-weight="600">Italian Game</text>
+    <text x="2002" y="726" fill="#9EA3BE" font-size="8">Opening · 8 Chapters</text>
+
+    <rect x="1956" y="742" width="358" height="46" rx="10" fill="#fff" stroke="#E4E7F2" stroke-width="0.5"/>
+    <rect x="1966" y="752" width="28" height="28" rx="7" fill="#6A1B9A" fill-opacity="0.1"/>
+    <text x="1980" y="771" text-anchor="middle" fill="#6A1B9A" font-size="10">🚪</text>
+    <text x="2002" y="765" fill="#1A1D3B" font-size="11" font-weight="600">Queen's Gambit</text>
+    <text x="2002" y="778" fill="#9EA3BE" font-size="8">Opening · 10 Chapters</text>
+
+    <rect x="1956" y="794" width="358" height="46" rx="10" fill="#fff" stroke="#E4E7F2" stroke-width="0.5"/>
+    <rect x="1966" y="804" width="28" height="28" rx="7" fill="#00838F" fill-opacity="0.1"/>
+    <text x="1980" y="823" text-anchor="middle" fill="#00838F" font-size="10">🏰</text>
+    <text x="2002" y="817" fill="#1A1D3B" font-size="11" font-weight="600">Rook Endgames</text>
+    <text x="2002" y="830" fill="#9EA3BE" font-size="8">Endgame · 12 Chapters</text>
+
+    <!-- Bottom Nav -->
+    <rect x="1940" y="930" width="390" height="54" rx="0 0 32 32" fill="#fff"/>
+    <line x1="1940" y1="930" x2="2330" y2="930" stroke="#E4E7F2" stroke-width="0.5"/>
+    <text x="2000" y="956" text-anchor="middle" fill="#B0B4CC" font-size="9">🏠</text>
+    <text x="2000" y="968" text-anchor="middle" fill="#B0B4CC" font-size="8">Home</text>
+    <text x="2080" y="956" text-anchor="middle" fill="#B0B4CC" font-size="9">🎮</text>
+    <text x="2080" y="968" text-anchor="middle" fill="#B0B4CC" font-size="8">Play</text>
+    <text x="2160" y="956" text-anchor="middle" fill="#2A3BB7" font-size="9" font-weight="700">🎓</text>
+    <text x="2160" y="968" text-anchor="middle" fill="#2A3BB7" font-size="8" font-weight="700">Lessons</text>
+    <text x="2240" y="956" text-anchor="middle" fill="#B0B4CC" font-size="9">📊</text>
+    <text x="2240" y="968" text-anchor="middle" fill="#B0B4CC" font-size="8">Analytics</text>
+  </g>
+  <text x="2135" y="1010" text-anchor="middle" fill="#1B2063" font-size="13" font-weight="700">5. Lessons Catalog</text>
+  <text x="2135" y="1028" text-anchor="middle" fill="#5A5F7D" font-size="10">Browse &amp; Search</text>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <!-- SCREEN 6: LESSON DETAIL                                                -->
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <g>
+    <rect x="60" y="1200" width="390" height="844" rx="32" fill="#F0F2F8" filter="url(#phoneShadow)"/>
+    <text x="80" y="1234" fill="#1A1D3B" font-size="11" font-weight="600">9:41</text>
+
+    <!-- App bar -->
+    <text x="90" y="1270" fill="#1B2063" font-size="18">←</text>
+    <text x="120" y="1271" fill="#1B2063" font-size="17" font-weight="800">Active Lesson</text>
+    <circle cx="421" cy="1264" r="19" fill="url(#avatarBlue)" stroke="#E4E7F2" stroke-width="2"/>
+
+    <!-- Lesson Progress Header -->
+    <rect x="76" y="1296" width="358" height="110" rx="16" fill="#fff" stroke="#E4E7F2" stroke-width="0.5" filter="url(#cardShadow)"/>
+    <rect x="92" y="1310" width="44" height="44" rx="12" fill="#3949AB" fill-opacity="0.12"/>
+    <text x="114" y="1338" text-anchor="middle" fill="#3949AB" font-size="20">🛡</text>
+    <text x="148" y="1326" fill="#1A1D3B" font-size="15" font-weight="700">Sicilian Defense</text>
+    <text x="148" y="1344" fill="#5A5F7D" font-size="10">Opening Repertoire · 12 Chapters</text>
+    <text x="148" y="1362" fill="#3949AB" font-size="10" font-weight="600">By SparMate Curriculum Engine</text>
+
+    <rect x="92" y="1374" width="326" height="6" rx="3" fill="#E0E3F0"/>
+    <rect x="92" y="1374" width="212" height="6" rx="3" fill="#3949AB"/>
+    <text x="310" y="1396" fill="#3949AB" font-size="10" font-weight="700">65% Complete</text>
+    <text x="400" y="1396" text-anchor="end" fill="#5A5F7D" font-size="9">8 of 12 chapters</text>
+
+    <!-- Lesson Content Card -->
+    <rect x="76" y="1420" width="358" height="130" rx="14" fill="#fff" stroke="#E4E7F2" stroke-width="0.5" filter="url(#cardShadow)"/>
+    <text x="96" y="1445" fill="#1A1D3B" font-size="13" font-weight="700">📖 Chapter 8: Pawn Structures</text>
+    <line x1="96" y1="1454" x2="414" y2="1454" stroke="#ECEFF5" stroke-width="0.5"/>
+    <text x="96" y="1474" fill="#5A5F7D" font-size="10" line-height="1.5">The Sicilian Defense creates asymmetric pawn</text>
+    <text x="96" y="1490" fill="#5A5F7D" font-size="10">structures that define the middlegame strategy.</text>
+    <text x="96" y="1506" fill="#5A5F7D" font-size="10">Understanding these formations is critical...</text>
+
+    <rect x="96" y="1520" width="318" height="20" rx="5" fill="#3949AB" fill-opacity="0.06"/>
+    <text x="255" y="1534" text-anchor="middle" fill="#3949AB" font-size="9" font-weight="600">📋 Interactive Board Position Below</text>
+
+    <!-- Chapter List Card -->
+    <rect x="76" y="1564" width="358" height="300" rx="14" fill="#fff" stroke="#E4E7F2" stroke-width="0.5" filter="url(#cardShadow)"/>
+    <text x="96" y="1590" fill="#1A1D3B" font-size="13" font-weight="700">📚 Chapters</text>
+
+    <!-- Chapter items -->
+    <rect x="92" y="1602" width="326" height="32" rx="8" fill="#43A047" fill-opacity="0.06"/>
+    <text x="106" y="1623" fill="#43A047" font-size="10">✓</text>
+    <text x="124" y="1623" fill="#1A1D3B" font-size="11" font-weight="600">1. Introduction to the Sicilian</text>
+    <text x="406" y="1623" text-anchor="end" fill="#43A047" font-size="9" font-weight="600">Done</text>
+
+    <rect x="92" y="1640" width="326" height="32" rx="8" fill="#43A047" fill-opacity="0.06"/>
+    <text x="106" y="1661" fill="#43A047" font-size="10">✓</text>
+    <text x="124" y="1661" fill="#1A1D3B" font-size="11" font-weight="600">2. Open Sicilian Variations</text>
+    <text x="406" y="1661" text-anchor="end" fill="#43A047" font-size="9" font-weight="600">Done</text>
+
+    <rect x="92" y="1678" width="326" height="32" rx="8" fill="#43A047" fill-opacity="0.06"/>
+    <text x="106" y="1699" fill="#43A047" font-size="10">✓</text>
+    <text x="124" y="1699" fill="#1A1D3B" font-size="11" font-weight="600">3. Najdorf Variation</text>
+    <text x="406" y="1699" text-anchor="end" fill="#43A047" font-size="9" font-weight="600">Done</text>
+
+    <rect x="92" y="1716" width="326" height="32" rx="8" fill="#43A047" fill-opacity="0.06"/>
+    <text x="106" y="1737" fill="#43A047" font-size="10">✓</text>
+    <text x="124" y="1737" fill="#1A1D3B" font-size="11" font-weight="600">4. Dragon Variation</text>
+    <text x="406" y="1737" text-anchor="end" fill="#43A047" font-size="9" font-weight="600">Done</text>
+
+    <rect x="92" y="1754" width="326" height="32" rx="8" fill="#3949AB" fill-opacity="0.08" stroke="#3949AB" stroke-width="0.8"/>
+    <text x="106" y="1775" fill="#3949AB" font-size="10">▶</text>
+    <text x="124" y="1775" fill="#1A1D3B" font-size="11" font-weight="700">8. Pawn Structures</text>
+    <text x="406" y="1775" text-anchor="end" fill="#3949AB" font-size="9" font-weight="600">Active</text>
+
+    <rect x="92" y="1792" width="326" height="32" rx="8" fill="#F7F8FC"/>
+    <text x="106" y="1813" fill="#B0B4CC" font-size="10">○</text>
+    <text x="124" y="1813" fill="#9EA3BE" font-size="11">9. Anti-Sicilian Systems</text>
+    <text x="406" y="1813" text-anchor="end" fill="#B0B4CC" font-size="9">Locked</text>
+
+    <rect x="92" y="1830" width="326" height="32" rx="8" fill="#F7F8FC"/>
+    <text x="106" y="1851" fill="#B0B4CC" font-size="10">○</text>
+    <text x="124" y="1851" fill="#9EA3BE" font-size="11">10. Endgame Transitions</text>
+    <text x="406" y="1851" text-anchor="end" fill="#B0B4CC" font-size="9">Locked</text>
+  </g>
+  <text x="255" y="2070" text-anchor="middle" fill="#1B2063" font-size="13" font-weight="700">6. Lesson Detail</text>
+  <text x="255" y="2088" text-anchor="middle" fill="#5A5F7D" font-size="10">Chapter View</text>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <!-- SCREEN 7: DAILY PUZZLES                                                -->
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <g>
+    <rect x="530" y="1200" width="390" height="844" rx="32" fill="#F0F2F8" filter="url(#phoneShadow)"/>
+    <text x="550" y="1234" fill="#1A1D3B" font-size="11" font-weight="600">9:41</text>
+
+    <!-- App bar -->
+    <text x="560" y="1270" fill="#1B2063" font-size="18">←</text>
+    <text x="590" y="1271" fill="#1B2063" font-size="17" font-weight="800">Daily Puzzles</text>
+    <circle cx="891" cy="1264" r="19" fill="url(#avatarBlue)" stroke="#E4E7F2" stroke-width="2"/>
+
+    <!-- Daily Goal Card -->
+    <rect x="546" y="1296" width="358" height="90" rx="14" fill="#fff" stroke="#E4E7F2" stroke-width="0.5" filter="url(#cardShadow)"/>
+    <text x="566" y="1322" fill="#1A1D3B" font-size="13" font-weight="700">🎯 Daily Goal</text>
+    <text x="566" y="1340" fill="#5A5F7D" font-size="11">3 of 5 puzzles solved today</text>
+    <rect x="566" y="1350" width="318" height="8" rx="4" fill="#E0E3F0"/>
+    <rect x="566" y="1350" width="191" height="8" rx="4" fill="#43A047"/>
+    <!-- Streak badge -->
+    <rect x="566" y="1366" width="90" height="18" rx="6" fill="#FF6F00" fill-opacity="0.1"/>
+    <text x="611" y="1379" text-anchor="middle" fill="#FF6F00" font-size="9" font-weight="600">🔥 12-day streak</text>
+
+    <!-- Puzzle Board -->
+    <rect x="546" y="1400" width="358" height="340" rx="14" fill="#fff" stroke="#E4E7F2" stroke-width="0.5" filter="url(#cardShadow)"/>
+    <text x="566" y="1424" fill="#1A1D3B" font-size="12" font-weight="700">Puzzle #1,247</text>
+    <text x="858" y="1424" fill="#E53935" font-size="10" font-weight="600">Hard</text>
+    <!-- Mini board -->
+    <rect x="566" y="1436" width="300" height="200" rx="8" fill="#E8EAF6"/>
+    <g fill="#5C6BC0" fill-opacity="0.25">
+      <rect x="566" y="1436" width="37.5" height="25" />
+      <rect x="641" y="1436" width="37.5" height="25" />
+      <rect x="716" y="1436" width="37.5" height="25" />
+      <rect x="791" y="1436" width="37.5" height="25" />
+    </g>
+    <text x="716" y="1540" text-anchor="middle" fill="#1B2063" font-size="20" font-weight="600">♞ → ?</text>
+    <text x="716" y="1560" text-anchor="middle" fill="#5A5F7D" font-size="10">White to move · Find the best continuation</text>
+
+    <!-- Hint / Submit buttons -->
+    <rect x="566" y="1650" width="140" height="36" rx="10" fill="#F0F2F8" stroke="#E4E7F2" stroke-width="0.5"/>
+    <text x="636" y="1673" text-anchor="middle" fill="#5A5F7D" font-size="11" font-weight="600">💡 Hint</text>
+    <rect x="718" y="1650" width="140" height="36" rx="10" fill="#2A3BB7"/>
+    <text x="788" y="1673" text-anchor="middle" fill="#fff" font-size="11" font-weight="600">Submit Move</text>
+
+    <!-- Category badges -->
+    <rect x="566" y="1700" width="50" height="20" rx="6" fill="#E53935" fill-opacity="0.08"/>
+    <text x="591" y="1714" text-anchor="middle" fill="#E53935" font-size="8" font-weight="600">Tactics</text>
+    <rect x="622" y="1700" width="54" height="20" rx="6" fill="#6A1B9A" fill-opacity="0.08"/>
+    <text x="649" y="1714" text-anchor="middle" fill="#6A1B9A" font-size="8" font-weight="600">Pin &amp; Fork</text>
+    <rect x="682" y="1700" width="80" height="20" rx="6" fill="#00838F" fill-opacity="0.08"/>
+    <text x="722" y="1714" text-anchor="middle" fill="#00838F" font-size="8" font-weight="600">ELO 1400-1600</text>
+
+    <!-- Recent Puzzles -->
+    <rect x="546" y="1754" width="358" height="120" rx="14" fill="#fff" stroke="#E4E7F2" stroke-width="0.5" filter="url(#cardShadow)"/>
+    <text x="566" y="1778" fill="#1A1D3B" font-size="12" font-weight="700">📋 Recent Puzzles</text>
+    <rect x="566" y="1790" width="318" height="28" rx="6" fill="#43A047" fill-opacity="0.05"/>
+    <text x="578" y="1809" fill="#43A047" font-size="9">✓ #1,246 · Fork Tactic · Solved in 45s</text>
+    <rect x="566" y="1824" width="318" height="28" rx="6" fill="#43A047" fill-opacity="0.05"/>
+    <text x="578" y="1843" fill="#43A047" font-size="9">✓ #1,245 · Pin Discovery · Solved in 1m 22s</text>
+    <rect x="566" y="1858" width="318" height="12" rx="3" fill="transparent"/>
+    <text x="578" y="1869" fill="#E53935" font-size="9">✗ #1,244 · Back Rank Mate · Failed</text>
+  </g>
+  <text x="725" y="2070" text-anchor="middle" fill="#1B2063" font-size="13" font-weight="700">7. Daily Puzzles</text>
+  <text x="725" y="2088" text-anchor="middle" fill="#5A5F7D" font-size="10">Puzzle Training</text>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <!-- SCREEN 8: COACHING ENGINE                                              -->
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <g>
+    <rect x="1000" y="1200" width="390" height="844" rx="32" fill="#F0F2F8" filter="url(#phoneShadow)"/>
+    <text x="1020" y="1234" fill="#1A1D3B" font-size="11" font-weight="600">9:41</text>
+
+    <!-- App bar -->
+    <text x="1030" y="1270" fill="#1B2063" font-size="18">←</text>
+    <text x="1060" y="1271" fill="#1B2063" font-size="17" font-weight="800">SparMate</text>
+    <circle cx="1361" cy="1264" r="19" fill="url(#avatarBlue)" stroke="#E4E7F2" stroke-width="2"/>
+
+    <text x="1042" y="1310" fill="#2A3BB7" font-size="18">🧠</text>
+    <text x="1070" y="1311" fill="#1A1D3B" font-size="20" font-weight="800">Coaching Engine</text>
+
+    <!-- Primary Directive Card -->
+    <rect x="1016" y="1330" width="358" height="150" rx="14" fill="#fff" stroke="#E4E7F2" stroke-width="0.5" filter="url(#cardShadow)"/>
+    <rect x="1032" y="1346" width="36" height="36" rx="10" fill="#3D5AFE" fill-opacity="0.12"/>
+    <text x="1050" y="1370" text-anchor="middle" fill="#3D5AFE" font-size="16">🎯</text>
+    <text x="1078" y="1362" fill="#1A1D3B" font-size="13" font-weight="700">Primary Directive</text>
+    <text x="1078" y="1380" fill="#5A5F7D" font-size="10">Based on your BKT mastery matrix</text>
+
+    <rect x="1032" y="1394" width="326" height="36" rx="8" fill="#E53935" fill-opacity="0.06" stroke="#E53935" stroke-width="0.5"/>
+    <text x="1050" y="1417" fill="#E53935" font-size="11" font-weight="700">⚠ Endgame Fundamentals — P(mastery): 0.34</text>
+
+    <text x="1032" y="1450" fill="#5A5F7D" font-size="10">Your BKT analysis shows critical weakness in endgame</text>
+    <text x="1032" y="1465" fill="#5A5F7D" font-size="10">technique. Focus on King+Pawn endings this week.</text>
+
+    <!-- Weekly Focus Card -->
+    <rect x="1016" y="1494" width="358" height="160" rx="14" fill="#fff" stroke="#E4E7F2" stroke-width="0.5" filter="url(#cardShadow)"/>
+    <text x="1036" y="1522" fill="#1A1D3B" font-size="13" font-weight="700">📅 Weekly Focus Areas</text>
+
+    <rect x="1036" y="1536" width="318" height="32" rx="8" fill="#E53935" fill-opacity="0.06"/>
+    <text x="1052" y="1557" fill="#E53935" font-size="10" font-weight="600">🔴 Endgame Fundamentals</text>
+    <rect x="1260" y="1543" width="80" height="18" rx="4" fill="#E53935" fill-opacity="0.12"/>
+    <text x="1300" y="1557" text-anchor="middle" fill="#E53935" font-size="8" font-weight="700">P: 0.34</text>
+
+    <rect x="1036" y="1574" width="318" height="32" rx="8" fill="#FF6F00" fill-opacity="0.06"/>
+    <text x="1052" y="1595" fill="#FF6F00" font-size="10" font-weight="600">🟠 Tactical Awareness</text>
+    <rect x="1260" y="1581" width="80" height="18" rx="4" fill="#FF6F00" fill-opacity="0.12"/>
+    <text x="1300" y="1595" text-anchor="middle" fill="#FF6F00" font-size="8" font-weight="700">P: 0.58</text>
+
+    <rect x="1036" y="1612" width="318" height="32" rx="8" fill="#43A047" fill-opacity="0.06"/>
+    <text x="1052" y="1633" fill="#43A047" font-size="10" font-weight="600">🟢 Opening Preparation</text>
+    <rect x="1260" y="1619" width="80" height="18" rx="4" fill="#43A047" fill-opacity="0.12"/>
+    <text x="1300" y="1633" text-anchor="middle" fill="#43A047" font-size="8" font-weight="700">P: 0.82</text>
+
+    <!-- Training Plan Card -->
+    <rect x="1016" y="1668" width="358" height="200" rx="14" fill="#fff" stroke="#E4E7F2" stroke-width="0.5" filter="url(#cardShadow)"/>
+    <text x="1036" y="1696" fill="#1A1D3B" font-size="13" font-weight="700">📋 Training Plan</text>
+    <text x="1036" y="1714" fill="#5A5F7D" font-size="9">Adaptive curriculum generated by BKT engine</text>
+
+    <!-- Plan items -->
+    <rect x="1036" y="1726" width="318" height="28" rx="6" fill="#3949AB" fill-opacity="0.06"/>
+    <text x="1052" y="1745" fill="#3949AB" font-size="10" font-weight="600">1. Complete: Rook Endgames L1-4</text>
+
+    <rect x="1036" y="1760" width="318" height="28" rx="6" fill="#3949AB" fill-opacity="0.06"/>
+    <text x="1052" y="1779" fill="#3949AB" font-size="10" font-weight="600">2. Spar: Petrosian (Positional Style)</text>
+
+    <rect x="1036" y="1794" width="318" height="28" rx="6" fill="#3949AB" fill-opacity="0.06"/>
+    <text x="1052" y="1813" fill="#3949AB" font-size="10" font-weight="600">3. Solve: 10 Endgame Puzzles</text>
+
+    <rect x="1036" y="1828" width="318" height="28" rx="6" fill="#3949AB" fill-opacity="0.06"/>
+    <text x="1052" y="1847" fill="#3949AB" font-size="10" font-weight="600">4. Review: King + Pawn Basics</text>
+
+    <!-- BKT badge -->
+    <rect x="1096" y="1880" width="220" height="18" rx="6" fill="#3D5AFE" fill-opacity="0.06"/>
+    <text x="1206" y="1893" text-anchor="middle" fill="#3D5AFE" font-size="8">Bayesian Knowledge Tracing · FastAPI Microservice</text>
+  </g>
+  <text x="1195" y="2070" text-anchor="middle" fill="#1B2063" font-size="13" font-weight="700">8. Coaching Engine</text>
+  <text x="1195" y="2088" text-anchor="middle" fill="#5A5F7D" font-size="10">BKT-Powered Coaching</text>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <!-- SCREEN 9: ANALYTICS                                                    -->
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <g>
+    <rect x="1470" y="1200" width="390" height="844" rx="32" fill="#F0F2F8" filter="url(#phoneShadow)"/>
+    <text x="1490" y="1234" fill="#1A1D3B" font-size="11" font-weight="600">9:41</text>
+
+    <!-- App bar -->
+    <rect x="1490" y="1252" width="32" height="32" rx="8" fill="#1B2063"/>
+    <text x="1506" y="1273" text-anchor="middle" fill="#fff" font-size="14">👤</text>
+    <text x="1536" y="1273" fill="#1B2063" font-size="18" font-weight="800">SparMate</text>
+    <circle cx="1831" cy="1268" r="19" fill="url(#avatarBlue)" stroke="#E4E7F2" stroke-width="2"/>
+
+    <text x="1502" y="1310" fill="#1A1D3B" font-size="22" font-weight="800">Analytics</text>
+
+    <!-- Rating Overview Card -->
+    <rect x="1486" y="1324" width="358" height="120" rx="14" fill="#fff" stroke="#E4E7F2" stroke-width="0.5" filter="url(#cardShadow)"/>
+    <text x="1506" y="1350" fill="#1A1D3B" font-size="13" font-weight="700">📈 Rating Overview</text>
+    <text x="1506" y="1380" fill="#2196F3" font-size="28" font-weight="800">1,547</text>
+    <text x="1610" y="1380" fill="#43A047" font-size="12" font-weight="700">▲ +24</text>
+    <text x="1506" y="1398" fill="#5A5F7D" font-size="10">Rapid Rating · Last 30 days</text>
+
+    <!-- Mini sparkline -->
+    <polyline points="1506,1420 1530,1414 1560,1418 1590,1408 1620,1412 1650,1404 1680,1398 1710,1402 1740,1394 1770,1388 1800,1382 1830,1376" fill="none" stroke="#2196F3" stroke-width="2"/>
+
+    <!-- Phase Accuracy Card -->
+    <rect x="1486" y="1458" width="358" height="100" rx="14" fill="#fff" stroke="#E4E7F2" stroke-width="0.5" filter="url(#cardShadow)"/>
+    <text x="1506" y="1484" fill="#1A1D3B" font-size="13" font-weight="700">🎯 Phase Accuracy</text>
+
+    <text x="1520" y="1510" fill="#5A5F7D" font-size="10">Opening</text>
+    <rect x="1580" y="1500" width="200" height="10" rx="3" fill="#E0E3F0"/>
+    <rect x="1580" y="1500" width="154" height="10" rx="3" fill="#43A047"/>
+    <text x="1800" y="1510" fill="#43A047" font-size="9" font-weight="700">77%</text>
+
+    <text x="1520" y="1530" fill="#5A5F7D" font-size="10">Middlegame</text>
+    <rect x="1580" y="1520" width="200" height="10" rx="3" fill="#E0E3F0"/>
+    <rect x="1580" y="1520" width="120" height="10" rx="3" fill="#FF6F00"/>
+    <text x="1800" y="1530" fill="#FF6F00" font-size="9" font-weight="700">60%</text>
+
+    <text x="1520" y="1550" fill="#5A5F7D" font-size="10">Endgame</text>
+    <rect x="1580" y="1540" width="200" height="10" rx="3" fill="#E0E3F0"/>
+    <rect x="1580" y="1540" width="86" height="10" rx="3" fill="#E53935"/>
+    <text x="1800" y="1550" fill="#E53935" font-size="9" font-weight="700">43%</text>
+
+    <!-- Match Results Card -->
+    <rect x="1486" y="1572" width="358" height="100" rx="14" fill="#fff" stroke="#E4E7F2" stroke-width="0.5" filter="url(#cardShadow)"/>
+    <text x="1506" y="1598" fill="#1A1D3B" font-size="13" font-weight="700">🏆 Match Results</text>
+    <text x="1506" y="1616" fill="#5A5F7D" font-size="10">Last 20 games</text>
+
+    <!-- W/D/L bars -->
+    <rect x="1506" y="1630" width="126" height="24" rx="6" fill="#43A047" fill-opacity="0.15"/>
+    <text x="1569" y="1647" text-anchor="middle" fill="#43A047" font-size="10" font-weight="700">12 Wins</text>
+    <rect x="1638" y="1630" width="66" height="24" rx="6" fill="#FF6F00" fill-opacity="0.15"/>
+    <text x="1671" y="1647" text-anchor="middle" fill="#FF6F00" font-size="10" font-weight="700">3 Draw</text>
+    <rect x="1710" y="1630" width="66" height="24" rx="6" fill="#E53935" fill-opacity="0.15"/>
+    <text x="1743" y="1647" text-anchor="middle" fill="#E53935" font-size="10" font-weight="700">5 Loss</text>
+
+    <!-- Insights Card -->
+    <rect x="1486" y="1686" width="358" height="90" rx="14" fill="#fff" stroke="#E4E7F2" stroke-width="0.5" filter="url(#cardShadow)"/>
+    <text x="1506" y="1712" fill="#1A1D3B" font-size="13" font-weight="700">💡 AI Insights</text>
+    <rect x="1506" y="1722" width="318" height="36" rx="8" fill="#00C853" fill-opacity="0.06"/>
+    <text x="1522" y="1740" fill="#2E7D32" font-size="10" font-weight="600">🟢 Strength: Your opening prep is solid.</text>
+    <text x="1522" y="1754" fill="#5A5F7D" font-size="9">BKT P(mastery) for openings: 0.82</text>
+
+    <!-- Top Opponents Card -->
+    <rect x="1486" y="1790" width="358" height="90" rx="14" fill="#fff" stroke="#E4E7F2" stroke-width="0.5" filter="url(#cardShadow)"/>
+    <text x="1506" y="1816" fill="#1A1D3B" font-size="13" font-weight="700">⚔️ Top Opponents</text>
+
+    <circle cx="1526" cy="1842" r="14" fill="#6A1B9A" fill-opacity="0.2"/>
+    <text x="1526" y="1847" text-anchor="middle" fill="#6A1B9A" font-size="9">🔥</text>
+    <text x="1548" y="1840" fill="#1A1D3B" font-size="10" font-weight="600">Tal</text>
+    <text x="1548" y="1854" fill="#E53935" font-size="8">1W / 4L</text>
+
+    <circle cx="1626" cy="1842" r="14" fill="#2E7D32" fill-opacity="0.2"/>
+    <text x="1626" y="1847" text-anchor="middle" fill="#2E7D32" font-size="9">🛡</text>
+    <text x="1648" y="1840" fill="#1A1D3B" font-size="10" font-weight="600">Petrosian</text>
+    <text x="1648" y="1854" fill="#FF6F00" font-size="8">3W / 2L</text>
+
+    <circle cx="1736" cy="1842" r="14" fill="#1565C0" fill-opacity="0.2"/>
+    <text x="1736" y="1847" text-anchor="middle" fill="#1565C0" font-size="9">🛡</text>
+    <text x="1758" y="1840" fill="#1A1D3B" font-size="10" font-weight="600">Torre</text>
+    <text x="1758" y="1854" fill="#43A047" font-size="8">5W / 1L</text>
+
+    <!-- Bottom Nav -->
+    <rect x="1470" y="1990" width="390" height="54" rx="0 0 32 32" fill="#fff"/>
+    <line x1="1470" y1="1990" x2="1860" y2="1990" stroke="#E4E7F2" stroke-width="0.5"/>
+    <text x="1530" y="2016" text-anchor="middle" fill="#B0B4CC" font-size="9">🏠</text>
+    <text x="1530" y="2028" text-anchor="middle" fill="#B0B4CC" font-size="8">Home</text>
+    <text x="1610" y="2016" text-anchor="middle" fill="#B0B4CC" font-size="9">🎮</text>
+    <text x="1610" y="2028" text-anchor="middle" fill="#B0B4CC" font-size="8">Play</text>
+    <text x="1690" y="2016" text-anchor="middle" fill="#B0B4CC" font-size="9">🎓</text>
+    <text x="1690" y="2028" text-anchor="middle" fill="#B0B4CC" font-size="8">Lessons</text>
+    <text x="1770" y="2016" text-anchor="middle" fill="#2A3BB7" font-size="9" font-weight="700">📊</text>
+    <text x="1770" y="2028" text-anchor="middle" fill="#2A3BB7" font-size="8" font-weight="700">Analytics</text>
+  </g>
+  <text x="1665" y="2070" text-anchor="middle" fill="#1B2063" font-size="13" font-weight="700">9. Analytics</text>
+  <text x="1665" y="2088" text-anchor="middle" fill="#5A5F7D" font-size="10">Performance Dashboard</text>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <!-- SCREEN 10: POST-GAME ANALYSIS                                          -->
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <g>
+    <rect x="1940" y="1200" width="390" height="844" rx="32" fill="#F0F2F8" filter="url(#phoneShadow)"/>
+    <text x="1960" y="1234" fill="#1A1D3B" font-size="11" font-weight="600">9:41</text>
+
+    <!-- App bar -->
+    <text x="1970" y="1270" fill="#1B2063" font-size="18">←</text>
+    <text x="2000" y="1271" fill="#1B2063" font-size="15" font-weight="800">Post-Game Analysis</text>
+    <circle cx="2301" cy="1264" r="19" fill="url(#avatarBlue)" stroke="#E4E7F2" stroke-width="2"/>
+
+    <!-- Result banner -->
+    <rect x="1956" y="1296" width="358" height="80" rx="16" fill="url(#heroGrad)" filter="url(#cardShadow)"/>
+    <text x="2135" y="1326" text-anchor="middle" fill="#fff" font-size="18" font-weight="800">Game Over — You Won! 🏆</text>
+    <text x="2135" y="1348" text-anchor="middle" fill="#fff" font-size="11" opacity="0.8">vs GM Mikhail Tal · Tactical Magician · 42 moves</text>
+    <rect x="2070" y="1358" width="130" height="14" rx="4" fill="#fff" fill-opacity="0.15"/>
+    <text x="2135" y="1370" text-anchor="middle" fill="#fff" font-size="8" font-weight="600">Rating: 1547 → 1571 (+24)</text>
+
+    <!-- ONNX Classification Card -->
+    <rect x="1956" y="1390" width="358" height="130" rx="14" fill="#fff" stroke="#E4E7F2" stroke-width="0.5" filter="url(#cardShadow)"/>
+    <text x="1976" y="1416" fill="#1A1D3B" font-size="13" font-weight="700">🧠 Mistake Classification</text>
+    <rect x="2200" y="1402" width="100" height="16" rx="4" fill="#FF6F00" fill-opacity="0.1"/>
+    <text x="2250" y="1414" text-anchor="middle" fill="#FF6F00" font-size="8" font-weight="600">ONNX · Offline</text>
+
+    <rect x="1976" y="1428" width="318" height="30" rx="6" fill="#E53935" fill-opacity="0.06"/>
+    <text x="1992" y="1448" fill="#E53935" font-size="10" font-weight="600">⚠ Move 18: Tactical Oversight — Hanging Piece</text>
+
+    <rect x="1976" y="1464" width="318" height="30" rx="6" fill="#FF6F00" fill-opacity="0.06"/>
+    <text x="1992" y="1484" fill="#FF6F00" font-size="10" font-weight="600">⚡ Move 27: Positional Error — Pawn Structure</text>
+
+    <text x="1976" y="1510" fill="#5A5F7D" font-size="9">Random Forest classifier · 87.4% accuracy · F1: 0.85</text>
+
+    <!-- BKT Update Card -->
+    <rect x="1956" y="1534" width="358" height="160" rx="14" fill="#fff" stroke="#E4E7F2" stroke-width="0.5" filter="url(#cardShadow)"/>
+    <text x="1976" y="1560" fill="#1A1D3B" font-size="13" font-weight="700">📈 BKT Mastery Update</text>
+    <text x="1976" y="1578" fill="#5A5F7D" font-size="9">Your skill probabilities after this match:</text>
+
+    <text x="1992" y="1600" fill="#5A5F7D" font-size="10">Tactical Awareness</text>
+    <rect x="2120" y="1590" width="170" height="10" rx="3" fill="#E0E3F0"/>
+    <rect x="2120" y="1590" width="99" height="10" rx="3" fill="#FF6F00"/>
+    <text x="2298" y="1600" fill="#FF6F00" font-size="9" font-weight="700">0.58</text>
+
+    <text x="1992" y="1622" fill="#5A5F7D" font-size="10">Endgame Fundamentals</text>
+    <rect x="2120" y="1612" width="170" height="10" rx="3" fill="#E0E3F0"/>
+    <rect x="2120" y="1612" width="58" height="10" rx="3" fill="#E53935"/>
+    <text x="2298" y="1622" fill="#E53935" font-size="9" font-weight="700">0.34</text>
+
+    <text x="1992" y="1644" fill="#5A5F7D" font-size="10">Opening Preparation</text>
+    <rect x="2120" y="1634" width="170" height="10" rx="3" fill="#E0E3F0"/>
+    <rect x="2120" y="1634" width="140" height="10" rx="3" fill="#43A047"/>
+    <text x="2298" y="1644" fill="#43A047" font-size="9" font-weight="700">0.82</text>
+
+    <text x="1992" y="1666" fill="#5A5F7D" font-size="10">Positional Play</text>
+    <rect x="2120" y="1656" width="170" height="10" rx="3" fill="#E0E3F0"/>
+    <rect x="2120" y="1656" width="116" height="10" rx="3" fill="#2196F3"/>
+    <text x="2298" y="1666" fill="#2196F3" font-size="9" font-weight="700">0.68</text>
+
+    <rect x="2016" y="1680" width="220" height="14" rx="4" fill="#3D5AFE" fill-opacity="0.06"/>
+    <text x="2126" y="1691" text-anchor="middle" fill="#3D5AFE" font-size="8">Updated via FastAPI BKT Engine → PostgreSQL</text>
+
+    <!-- New Lessons Card -->
+    <rect x="1956" y="1708" width="358" height="100" rx="14" fill="#fff" stroke="#E4E7F2" stroke-width="0.5" filter="url(#cardShadow)"/>
+    <text x="1976" y="1734" fill="#1A1D3B" font-size="13" font-weight="700">📚 Recommended Next</text>
+    <text x="1976" y="1752" fill="#5A5F7D" font-size="9">Based on your updated mastery profile:</text>
+
+    <rect x="1976" y="1764" width="318" height="30" rx="6" fill="#3949AB" fill-opacity="0.06"/>
+    <text x="1992" y="1784" fill="#3949AB" font-size="10" font-weight="600">→ Rook Endgames: Chapter 1</text>
+
+    <!-- CTA Buttons -->
+    <rect x="1956" y="1820" width="170" height="40" rx="12" fill="#F0F2F8" stroke="#E4E7F2" stroke-width="0.5"/>
+    <text x="2041" y="1845" text-anchor="middle" fill="#1B2063" font-size="11" font-weight="600">🔄 Play Again</text>
+    <rect x="2136" y="1820" width="178" height="40" rx="12" fill="#2A3BB7"/>
+    <text x="2225" y="1845" text-anchor="middle" fill="#fff" font-size="11" font-weight="600">📚 Start Lesson</text>
+
+    <!-- Pipeline badge -->
+    <rect x="1996" y="1876" width="260" height="16" rx="6" fill="#3D5AFE" fill-opacity="0.04"/>
+    <text x="2126" y="1888" text-anchor="middle" fill="#3D5AFE" font-size="7">Flutter → ONNX → Laravel → FastAPI → PostgreSQL → Lesson Plan</text>
+  </g>
+  <text x="2135" y="2070" text-anchor="middle" fill="#1B2063" font-size="13" font-weight="700">10. Post-Game Analysis</text>
+  <text x="2135" y="2088" text-anchor="middle" fill="#5A5F7D" font-size="10">ONNX + BKT Results</text>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <!-- FLOW ARROWS (between screens)                                          -->
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+
+  <!-- Row 1 arrows -->
+  <path d="M 455 560 L 525 560" stroke="#6366f1" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="490" y="552" text-anchor="middle" fill="#6366f1" font-size="8" font-weight="600">Login</text>
+
+  <path d="M 925 440 L 995 440" stroke="#6366f1" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="960" y="432" text-anchor="middle" fill="#6366f1" font-size="8" font-weight="600">Spar</text>
+
+  <path d="M 1395 500 L 1465 500" stroke="#6366f1" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="1430" y="492" text-anchor="middle" fill="#6366f1" font-size="8" font-weight="600">Select</text>
+
+  <path d="M 925 700 C 960 700, 960 1680, 995 1680" stroke="#94a3b8" stroke-width="1.5" fill="none" marker-end="url(#arrowGray)" stroke-dasharray="5,3"/>
+  <text x="960" y="1200" fill="#94a3b8" font-size="8" transform="rotate(-90, 960, 1200)">Coaching</text>
+
+  <!-- Row 1 to Row 2 arrows -->
+  <path d="M 1665 988 L 1665 1050 L 2135 1050 L 2135 1195" stroke="#6366f1" stroke-width="2" fill="none" marker-end="url(#arrow)" stroke-dasharray="6,3"/>
+  <text x="1900" y="1040" text-anchor="middle" fill="#6366f1" font-size="8" font-weight="600">Game Over → Analysis</text>
+
+  <!-- Row 2 flow: Post-Game back to Home or Play Again -->
+  <path d="M 2041 1860 L 2041 1940 L 1195 1940 L 1195 1900" stroke="#94a3b8" stroke-width="1.5" fill="none" marker-end="url(#arrowGray)" stroke-dasharray="5,3"/>
+  <text x="1618" y="1932" text-anchor="middle" fill="#94a3b8" font-size="8">Play Again loop</text>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <!-- LEGEND & DESIGN SYSTEM                                                 -->
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <rect x="60" y="2120" width="2270" height="190" rx="16" fill="#fff" stroke="#E4E7F2" stroke-width="1"/>
+
+  <text x="90" y="2150" fill="#1B2063" font-size="16" font-weight="700">Design System Reference</text>
+
+  <!-- Color swatches -->
+  <text x="90" y="2178" fill="#5A5F7D" font-size="11" font-weight="600">Colors</text>
+  <rect x="140" y="2166" width="24" height="16" rx="4" fill="#1B2063"/>
+  <text x="170" y="2178" fill="#5A5F7D" font-size="9">Navy #1B2063</text>
+  <rect x="260" y="2166" width="24" height="16" rx="4" fill="#2A3BB7"/>
+  <text x="290" y="2178" fill="#5A5F7D" font-size="9">Blue #2A3BB7</text>
+  <rect x="380" y="2166" width="24" height="16" rx="4" fill="#3D5AFE"/>
+  <text x="410" y="2178" fill="#5A5F7D" font-size="9">Accent #3D5AFE</text>
+  <rect x="500" y="2166" width="24" height="16" rx="4" fill="#F0F2F8"/>
+  <text x="530" y="2178" fill="#5A5F7D" font-size="9">Scaffold #F0F2F8</text>
+  <rect x="625" y="2166" width="24" height="16" rx="4" fill="#E53935"/>
+  <text x="655" y="2178" fill="#5A5F7D" font-size="9">Red #E53935</text>
+  <rect x="730" y="2166" width="24" height="16" rx="4" fill="#43A047"/>
+  <text x="760" y="2178" fill="#5A5F7D" font-size="9">Green #43A047</text>
+  <rect x="840" y="2166" width="24" height="16" rx="4" fill="#FF6F00"/>
+  <text x="870" y="2178" fill="#5A5F7D" font-size="9">Orange #FF6F00</text>
+
+  <!-- Typography -->
+  <text x="90" y="2210" fill="#5A5F7D" font-size="11" font-weight="600">Typography</text>
+  <text x="170" y="2210" fill="#1A1D3B" font-size="9">SF Pro / Roboto · Headline: 22-28pt W800 · Title: 14-16pt W600-700 · Body: 11-13pt W400</text>
+
+  <!-- Components -->
+  <text x="90" y="2240" fill="#5A5F7D" font-size="11" font-weight="600">Components</text>
+  <text x="170" y="2240" fill="#1A1D3B" font-size="9">Cards: 14-16px radius, 0.5px #E4E7F2 border · Chips: 4-8px radius · Progress: 4-8px height · Avatars: circular, gradient fill</text>
+
+  <!-- Screen dimensions -->
+  <text x="90" y="2270" fill="#5A5F7D" font-size="11" font-weight="600">Viewport</text>
+  <text x="170" y="2270" fill="#1A1D3B" font-size="9">390×844pt (iPhone 14) · 32px phone frame radius · 16px content padding · Bottom Nav: 54pt</text>
+
+  <!-- Nav structure -->
+  <text x="90" y="2296" fill="#5A5F7D" font-size="11" font-weight="600">Navigation</text>
+  <text x="170" y="2296" fill="#1A1D3B" font-size="9">Bottom Nav: Home | Play | Lessons | Analytics · Push: GM Selection → Sparring → Post-Game · Push: Lessons → Lesson Detail</text>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <!-- SCREEN MAP / FLOW DIAGRAM                                              -->
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <text x="60" y="2350" fill="#1B2063" font-size="16" font-weight="700">Screen Map — User Flow</text>
+
+  <rect x="60" y="2370" width="2270" height="200" rx="16" fill="#fff" stroke="#E4E7F2" stroke-width="1"/>
+
+  <!-- Flow boxes -->
+  <rect x="100" y="2420" width="120" height="50" rx="10" fill="#0f1137"/>
+  <text x="160" y="2450" text-anchor="middle" fill="#fff" font-size="10" font-weight="600">1. Login</text>
+
+  <path d="M 225 2445 L 265 2445" stroke="#6366f1" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+  <rect x="270" y="2420" width="140" height="50" rx="10" fill="url(#heroGrad)"/>
+  <text x="340" y="2450" text-anchor="middle" fill="#fff" font-size="10" font-weight="600">2. Home (Hub)</text>
+
+  <!-- Branch from Home -->
+  <path d="M 415 2430 L 490 2400" stroke="#6366f1" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 415 2445 L 490 2445" stroke="#6366f1" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 415 2455 L 490 2490" stroke="#6366f1" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 340 2475 L 340 2520 L 490 2520" stroke="#94a3b8" stroke-width="1.5" fill="none" marker-end="url(#arrowGray)" stroke-dasharray="4,2"/>
+
+  <!-- Sparring branch -->
+  <rect x="495" y="2375" width="130" height="50" rx="10" fill="#6A1B9A" fill-opacity="0.15" stroke="#6A1B9A" stroke-width="1"/>
+  <text x="560" y="2405" text-anchor="middle" fill="#6A1B9A" font-size="10" font-weight="600">3. GM Select</text>
+
+  <path d="M 630 2400 L 670 2400" stroke="#6366f1" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+  <rect x="675" y="2375" width="130" height="50" rx="10" fill="#6A1B9A" fill-opacity="0.15" stroke="#6A1B9A" stroke-width="1"/>
+  <text x="740" y="2405" text-anchor="middle" fill="#6A1B9A" font-size="10" font-weight="600">4. Sparring</text>
+
+  <path d="M 810 2400 L 850 2400" stroke="#6366f1" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+  <rect x="855" y="2375" width="160" height="50" rx="10" fill="#E53935" fill-opacity="0.12" stroke="#E53935" stroke-width="1"/>
+  <text x="935" y="2405" text-anchor="middle" fill="#E53935" font-size="10" font-weight="600">10. Post-Game</text>
+
+  <!-- Lessons branch -->
+  <rect x="495" y="2420" width="130" height="50" rx="10" fill="#3949AB" fill-opacity="0.15" stroke="#3949AB" stroke-width="1"/>
+  <text x="560" y="2450" text-anchor="middle" fill="#3949AB" font-size="10" font-weight="600">5. Lessons</text>
+
+  <path d="M 630 2445 L 670 2445" stroke="#6366f1" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+  <rect x="675" y="2420" width="130" height="50" rx="10" fill="#3949AB" fill-opacity="0.15" stroke="#3949AB" stroke-width="1"/>
+  <text x="740" y="2450" text-anchor="middle" fill="#3949AB" font-size="10" font-weight="600">6. Lesson Detail</text>
+
+  <!-- Puzzles and other branches -->
+  <rect x="495" y="2465" width="130" height="50" rx="10" fill="#E53935" fill-opacity="0.12" stroke="#E53935" stroke-width="1"/>
+  <text x="560" y="2495" text-anchor="middle" fill="#E53935" font-size="10" font-weight="600">7. Puzzles</text>
+
+  <rect x="495" y="2505" width="130" height="50" rx="10" fill="#3D5AFE" fill-opacity="0.12" stroke="#3D5AFE" stroke-width="1"/>
+  <text x="560" y="2535" text-anchor="middle" fill="#3D5AFE" font-size="10" font-weight="600">8. Coaching</text>
+
+  <!-- Analytics from bottom nav -->
+  <rect x="675" y="2465" width="130" height="50" rx="10" fill="#2196F3" fill-opacity="0.12" stroke="#2196F3" stroke-width="1"/>
+  <text x="740" y="2495" text-anchor="middle" fill="#2196F3" font-size="10" font-weight="600">9. Analytics</text>
+
+  <path d="M 340 2475 L 340 2490 L 740 2490 L 740 2470" stroke="#94a3b8" stroke-width="1" fill="none" marker-end="url(#arrowGray)" stroke-dasharray="4,2"/>
+
+  <!-- Loop back from Post-Game -->
+  <path d="M 935 2430 C 935 2350, 340 2350, 340 2415" stroke="#94a3b8" stroke-width="1.5" fill="none" marker-end="url(#arrowGray)" stroke-dasharray="5,3"/>
+  <text x="640" y="2350" text-anchor="middle" fill="#94a3b8" font-size="9" font-weight="600">Play Again / Back to Home</text>
+
+  <!-- Figma import note -->
+  <rect x="1100" y="2380" width="500" height="170" rx="12" fill="#F0F2F8" stroke="#E4E7F2" stroke-width="1"/>
+  <text x="1120" y="2406" fill="#1B2063" font-size="13" font-weight="700">📦 Figma Import Instructions</text>
+  <text x="1120" y="2428" fill="#5A5F7D" font-size="11">1. Open Figma → File → Import (or drag-drop this SVG)</text>
+  <text x="1120" y="2448" fill="#5A5F7D" font-size="11">2. Each phone frame imports as a group — rename to screen name</text>
+  <text x="1120" y="2468" fill="#5A5F7D" font-size="11">3. Use Figma's "Create Component" to convert each screen</text>
+  <text x="1120" y="2488" fill="#5A5F7D" font-size="11">4. Add Figma Prototype connections following the flow arrows</text>
+  <text x="1120" y="2508" fill="#5A5F7D" font-size="11">5. Set frames to 390×844 for iPhone 14 device preview</text>
+  <text x="1120" y="2536" fill="#2A3BB7" font-size="10" font-weight="600">Tip: Use "Ungroup" then re-group by screen for easier editing</text>
+
+  <!-- Tech stack labels -->
+  <rect x="1650" y="2380" width="380" height="170" rx="12" fill="#F0F2F8" stroke="#E4E7F2" stroke-width="1"/>
+  <text x="1670" y="2406" fill="#1B2063" font-size="13" font-weight="700">🏗 Architecture Reference</text>
+  <text x="1670" y="2430" fill="#5A5F7D" font-size="10">Frontend:   Flutter + Dart FFI + Stockfish C++</text>
+  <text x="1670" y="2450" fill="#5A5F7D" font-size="10">Backend:    Laravel 13 + Sanctum + PostgreSQL</text>
+  <text x="1670" y="2470" fill="#5A5F7D" font-size="10">ML Service:  FastAPI + BKT Engine + Scikit-Learn</text>
+  <text x="1670" y="2490" fill="#5A5F7D" font-size="10">Edge AI:    ONNX Runtime (Mistake Classification)</text>
+  <text x="1670" y="2510" fill="#5A5F7D" font-size="10">Engine:     Stockfish C++ (Heuristic AI Personas)</text>
+  <text x="1670" y="2536" fill="#2A3BB7" font-size="10" font-weight="600">4 GM Personas: Torre · Tal · Petrosian · Carlsen</text>
+</svg>
