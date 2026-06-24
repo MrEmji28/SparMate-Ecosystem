@@ -39,6 +39,7 @@ class GeneratePlanRequest(BaseModel):
     user_id: int
     bkt_matrix: dict[str, float]
     elo_rating: int = 1200
+    skill_level: Optional[str] = Field(None, description="User skill level: 'beginner', 'intermediate', 'advanced'")
 
 
 # ── Classification Request Models ────────────────────────────────────────
@@ -123,4 +124,41 @@ class HealthResponse(BaseModel):
     status: str = "online"
     service: str = "SparMate ML Microservice"
     version: str = "2.0.0"
+
+
+# ── Coaching Insights Models ─────────────────────────────────────────────
+
+class MatchBlunderSummary(BaseModel):
+    """Summary of classified blunders from a single match."""
+    match_id: int
+    opponent_name: str = "Opponent"
+    result: str = "loss"
+    blunders: list[ClassifiedBlunder] = Field(default_factory=list)
+
+
+class CoachingInsightsRequest(BaseModel):
+    """Request payload to generate coaching indicators from recent matches."""
+    user_id: int
+    bkt_matrix: dict[str, float]
+    recent_matches: list[MatchBlunderSummary] = Field(default_factory=list)
+
+
+class CoachingIndicator(BaseModel):
+    """A single coaching indicator for the UI (recent game insight)."""
+    icon_type: str = Field("negative", description="'positive' or 'negative'")
+    opponent: str
+    text: str
+    category: str = Field("", description="BKT skill category this relates to")
+    match_id: int = 0
+
+
+class CoachingInsightsResponse(BaseModel):
+    """Response containing coaching indicators and skill trends."""
+    status: str = "success"
+    user_id: int
+    recent_indicators: list[CoachingIndicator] = Field(default_factory=list)
+    skill_trends: dict[str, str] = Field(
+        default_factory=dict,
+        description="Trend per skill: 'improving', 'stable', 'declining'"
+    )
 

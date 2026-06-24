@@ -7,8 +7,8 @@ import 'package:http/http.dart' as http;
 /// Provides typed methods for every Laravel API endpoint defined
 /// in `sparmate_backend/routes/api.php`.
 class ApiService {
-  static const String _defaultBaseUrl = 'http://10.0.2.2:8000/api/v1';
-  // For iOS simulator use: 'http://127.0.0.1:8000/api/v1'
+  static const String _defaultBaseUrl = 'http://127.0.0.1:8001/api/v1';
+  // For Android emulator use: 'http://10.0.2.2:8001/api/v1'
   // For physical device use your machine's LAN IP
 
   final String baseUrl;
@@ -226,7 +226,7 @@ class ApiService {
   }) =>
       _post('/puzzles/$puzzleId/attempt', {
         'solved': solved,
-        'time_taken_seconds': timeTakenSeconds,
+        'time_seconds': timeTakenSeconds,
       });
 
   // ── Coaching Engine ───────────────────────────────────────────────
@@ -243,6 +243,13 @@ class ApiService {
   /// Fetch the user's analytics overview.
   Future<Map<String, dynamic>> getAnalyticsOverview() =>
       _get('/analytics/overview');
+
+  // ── Onboarding ────────────────────────────────────────────────────
+
+  /// Submit the onboarding skill survey answers.
+  Future<Map<String, dynamic>> submitOnboarding(
+      List<Map<String, dynamic>> answers) =>
+      _post('/onboarding', {'answers': answers});
 }
 
 /// Custom exception for API errors.

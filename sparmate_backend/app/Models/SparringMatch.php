@@ -19,15 +19,17 @@ class SparringMatch extends Model
         'duration_seconds',
         'pressure_avg',
         'analysis',
+        'classified_blunders',
         'played_at',
     ];
 
     protected function casts(): array
     {
         return [
-            'analysis'    => 'array',
-            'pressure_avg' => 'float',
-            'played_at'   => 'datetime',
+            'analysis'             => 'array',
+            'classified_blunders'  => 'array',
+            'pressure_avg'        => 'float',
+            'played_at'           => 'datetime',
         ];
     }
 

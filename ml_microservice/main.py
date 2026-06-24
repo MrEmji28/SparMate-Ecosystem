@@ -31,8 +31,11 @@ from models import (
     ClassifiedBlunder,
     HealthResponse,
     PlanItem,
+    CoachingInsightsRequest,
+    CoachingInsightsResponse,
+    CoachingIndicator,
 )
-from bkt_engine import process_match_blunders, generate_training_plan
+from bkt_engine import process_match_blunders, generate_training_plan, generate_coaching_insights
 from classifier import get_classifier
 
 # ── App Configuration ─────────────────────────────────────────────────────
@@ -173,6 +176,7 @@ async def create_training_plan(payload: GeneratePlanRequest):
     plan_data = generate_training_plan(
         bkt_matrix=payload.bkt_matrix,
         elo_rating=payload.elo_rating,
+        skill_level=payload.skill_level,
     )
 
     return GeneratePlanResponse(
@@ -180,6 +184,42 @@ async def create_training_plan(payload: GeneratePlanRequest):
         primary_directive=plan_data["primary_directive"],
         weekly_focus=plan_data["weekly_focus"],
         plan_items=[PlanItem(**item) for item in plan_data["plan_items"]],
+    )
+
+
+# ── Coaching Insights (Sprint 6+) ────────────────────────────────────────
+
+@app.post("/api/v1/coaching-insights", response_model=CoachingInsightsResponse)
+async def coaching_insights(payload: CoachingInsightsRequest):
+    """
+    Generate coaching indicators from recent match blunders.
+
+    Analyzes the user's recent classified blunders and generates
+    human-readable coaching feedback for the Coaching Engine UI.
+    Each match produces 1-2 indicators highlighting specific areas
+    for improvement or praising clean play.
+    """
+    # Convert Pydantic models to dicts
+    matches = []
+    for match in payload.recent_matches:
+        matches.append({
+            "match_id": match.match_id,
+            "opponent_name": match.opponent_name,
+            "result": match.result,
+            "blunders": [b.model_dump() for b in match.blunders],
+        })
+
+    insights = generate_coaching_insights(
+        recent_matches=matches,
+        bkt_matrix=payload.bkt_matrix,
+    )
+
+    return CoachingInsightsResponse(
+        user_id=payload.user_id,
+        recent_indicators=[
+            CoachingIndicator(**ind) for ind in insights["recent_indicators"]
+        ],
+        skill_trends=insights["skill_trends"],
     )
 
 

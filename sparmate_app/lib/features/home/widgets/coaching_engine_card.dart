@@ -19,9 +19,28 @@ class CoachingEngineCard extends StatelessWidget {
 
     // Build focus chips from live BKT or use defaults
     final chips = _buildChips(bktSkills);
-    final feedbackText = directive != null
-        ? 'Personalized feedback: "$directive"'
-        : 'Personalized feedback: "Focus on pawn structure in the mid-game."';
+
+    // Build feedback text from live data
+    String feedbackText;
+    if (directive != null) {
+      feedbackText = '"$directive"';
+    } else if (bktSkills != null) {
+      final entries = bktSkills.entries.toList()
+        ..sort((a, b) => (a.value as num).compareTo(b.value as num));
+      if (entries.isNotEmpty) {
+        final weakest = entries.first;
+        final label = weakest.key.replaceAll('_', ' ');
+        final capitalizedLabel = label.split(' ').map((w) =>
+          w.isNotEmpty ? '${w[0].toUpperCase()}${w.substring(1)}' : w
+        ).join(' ');
+        final mastery = ((weakest.value as num) * 100).toInt();
+        feedbackText = 'Focus area: $capitalizedLabel ($mastery% mastery). Tap to see your full coaching plan.';
+      } else {
+        feedbackText = 'Personalized feedback: "Focus on pawn structure in the mid-game."';
+      }
+    } else {
+      feedbackText = 'Personalized feedback: "Focus on pawn structure in the mid-game."';
+    }
 
     return GestureDetector(
       onTap: () => Navigator.of(context).push(

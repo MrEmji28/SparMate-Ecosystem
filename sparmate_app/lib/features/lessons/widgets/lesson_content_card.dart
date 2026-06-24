@@ -1,13 +1,163 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../../../core/theme/app_colors.dart';
 
 /// Current chapter content preview showing theory and key concepts.
+/// Accepts dynamic data and a functional continue callback.
+/// Uses Lichess-style board with SVG pieces.
 class LessonContentCard extends StatelessWidget {
-  const LessonContentCard({super.key});
+  final String title;
+  final int chapterIndex;
+  final int totalChapters;
+  final Color color;
+  final VoidCallback? onContinue;
+
+  const LessonContentCard({
+    super.key,
+    this.title = 'Sicilian Defense',
+    this.chapterIndex = 7,
+    this.totalChapters = 12,
+    this.color = const Color(0xFF3949AB),
+    this.onContinue,
+  });
+
+  static const _chapterTitles = [
+    'Introduction & Overview',
+    'Core Principles',
+    'Key Variations',
+    'Tactical Patterns',
+    'Positional Ideas',
+    'Strategic Plans',
+    'Common Mistakes',
+    'Pawn Structures & Plans',
+    'Typical Middlegame Ideas',
+    'Endgame Transitions',
+    'Common Traps & Pitfalls',
+    'Putting It All Together',
+  ];
+
+  // Key concepts vary by chapter index to feel dynamic
+  static const _conceptSets = [
+    [
+      _ConceptData(Icons.school_rounded, 'Fundamentals',
+          'Learn the basic ideas and setup positions for this opening system.'),
+      _ConceptData(Icons.timeline_rounded, 'Historical Context',
+          'Understand how this opening evolved through chess history.'),
+    ],
+    [
+      _ConceptData(Icons.grid_on_rounded, 'Center Control',
+          'Control the central squares to maximize piece activity and mobility.'),
+      _ConceptData(Icons.swap_vert_rounded, 'Piece Development',
+          'Develop minor pieces actively and castle early for king safety.'),
+    ],
+    [
+      _ConceptData(Icons.account_tree_rounded, 'Main Lines',
+          'Study the most popular and theoretically important variations.'),
+      _ConceptData(Icons.alt_route_rounded, 'Sidelines',
+          'Explore lesser-known but dangerous surprise weapons.'),
+    ],
+    [
+      _ConceptData(Icons.bolt_rounded, 'Tactical Motifs',
+          'Recognize pins, forks, and discovered attacks in typical positions.'),
+      _ConceptData(Icons.visibility_rounded, 'Pattern Recognition',
+          'Train your eye to spot recurring tactical themes quickly.'),
+    ],
+    [
+      _ConceptData(Icons.psychology_rounded, 'Strategic Thinking',
+          'Develop long-term plans based on pawn structure and piece placement.'),
+      _ConceptData(Icons.dashboard_rounded, 'Piece Placement',
+          'Learn optimal squares for your pieces in different pawn structures.'),
+    ],
+    [
+      _ConceptData(Icons.route_rounded, 'Planning',
+          'Create concrete plans based on the specific features of the position.'),
+      _ConceptData(Icons.compare_arrows_rounded, 'Pawn Breaks',
+          'Identify and execute the correct pawn breaks at the right moment.'),
+    ],
+    [
+      _ConceptData(Icons.warning_rounded, 'Common Errors',
+          'Avoid the most frequent mistakes players make in this system.'),
+      _ConceptData(Icons.shield_rounded, 'Defensive Ideas',
+          'Learn key defensive resources when under attack.'),
+    ],
+    [
+      _ConceptData(Icons.grid_on_rounded, 'Maroczy Bind',
+          'Control the center with pawns on c4 and e4 to restrict counterplay.'),
+      _ConceptData(Icons.swap_vert_rounded, 'Hedgehog Formation',
+          'Flexible pawn structure allowing dynamic piece play from the first three ranks.'),
+      _ConceptData(Icons.security_rounded, 'Isolated d-pawn',
+          'Understanding when the isolated pawn is a strength vs. weakness.'),
+    ],
+  ];
+
+  // Pre-defined positions for different chapter types
+  // Each position: list of (row, col, pieceCode) where pieceCode e.g. 'wP', 'bK'
+  static const _positions = [
+    // Position 0: Starting position (for intro chapters)
+    [
+      [0, 0, 'bR'], [0, 1, 'bN'], [0, 2, 'bB'], [0, 3, 'bQ'],
+      [0, 4, 'bK'], [0, 5, 'bB'], [0, 6, 'bN'], [0, 7, 'bR'],
+      [1, 0, 'bP'], [1, 1, 'bP'], [1, 2, 'bP'], [1, 3, 'bP'],
+      [1, 4, 'bP'], [1, 5, 'bP'], [1, 6, 'bP'], [1, 7, 'bP'],
+      [6, 0, 'wP'], [6, 1, 'wP'], [6, 2, 'wP'], [6, 3, 'wP'],
+      [6, 4, 'wP'], [6, 5, 'wP'], [6, 6, 'wP'], [6, 7, 'wP'],
+      [7, 0, 'wR'], [7, 1, 'wN'], [7, 2, 'wB'], [7, 3, 'wQ'],
+      [7, 4, 'wK'], [7, 5, 'wB'], [7, 6, 'wN'], [7, 7, 'wR'],
+    ],
+    // Position 1: Sicilian 1.e4 c5
+    [
+      [0, 0, 'bR'], [0, 1, 'bN'], [0, 2, 'bB'], [0, 3, 'bQ'],
+      [0, 4, 'bK'], [0, 5, 'bB'], [0, 6, 'bN'], [0, 7, 'bR'],
+      [1, 0, 'bP'], [1, 1, 'bP'], [1, 3, 'bP'],
+      [1, 4, 'bP'], [1, 5, 'bP'], [1, 6, 'bP'], [1, 7, 'bP'],
+      [3, 2, 'bP'],
+      [4, 4, 'wP'],
+      [6, 0, 'wP'], [6, 1, 'wP'], [6, 2, 'wP'], [6, 3, 'wP'],
+      [6, 5, 'wP'], [6, 6, 'wP'], [6, 7, 'wP'],
+      [7, 0, 'wR'], [7, 1, 'wN'], [7, 2, 'wB'], [7, 3, 'wQ'],
+      [7, 4, 'wK'], [7, 5, 'wB'], [7, 6, 'wN'], [7, 7, 'wR'],
+    ],
+    // Position 2: Maroczy Bind
+    [
+      [0, 4, 'bK'], [2, 3, 'bP'], [2, 5, 'bN'],
+      [1, 0, 'bP'], [1, 1, 'bP'], [1, 4, 'bP'],
+      [1, 5, 'bP'], [1, 6, 'bP'], [1, 7, 'bP'],
+      [4, 2, 'wP'], [4, 4, 'wP'],
+      [5, 2, 'wN'], [5, 5, 'wB'],
+      [6, 0, 'wP'], [6, 1, 'wP'], [6, 5, 'wP'], [6, 6, 'wP'], [6, 7, 'wP'],
+      [7, 4, 'wK'],
+    ],
+    // Position 3: Knight outpost
+    [
+      [0, 4, 'bK'], [0, 7, 'bR'],
+      [1, 5, 'bP'], [1, 6, 'bP'], [1, 7, 'bP'],
+      [2, 1, 'bB'], [2, 3, 'bP'],
+      [3, 4, 'wN'], // Knight on outpost e5
+      [4, 3, 'wP'],
+      [6, 4, 'wP'], [6, 5, 'wP'], [6, 6, 'wP'], [6, 7, 'wP'],
+      [7, 4, 'wK'], [7, 7, 'wR'],
+    ],
+  ];
+
+  // Highlighted squares per position (e.g. key control squares)
+  static const _highlights = [
+    <List<int>>[], // No highlights for starting pos
+    [[3, 2]], // c5 highlighted
+    [[3, 3]], // d5 control highlighted
+    [[3, 4]], // e5 outpost highlighted
+  ];
 
   @override
   Widget build(BuildContext context) {
     final tt = Theme.of(context).textTheme;
+    final chapterTitle = chapterIndex < _chapterTitles.length
+        ? _chapterTitles[chapterIndex]
+        : 'Chapter ${chapterIndex + 1}';
+    final concepts = chapterIndex < _conceptSets.length
+        ? _conceptSets[chapterIndex]
+        : _conceptSets[chapterIndex % _conceptSets.length];
+
+    final posIdx = chapterIndex % _positions.length;
 
     return Container(
       padding: const EdgeInsets.all(20),
@@ -22,17 +172,19 @@ class LessonContentCard extends StatelessWidget {
           // ── Header ──
           Row(
             children: [
-              Icon(Icons.auto_stories_rounded, size: 20, color: AppColors.primaryBlue),
+              Icon(Icons.auto_stories_rounded, size: 20, color: color),
               const SizedBox(width: 8),
-              Text('Current Chapter', style: tt.titleMedium?.copyWith(fontWeight: FontWeight.w700)),
+              Text('Up Next',
+                  style: tt.titleMedium
+                      ?.copyWith(fontWeight: FontWeight.w700)),
             ],
           ),
           const SizedBox(height: 6),
           Text(
-            'Chapter 8: Pawn Structures & Plans',
+            'Chapter ${chapterIndex + 1}: $chapterTitle',
             style: tt.titleSmall?.copyWith(
               fontWeight: FontWeight.w600,
-              color: AppColors.primaryBlue,
+              color: color,
               fontSize: 13,
             ),
           ),
@@ -41,34 +193,106 @@ class LessonContentCard extends StatelessWidget {
           // ── Key concepts ──
           Text(
             'KEY CONCEPTS',
-            style: tt.labelSmall?.copyWith(letterSpacing: 1.2, fontWeight: FontWeight.w700, color: AppColors.textLight),
+            style: tt.labelSmall?.copyWith(
+                letterSpacing: 1.2,
+                fontWeight: FontWeight.w700,
+                color: AppColors.textLight),
           ),
           const SizedBox(height: 12),
-          _concept(context, Icons.grid_on_rounded, 'Maroczy Bind',
-              'Control the center with pawns on c4 and e4 to restrict Black\'s counterplay.'),
-          const SizedBox(height: 10),
-          _concept(context, Icons.swap_vert_rounded, 'Hedgehog Formation',
-              'Flexible pawn structure allowing dynamic piece play from the first three ranks.'),
-          const SizedBox(height: 10),
-          _concept(context, Icons.security_rounded, 'Isolated d-pawn',
-              'Understanding when the isolated pawn is a strength vs. weakness.'),
+          for (var i = 0; i < concepts.length; i++) ...[
+            if (i > 0) const SizedBox(height: 10),
+            _buildConcept(context, concepts[i]),
+          ],
           const SizedBox(height: 20),
 
-          // ── Mini board preview ──
-          Container(
-            width: double.infinity,
-            height: 140,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: AppColors.border, width: 0.5),
-            ),
-            clipBehavior: Clip.antiAlias,
-            child: CustomPaint(painter: _MiniPositionPainter()),
-          ),
+          // ── Lichess-style mini board ──
+          LayoutBuilder(builder: (context, constraints) {
+            final boardSize = constraints.maxWidth;
+            final sqSize = boardSize / 8;
+            final position = _positions[posIdx];
+            final highlights =
+                posIdx < _highlights.length ? _highlights[posIdx] : <List<int>>[];
+
+            return Container(
+              width: boardSize,
+              height: boardSize * 0.55, // Show ~4.5 rows
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.08),
+                    blurRadius: 8,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              clipBehavior: Clip.antiAlias,
+              child: Stack(
+                children: [
+                  // Board squares
+                  for (var r = 0; r < 8; r++)
+                    for (var c = 0; c < 8; c++)
+                      _buildSquare(r, c, sqSize, highlights),
+
+                  // Pieces
+                  for (final p in position)
+                    Positioned(
+                      left: (p[1] as int) * sqSize,
+                      top: (p[0] as int) * sqSize,
+                      width: sqSize,
+                      height: sqSize,
+                      child: Padding(
+                        padding: EdgeInsets.all(sqSize * 0.08),
+                        child: SvgPicture.asset(
+                          'assets/pieces/${p[2]}.svg',
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                    ),
+
+                  // Rank labels (Lichess-style, on right edge)
+                  for (var r = 0; r < 8; r++)
+                    Positioned(
+                      top: r * sqSize + 2,
+                      right: 3,
+                      child: Text(
+                        '${8 - r}',
+                        style: TextStyle(
+                          fontSize: sqSize * 0.2,
+                          fontWeight: FontWeight.w700,
+                          color: (r + 7) % 2 == 0
+                              ? const Color(0xFFB48764)
+                              : const Color(0xFFEDD6B0),
+                        ),
+                      ),
+                    ),
+
+                  // File labels (Lichess-style, on bottom edge)
+                  for (var c = 0; c < 8; c++)
+                    Positioned(
+                      bottom: 2,
+                      left: c * sqSize + 3,
+                      child: Text(
+                        String.fromCharCode('a'.codeUnitAt(0) + c),
+                        style: TextStyle(
+                          fontSize: sqSize * 0.2,
+                          fontWeight: FontWeight.w700,
+                          color: (7 + c) % 2 == 0
+                              ? const Color(0xFFB48764)
+                              : const Color(0xFFEDD6B0),
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+            );
+          }),
           const SizedBox(height: 8),
           Center(
             child: Text(
-              'Maroczy Bind: White controls d5',
+              chapterIndex < 8
+                  ? 'Position from $chapterTitle'
+                  : 'Key position to study',
               style: tt.bodySmall?.copyWith(
                 color: AppColors.textLight,
                 fontStyle: FontStyle.italic,
@@ -83,15 +307,17 @@ class LessonContentCard extends StatelessWidget {
             width: double.infinity,
             height: 48,
             child: ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: onContinue,
               icon: const Icon(Icons.play_arrow_rounded, size: 20),
               label: const Text('Continue Lesson'),
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.primaryNavy,
+                backgroundColor: color,
                 foregroundColor: Colors.white,
                 elevation: 0,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14)),
+                textStyle: const TextStyle(
+                    fontSize: 15, fontWeight: FontWeight.w700),
               ),
             ),
           ),
@@ -100,7 +326,32 @@ class LessonContentCard extends StatelessWidget {
     );
   }
 
-  Widget _concept(BuildContext context, IconData icon, String title, String desc) {
+  Widget _buildSquare(
+      int row, int col, double sqSize, List<List<int>> highlights) {
+    final isLight = (row + col) % 2 == 0;
+    final isHighlighted =
+        highlights.any((h) => h[0] == row && h[1] == col);
+
+    // Lichess brown theme
+    const lightSquare = Color(0xFFEDD6B0);
+    const darkSquare = Color(0xFFB48764);
+    const highlightLight = Color(0xFFC8D88B);
+    const highlightDark = Color(0xFF9AAD5B);
+
+    final bgColor = isHighlighted
+        ? (isLight ? highlightLight : highlightDark)
+        : (isLight ? lightSquare : darkSquare);
+
+    return Positioned(
+      left: col * sqSize,
+      top: row * sqSize,
+      width: sqSize,
+      height: sqSize,
+      child: Container(color: bgColor),
+    );
+  }
+
+  Widget _buildConcept(BuildContext context, _ConceptData concept) {
     final tt = Theme.of(context).textTheme;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -109,19 +360,27 @@ class LessonContentCard extends StatelessWidget {
           width: 32,
           height: 32,
           decoration: BoxDecoration(
-            color: AppColors.primaryBlue.withValues(alpha: 0.08),
+            color: color.withValues(alpha: 0.08),
             borderRadius: BorderRadius.circular(8),
           ),
-          child: Icon(icon, size: 16, color: AppColors.primaryBlue),
+          child: Icon(concept.icon, size: 16, color: color),
         ),
         const SizedBox(width: 10),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(title, style: tt.titleSmall?.copyWith(fontWeight: FontWeight.w700, color: AppColors.textDark, fontSize: 13)),
+              Text(concept.title,
+                  style: tt.titleSmall?.copyWith(
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.textDark,
+                      fontSize: 13)),
               const SizedBox(height: 2),
-              Text(desc, style: tt.bodySmall?.copyWith(color: AppColors.textMedium, height: 1.4, fontSize: 11.5)),
+              Text(concept.description,
+                  style: tt.bodySmall?.copyWith(
+                      color: AppColors.textMedium,
+                      height: 1.4,
+                      fontSize: 11.5)),
             ],
           ),
         ),
@@ -130,68 +389,9 @@ class LessonContentCard extends StatelessWidget {
   }
 }
 
-/// Draws a simplified chess position showing the Maroczy Bind.
-class _MiniPositionPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final sq = size.width / 8;
-    final boardH = sq * 8;
-    final yOff = (size.height - boardH) / 2;
-
-    final light = Paint()..color = const Color(0xFFF0D9B5);
-    final dark = Paint()..color = const Color(0xFFB58863);
-
-    for (var r = 0; r < 8; r++) {
-      for (var c = 0; c < 8; c++) {
-        canvas.drawRect(Rect.fromLTWH(c * sq, yOff + r * sq, sq, sq), (r + c) % 2 == 0 ? light : dark);
-      }
-    }
-
-    // Highlight controlled squares
-    final highlight = Paint()..color = AppColors.primaryBlue.withValues(alpha: 0.2);
-    canvas.drawRect(Rect.fromLTWH(3 * sq, yOff + 3 * sq, sq, sq), highlight); // d5
-
-    // White pawns (Maroczy Bind: c4, e4)
-    _p(canvas, 4, 2, sq, yOff, '♙', true);  // c4
-    _p(canvas, 4, 4, sq, yOff, '♙', true);  // e4
-    _p(canvas, 6, 0, sq, yOff, '♙', true);
-    _p(canvas, 6, 1, sq, yOff, '♙', true);
-    _p(canvas, 6, 5, sq, yOff, '♙', true);
-    _p(canvas, 6, 6, sq, yOff, '♙', true);
-    _p(canvas, 6, 7, sq, yOff, '♙', true);
-    // White pieces
-    _p(canvas, 7, 4, sq, yOff, '♔', true);
-    _p(canvas, 5, 2, sq, yOff, '♘', true);
-    _p(canvas, 5, 5, sq, yOff, '♗', true);
-
-    // Black pawns
-    _p(canvas, 1, 0, sq, yOff, '♟', false);
-    _p(canvas, 1, 1, sq, yOff, '♟', false);
-    _p(canvas, 2, 3, sq, yOff, '♟', false);  // d6
-    _p(canvas, 1, 4, sq, yOff, '♟', false);
-    _p(canvas, 1, 5, sq, yOff, '♟', false);
-    _p(canvas, 1, 6, sq, yOff, '♟', false);
-    _p(canvas, 1, 7, sq, yOff, '♟', false);
-    // Black pieces
-    _p(canvas, 0, 4, sq, yOff, '♚', false);
-    _p(canvas, 2, 5, sq, yOff, '♞', false);
-  }
-
-  void _p(Canvas canvas, int r, int c, double sq, double yOff, String piece, bool white) {
-    final tp = TextPainter(
-      text: TextSpan(
-        text: piece,
-        style: TextStyle(
-          fontSize: sq * 0.7,
-          color: white ? Colors.white : const Color(0xFF2D2D2D),
-          shadows: [Shadow(color: Colors.black.withValues(alpha: 0.25), blurRadius: 1.5, offset: const Offset(0.5, 0.5))],
-        ),
-      ),
-      textDirection: TextDirection.ltr,
-    )..layout();
-    tp.paint(canvas, Offset(c * sq + (sq - tp.width) / 2, yOff + r * sq + (sq - tp.height) / 2));
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter old) => false;
+class _ConceptData {
+  final IconData icon;
+  final String title;
+  final String description;
+  const _ConceptData(this.icon, this.title, this.description);
 }

@@ -17,6 +17,10 @@ class AppState extends ChangeNotifier {
 
   bool get isAuthenticated => api.isAuthenticated;
 
+  /// True if the user has completed the onboarding skill survey.
+  bool get onboardingCompleted =>
+      _user?['onboarding_completed'] == true;
+
   Map<String, dynamic>? _user;
   Map<String, dynamic>? get user => _user;
 
@@ -33,6 +37,18 @@ class AppState extends ChangeNotifier {
 
   List<dynamic>? _weakestSkills;
   List<dynamic>? get weakestSkills => _weakestSkills;
+
+  /// Recent coaching indicators from match analysis (opponent, text, icon_type).
+  List<dynamic>? _recentIndicators;
+  List<dynamic>? get recentIndicators => _recentIndicators;
+
+  /// Coaching-specific error message for graceful degradation.
+  String? _coachingError;
+  String? get coachingError => _coachingError;
+
+  /// Timestamp of last coaching data fetch to avoid redundant calls.
+  DateTime? _lastCoachingFetch;
+  DateTime? get lastCoachingFetch => _lastCoachingFetch;
 
   // ── Dashboard ─────────────────────────────────────────────────────
 
@@ -68,6 +84,7 @@ class AppState extends ChangeNotifier {
 
   void clearError() {
     _errorMessage = null;
+    _coachingError = null;
     notifyListeners();
   }
 
@@ -123,6 +140,9 @@ class AppState extends ChangeNotifier {
     _bktMatrix = null;
     _trainingPlan = null;
     _weakestSkills = null;
+    _recentIndicators = null;
+    _coachingError = null;
+    _lastCoachingFetch = null;
     _dashboardData = null;
     _analyticsData = null;
     _grandmasters = null;
@@ -153,16 +173,19 @@ class AppState extends ChangeNotifier {
     }
   }
 
-  /// Fetch the coaching plan (BKT matrix + training plan).
+  /// Fetch the coaching plan (BKT matrix + training plan + recent indicators).
   Future<void> fetchCoachingPlan() async {
+    _coachingError = null;
     try {
       final data = await api.getCoachingPlan();
       _bktMatrix = data['bkt_matrix'] as Map<String, dynamic>?;
       _trainingPlan = data['training_plan'] as Map<String, dynamic>?;
       _weakestSkills = data['weakest_skills'] as List<dynamic>?;
+      _recentIndicators = data['recent_indicators'] as List<dynamic>?;
+      _lastCoachingFetch = DateTime.now();
       notifyListeners();
     } on ApiException catch (e) {
-      _errorMessage = e.message;
+      _coachingError = e.message;
       notifyListeners();
     }
   }
@@ -170,14 +193,16 @@ class AppState extends ChangeNotifier {
   /// Refresh the coaching plan (triggers FastAPI call).
   Future<void> refreshCoachingPlan() async {
     _setLoading(true);
+    _coachingError = null;
     try {
       final data = await api.refreshCoachingPlan();
       _trainingPlan = data['training_plan'] as Map<String, dynamic>?;
+      _recentIndicators = data['recent_indicators'] as List<dynamic>?;
       _setLoading(false);
       // Re-fetch the full coaching data to update BKT matrix
       await fetchCoachingPlan();
     } on ApiException catch (e) {
-      _errorMessage = e.message;
+      _coachingError = e.message;
       _setLoading(false);
     }
   }
@@ -276,6 +301,23 @@ class AppState extends ChangeNotifier {
       _errorMessage = e.message;
       _setLoading(false);
       return null;
+    }
+  }
+
+  /// Submit onboarding skill survey answers.
+  /// Updates the user's ELO rating and BKT matrix based on responses.
+  Future<bool> submitOnboarding(List<Map<String, dynamic>> answers) async {
+    _setLoading(true);
+    _errorMessage = null;
+    try {
+      final data = await api.submitOnboarding(answers);
+      _user = (data['user'] as Map<String, dynamic>?) ?? _user;
+      _setLoading(false);
+      return true;
+    } on ApiException catch (e) {
+      _errorMessage = e.message;
+      _setLoading(false);
+      return false;
     }
   }
 }

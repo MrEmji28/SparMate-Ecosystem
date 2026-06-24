@@ -25,6 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final state = context.read<AppState>();
       if (state.isAuthenticated) {
+        state.fetchDashboard();
         state.fetchCoachingPlan();
         state.fetchAnalytics();
       }
@@ -64,16 +65,74 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     const Spacer(),
-                    Container(
-                      width: 38, height: 38,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        gradient: LinearGradient(
-                          colors: [AppColors.primaryBlue, AppColors.primaryLight],
-                        ),
-                        border: Border.all(color: AppColors.border, width: 2),
+                    PopupMenuButton<String>(
+                      key: const Key('profile-menu'),
+                      offset: const Offset(0, 44),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14),
                       ),
-                      child: const Icon(Icons.person, color: Colors.white, size: 18),
+                      color: Colors.white,
+                      elevation: 8,
+                      onSelected: (value) {
+                        if (value == 'logout') {
+                          context.read<AppState>().logout();
+                        }
+                      },
+                      itemBuilder: (_) => [
+                        PopupMenuItem(
+                          enabled: false,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                context.read<AppState>().user?['name'] ?? 'Player',
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  color: AppColors.textDark,
+                                  fontSize: 14,
+                                ),
+                              ),
+                              const SizedBox(height: 2),
+                              Text(
+                                context.read<AppState>().user?['email'] ?? '',
+                                style: const TextStyle(
+                                  color: AppColors.textLight,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const PopupMenuDivider(),
+                        const PopupMenuItem(
+                          value: 'logout',
+                          child: Row(
+                            children: [
+                              Icon(Icons.logout_rounded, size: 18, color: AppColors.liveRed),
+                              SizedBox(width: 10),
+                              Text(
+                                'Sign Out',
+                                style: TextStyle(
+                                  color: AppColors.liveRed,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                      child: Container(
+                        width: 38, height: 38,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          gradient: LinearGradient(
+                            colors: [AppColors.primaryBlue, AppColors.primaryLight],
+                          ),
+                          border: Border.all(color: AppColors.border, width: 2),
+                        ),
+                        child: const Icon(Icons.person, color: Colors.white, size: 18),
+                      ),
                     ),
                   ],
                 ),

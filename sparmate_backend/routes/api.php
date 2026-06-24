@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\V1\DashboardController;
 use App\Http\Controllers\Api\V1\GrandmasterController;
 use App\Http\Controllers\Api\V1\LessonController;
 use App\Http\Controllers\Api\V1\MatchController;
+use App\Http\Controllers\Api\V1\OnboardingController;
 use App\Http\Controllers\Api\V1\PuzzleController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +34,9 @@ Route::prefix('v1')->group(function () {
         // Auth
         Route::post('/logout', [AuthController::class, 'logout']);
         Route::get('/user',    [AuthController::class, 'user']);
+
+        // Onboarding Survey
+        Route::post('/onboarding', [OnboardingController::class, 'store']);
 
         // Dashboard (Home Screen aggregate)
         Route::get('/dashboard', [DashboardController::class, 'index']);

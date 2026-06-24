@@ -73,18 +73,19 @@ class _SparringScreenState extends State<SparringScreen> {
               sliver: SliverList(
                 delegate: SliverChildListDelegate([
                   GmProfileCard(gm: widget.gm),
-                  const SizedBox(height: 16),
-                  // ── Game Board + Pressure Gauge Row ──
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(child: GameBoardCard(gm: widget.gm)),
-                      const SizedBox(width: 12),
-                      PressureGauge(
-                        pressure: _pressure,
-                        size: 100,
-                      ),
-                    ],
+                  const SizedBox(height: 12),
+                  // ── Pressure Gauge (compact) ──
+                  PressureGauge(
+                    pressure: _pressure,
+                    size: 80,
+                  ),
+                  const SizedBox(height: 12),
+                  // ── Interactive Game Board ──
+                  GameBoardCard(
+                    gm: widget.gm,
+                    onPressureChanged: (p) {
+                      if (mounted) setState(() => _pressure = p);
+                    },
                   ),
                   const SizedBox(height: 16),
                   GameInfoCard(gm: widget.gm),

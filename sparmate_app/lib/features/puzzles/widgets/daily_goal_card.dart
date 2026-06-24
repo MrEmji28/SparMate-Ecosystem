@@ -2,13 +2,24 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import '../../../core/theme/app_colors.dart';
 
-/// Daily Goal card with progress indicator and current streak.
+/// Daily Goal card with dynamic progress indicator and streak.
 class DailyGoalCard extends StatelessWidget {
-  const DailyGoalCard({super.key});
+  final int solved;
+  final int dailyGoal;
+  final int streakDays;
+
+  const DailyGoalCard({
+    super.key,
+    this.solved = 0,
+    this.dailyGoal = 5,
+    this.streakDays = 0,
+  });
 
   @override
   Widget build(BuildContext context) {
     final tt = Theme.of(context).textTheme;
+    final progress = dailyGoal > 0 ? (solved / dailyGoal).clamp(0.0, 1.0) : 0.0;
+    final isComplete = solved >= dailyGoal;
 
     return Container(
       padding: const EdgeInsets.all(20),
@@ -27,11 +38,36 @@ class DailyGoalCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Daily Goal', style: tt.titleMedium?.copyWith(fontWeight: FontWeight.w700, fontSize: 16)),
+                    Row(
+                      children: [
+                        Text('Daily Goal',
+                            style: tt.titleMedium?.copyWith(
+                                fontWeight: FontWeight.w700, fontSize: 16)),
+                        if (isComplete) ...[
+                          const SizedBox(width: 8),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: AppColors.successGreen.withValues(alpha: 0.1),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Text('Complete!',
+                                style: TextStyle(
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w700,
+                                    color: AppColors.successGreen)),
+                          ),
+                        ],
+                      ],
+                    ),
                     const SizedBox(height: 4),
                     Text(
-                      'Solve 5 puzzles to maintain your edge.',
-                      style: tt.bodySmall?.copyWith(color: AppColors.textLight, fontSize: 12),
+                      isComplete
+                          ? 'Great job! You hit your daily goal. 🎉'
+                          : 'Solve $dailyGoal puzzles to maintain your edge.',
+                      style: tt.bodySmall
+                          ?.copyWith(color: AppColors.textLight, fontSize: 12),
                     ),
                   ],
                 ),
@@ -42,11 +78,20 @@ class DailyGoalCard extends StatelessWidget {
                 width: 52,
                 height: 52,
                 child: CustomPaint(
-                  painter: _CircularPainter(progress: 2 / 5),
+                  painter: _CircularPainter(
+                    progress: progress,
+                    isComplete: isComplete,
+                  ),
                   child: Center(
                     child: Text(
-                      '2/5',
-                      style: tt.titleMedium?.copyWith(fontWeight: FontWeight.w800, fontSize: 15, color: AppColors.primaryBlue),
+                      '$solved/$dailyGoal',
+                      style: tt.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w800,
+                        fontSize: 15,
+                        color: isComplete
+                            ? AppColors.successGreen
+                            : AppColors.primaryBlue,
+                      ),
                     ),
                   ),
                 ),
@@ -57,11 +102,12 @@ class DailyGoalCard extends StatelessWidget {
           // Progress bar
           ClipRRect(
             borderRadius: BorderRadius.circular(4),
-            child: const LinearProgressIndicator(
-              value: 0.4,
+            child: LinearProgressIndicator(
+              value: progress,
               minHeight: 6,
               backgroundColor: AppColors.progressTrack,
-              valueColor: AlwaysStoppedAnimation(AppColors.progressFill),
+              valueColor: AlwaysStoppedAnimation(
+                  isComplete ? AppColors.successGreen : AppColors.progressFill),
             ),
           ),
           const SizedBox(height: 20),
@@ -87,17 +133,27 @@ class DailyGoalCard extends StatelessWidget {
                   children: [
                     Text(
                       'CURRENT STREAK',
-                      style: tt.labelSmall?.copyWith(letterSpacing: 1.2, fontWeight: FontWeight.w700, color: AppColors.textLight),
+                      style: tt.labelSmall?.copyWith(
+                          letterSpacing: 1.2,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.textLight),
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      '12 Days',
-                      style: tt.headlineMedium?.copyWith(fontWeight: FontWeight.w800, fontSize: 28, color: AppColors.textDark),
+                      '$streakDays ${streakDays == 1 ? 'Day' : 'Days'}',
+                      style: tt.headlineMedium?.copyWith(
+                          fontWeight: FontWeight.w800,
+                          fontSize: 28,
+                          color: AppColors.textDark),
                     ),
                   ],
                 ),
                 const Spacer(),
-                Icon(Icons.local_fire_department_rounded, size: 36, color: Colors.orange.shade600),
+                Icon(Icons.local_fire_department_rounded,
+                    size: 36,
+                    color: streakDays > 0
+                        ? Colors.orange.shade600
+                        : AppColors.textLight),
               ],
             ),
           ),
@@ -109,16 +165,34 @@ class DailyGoalCard extends StatelessWidget {
 
 class _CircularPainter extends CustomPainter {
   final double progress;
-  _CircularPainter({required this.progress});
+  final bool isComplete;
+  _CircularPainter({required this.progress, this.isComplete = false});
 
   @override
   void paint(Canvas canvas, Size size) {
     final c = Offset(size.width / 2, size.height / 2);
     final r = size.width / 2 - 3;
-    canvas.drawCircle(c, r, Paint()..color = AppColors.progressTrack..strokeWidth = 4..style = PaintingStyle.stroke..strokeCap = StrokeCap.round);
-    canvas.drawArc(Rect.fromCircle(center: c, radius: r), -pi / 2, 2 * pi * progress, false, Paint()..color = AppColors.primaryBlue..strokeWidth = 4..style = PaintingStyle.stroke..strokeCap = StrokeCap.round);
+    canvas.drawCircle(
+        c,
+        r,
+        Paint()
+          ..color = AppColors.progressTrack
+          ..strokeWidth = 4
+          ..style = PaintingStyle.stroke
+          ..strokeCap = StrokeCap.round);
+    canvas.drawArc(
+        Rect.fromCircle(center: c, radius: r),
+        -pi / 2,
+        2 * pi * progress,
+        false,
+        Paint()
+          ..color = isComplete ? AppColors.successGreen : AppColors.primaryBlue
+          ..strokeWidth = 4
+          ..style = PaintingStyle.stroke
+          ..strokeCap = StrokeCap.round);
   }
 
   @override
-  bool shouldRepaint(covariant _CircularPainter old) => old.progress != progress;
+  bool shouldRepaint(covariant _CircularPainter old) =>
+      old.progress != progress || old.isComplete != isComplete;
 }

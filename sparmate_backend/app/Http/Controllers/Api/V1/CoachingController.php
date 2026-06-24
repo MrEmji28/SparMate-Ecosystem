@@ -12,7 +12,11 @@ use Illuminate\Support\Facades\Http;
 class CoachingController extends Controller
 {
     /**
-     * Return the user's current training plan (Coaching Engine screen).
+     * Return the user's current training plan + BKT matrix + recent indicators.
+     *
+     * This is the primary endpoint for the Coaching Engine screen.
+     * It aggregates data from the database and optionally calls FastAPI
+     * for coaching insights derived from recent match blunders.
      */
     public function plan(Request $request): JsonResponse
     {
@@ -29,9 +33,12 @@ class CoachingController extends Controller
             ]);
         }
 
+        // ── Fetch recent match indicators ─────────────────────────────
+        $recentIndicators = $this->getRecentIndicators($user, $bktMatrix);
+
         return response()->json([
             'bkt_matrix' => [
-                'skills' => $bktMatrix->matrix,
+                'skills'     => $bktMatrix->matrix,
                 'updated_at' => $bktMatrix->updated_at?->toISOString(),
             ],
             'training_plan' => $trainingPlan ? [
@@ -40,7 +47,8 @@ class CoachingController extends Controller
                 'plan_items'        => $trainingPlan->plan_items,
                 'generated_at'      => $trainingPlan->generated_at?->toISOString(),
             ] : null,
-            'weakest_skills' => $this->getWeakestSkills($bktMatrix->matrix),
+            'weakest_skills'     => $this->getWeakestSkills($bktMatrix->matrix),
+            'recent_indicators'  => $recentIndicators,
         ]);
     }
 
@@ -67,7 +75,7 @@ class CoachingController extends Controller
             $response = Http::timeout(10)->post("{$fastApiUrl}/api/v1/generate-plan", [
                 'user_id'    => $user->id,
                 'bkt_matrix' => $bktMatrix->matrix,
-                'elo_rating' => $user->elo_rating,
+                'elo_rating' => $user->elo_rating ?? 1200,
             ]);
 
             if ($response->successful()) {
@@ -81,9 +89,13 @@ class CoachingController extends Controller
                     'generated_at'      => now(),
                 ]);
 
+                // Also fetch fresh indicators
+                $indicators = $this->getRecentIndicators($user, $bktMatrix);
+
                 return response()->json([
-                    'message'       => 'Training plan refreshed.',
-                    'training_plan' => $plan,
+                    'message'            => 'Training plan refreshed.',
+                    'training_plan'      => $plan,
+                    'recent_indicators'  => $indicators,
                 ]);
             }
         } catch (\Exception $e) {
@@ -102,9 +114,106 @@ class CoachingController extends Controller
         ]);
 
         return response()->json([
-            'message'       => 'Training plan generated locally (FastAPI unavailable).',
-            'training_plan' => $plan,
+            'message'            => 'Training plan generated locally (FastAPI unavailable).',
+            'training_plan'      => $plan,
+            'recent_indicators'  => [],
         ]);
+    }
+
+    /**
+     * Get recent coaching indicators by analyzing the user's last matches.
+     *
+     * Calls the FastAPI /coaching-insights endpoint with recent match blunders.
+     * Falls back to a local summary if FastAPI is unavailable.
+     */
+    private function getRecentIndicators($user, $bktMatrix): array
+    {
+        // Fetch last 5 matches with classified blunders and grandmaster info
+        $recentMatches = $user->matches()
+            ->with('grandmaster:id,name,full_name')
+            ->whereNotNull('result')
+            ->where('result', '!=', 'in_progress')
+            ->orderByDesc('played_at')
+            ->limit(5)
+            ->get();
+
+        if ($recentMatches->isEmpty()) {
+            return [];
+        }
+
+        // Build match blunder summaries for FastAPI
+        $matchSummaries = $recentMatches->map(function ($match) {
+            $opponentName = $match->grandmaster?->full_name
+                          ?? $match->grandmaster?->name
+                          ?? 'Opponent';
+
+            return [
+                'match_id'      => $match->id,
+                'opponent_name' => $opponentName,
+                'result'        => $match->result,
+                'blunders'      => $match->classified_blunders ?? [],
+            ];
+        })->toArray();
+
+        // Try FastAPI coaching-insights endpoint
+        $fastApiUrl = config('services.fastapi.url', 'http://127.0.0.1:8000');
+
+        try {
+            $response = Http::timeout(8)->post("{$fastApiUrl}/api/v1/coaching-insights", [
+                'user_id'        => $user->id,
+                'bkt_matrix'     => $bktMatrix->matrix,
+                'recent_matches' => $matchSummaries,
+            ]);
+
+            if ($response->successful()) {
+                return $response->json('recent_indicators', []);
+            }
+        } catch (\Exception $e) {
+            // FastAPI unavailable — fall back to local summary
+        }
+
+        // ── Fallback: Generate basic indicators locally ───────────────
+        return $this->generateLocalIndicators($matchSummaries);
+    }
+
+    /**
+     * Generate basic coaching indicators locally when FastAPI is unavailable.
+     */
+    private function generateLocalIndicators(array $matchSummaries): array
+    {
+        $indicators = [];
+
+        foreach ($matchSummaries as $match) {
+            $blunders = $match['blunders'] ?? [];
+            $opponent = $match['opponent_name'] ?? 'Opponent';
+
+            if (empty($blunders)) {
+                $indicators[] = [
+                    'icon_type' => 'positive',
+                    'opponent'  => $opponent,
+                    'text'      => 'Clean game with no significant blunders. Well played!',
+                    'category'  => '',
+                    'match_id'  => $match['match_id'],
+                ];
+                continue;
+            }
+
+            // Count categories
+            $categories = array_count_values(array_column($blunders, 'category'));
+            arsort($categories);
+            $topCategory = array_key_first($categories);
+            $label = str_replace('_', ' ', ucwords($topCategory, '_'));
+
+            $indicators[] = [
+                'icon_type' => 'negative',
+                'opponent'  => $opponent,
+                'text'      => "{$label} was the primary weakness — {$categories[$topCategory]} mistake(s) in this area.",
+                'category'  => $topCategory,
+                'match_id'  => $match['match_id'],
+            ];
+        }
+
+        return array_slice($indicators, 0, 6);
     }
 
     /**

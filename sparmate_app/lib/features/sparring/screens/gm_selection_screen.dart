@@ -140,9 +140,12 @@ class _GmSelectionCard extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Text(
-                        '${gm.title} ${gm.fullName}',
-                        style: tt.titleMedium?.copyWith(fontWeight: FontWeight.w700, fontSize: 15),
+                      Flexible(
+                        child: Text(
+                          '${gm.title} ${gm.fullName}',
+                          style: tt.titleMedium?.copyWith(fontWeight: FontWeight.w700, fontSize: 15),
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                       const SizedBox(width: 6),
                       Text(gm.nationality, style: const TextStyle(fontSize: 13)),
@@ -155,17 +158,16 @@ class _GmSelectionCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   // Strengths preview
-                  Row(
-                    children: gm.strengths.take(2).map((s) => Padding(
-                      padding: const EdgeInsets.only(right: 6),
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
-                        decoration: BoxDecoration(
-                          color: gm.color.withValues(alpha: 0.08),
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                        child: Text(s, style: TextStyle(fontSize: 9, fontWeight: FontWeight.w600, color: gm.color)),
+                  Wrap(
+                    spacing: 6,
+                    runSpacing: 4,
+                    children: gm.strengths.take(2).map((s) => Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+                      decoration: BoxDecoration(
+                        color: gm.color.withValues(alpha: 0.08),
+                        borderRadius: BorderRadius.circular(6),
                       ),
+                      child: Text(s, style: TextStyle(fontSize: 9, fontWeight: FontWeight.w600, color: gm.color)),
                     )).toList(),
                   ),
                 ],

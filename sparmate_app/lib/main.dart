@@ -3,14 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'core/theme/app_theme.dart';
 import 'core/state/app_state.dart';
-import 'shared/widgets/app_shell.dart';
+import 'features/auth/screens/auth_gate.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.dark,
+      statusBarIconBrightness: Brightness.light,
     ),
   );
   runApp(const SparMateApp());
@@ -27,7 +27,7 @@ class SparMateApp extends StatelessWidget {
         title: 'SparMate',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.light,
-        home: const AppShell(),
+        home: const AuthGate(),
       ),
     );
   }
