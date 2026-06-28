@@ -14,6 +14,7 @@ class Grandmaster {
   final List<String> openings;
   final Color color;
   final IconData icon;
+  final String imagePath;
   final int eloRating;
 
   const Grandmaster({
@@ -29,6 +30,7 @@ class Grandmaster {
     required this.openings,
     required this.color,
     required this.icon,
+    required this.imagePath,
     required this.eloRating,
   });
 
@@ -47,6 +49,7 @@ class Grandmaster {
     openings: ['Queen\'s Indian Defense', 'Nimzo-Indian', 'Ruy Lopez'],
     color: Color(0xFF1565C0),
     icon: Icons.security,
+    imagePath: 'assets/grandmasters/torre.jpeg',
     eloRating: 2540,
   );
 
@@ -65,6 +68,7 @@ class Grandmaster {
     openings: ['Sicilian Najdorf', 'King\'s Indian', 'Benoni Defense'],
     color: Color(0xFF6A1B9A),
     icon: Icons.local_fire_department,
+    imagePath: 'assets/grandmasters/tal.jpeg',
     eloRating: 2700,
   );
 
@@ -83,6 +87,7 @@ class Grandmaster {
     openings: ['French Defense', 'Caro-Kann', 'English Opening'],
     color: Color(0xFF2E7D32),
     icon: Icons.shield,
+    imagePath: 'assets/grandmasters/petrosian.webp',
     eloRating: 2650,
   );
 
@@ -101,6 +106,7 @@ class Grandmaster {
     openings: ['Ruy Lopez', 'English Opening', 'Catalan'],
     color: Color(0xFF00838F),
     icon: Icons.star,
+    imagePath: 'assets/grandmasters/magnus.jpeg',
     eloRating: 2882,
   );
 

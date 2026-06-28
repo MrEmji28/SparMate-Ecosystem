@@ -80,8 +80,14 @@ class _PuzzlesScreenState extends State<PuzzlesScreen> {
       setState(() {
         _isLoading = false;
         _currentPuzzleIndex = 0;
-        _puzzleStartTime = DateTime.now().millisecondsSinceEpoch ~/ 1000;
       });
+
+      // Show the intro popup
+      if (mounted) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted) _showPuzzleIntroDialog();
+        });
+      }
     } catch (e) {
       setState(() {
         _errorMsg = 'Using offline puzzles (API unavailable).';
@@ -140,8 +146,14 @@ class _PuzzlesScreenState extends State<PuzzlesScreen> {
     ];
     setState(() {
       _isLoading = false;
-      _puzzleStartTime = DateTime.now().millisecondsSinceEpoch ~/ 1000;
     });
+
+    // Show the intro popup for fallback too
+    if (mounted) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) _showPuzzleIntroDialog();
+      });
+    }
   }
 
   void _onPuzzleSolved() {
@@ -364,6 +376,324 @@ class _PuzzlesScreenState extends State<PuzzlesScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  void _showPuzzleIntroDialog() {
+    final puzzle = _currentPuzzle;
+    showGeneralDialog(
+      context: context,
+      barrierDismissible: false,
+      barrierLabel: 'Dismiss',
+      barrierColor: Colors.black.withValues(alpha: 0.6),
+      transitionDuration: const Duration(milliseconds: 400),
+      pageBuilder: (ctx, anim, secondAnim) => const SizedBox.shrink(),
+      transitionBuilder: (ctx, anim, secondAnim, child) {
+        final curved =
+            CurvedAnimation(parent: anim, curve: Curves.easeOutBack);
+        return ScaleTransition(
+          scale: curved,
+          child: FadeTransition(
+            opacity: anim,
+            child: _PuzzleIntroDialogContent(
+              puzzleCount: _puzzles.length,
+              dailyGoal: _dailyGoal,
+              solvedToday: _solvedToday,
+              streakDays: _streakDays,
+              currentTheme: puzzle?.theme ?? 'Tactics',
+              currentDifficulty: puzzle?.difficulty ?? 'beginner',
+              currentRating: puzzle?.rating ?? 1200,
+              onStart: () {
+                Navigator.of(ctx).pop();
+                setState(() {
+                  _puzzleStartTime =
+                      DateTime.now().millisecondsSinceEpoch ~/ 1000;
+                });
+              },
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+/// ── Puzzle Intro Dialog ──────────────────────────────────────────────
+class _PuzzleIntroDialogContent extends StatelessWidget {
+  final int puzzleCount;
+  final int dailyGoal;
+  final int solvedToday;
+  final int streakDays;
+  final String currentTheme;
+  final String currentDifficulty;
+  final int currentRating;
+  final VoidCallback onStart;
+
+  const _PuzzleIntroDialogContent({
+    required this.puzzleCount,
+    required this.dailyGoal,
+    required this.solvedToday,
+    required this.streakDays,
+    required this.currentTheme,
+    required this.currentDifficulty,
+    required this.currentRating,
+    required this.onStart,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final remaining = (dailyGoal - solvedToday).clamp(0, dailyGoal);
+    final difficultyColor = switch (currentDifficulty) {
+      'beginner' => const Color(0xFF43A047),
+      'intermediate' => const Color(0xFFFFA000),
+      'advanced' => const Color(0xFFE53935),
+      _ => AppColors.primaryBlue,
+    };
+    final difficultyLabel =
+        currentDifficulty[0].toUpperCase() + currentDifficulty.substring(1);
+
+    return Center(
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 28),
+        constraints: const BoxConstraints(maxWidth: 380),
+        decoration: BoxDecoration(
+          color: AppColors.cardBg,
+          borderRadius: BorderRadius.circular(24),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.primaryBlue.withValues(alpha: 0.15),
+              blurRadius: 30,
+              offset: const Offset(0, 10),
+            ),
+          ],
+        ),
+        child: Material(
+          color: Colors.transparent,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(24, 28, 24, 20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Puzzle icon
+                Container(
+                  width: 64,
+                  height: 64,
+                  decoration: BoxDecoration(
+                    gradient: const LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Color(0xFF3949AB),
+                        Color(0xFF1E88E5),
+                      ],
+                    ),
+                    borderRadius: BorderRadius.circular(18),
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color(0xFF3949AB).withValues(alpha: 0.3),
+                        blurRadius: 12,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: const Icon(
+                    Icons.extension_rounded,
+                    size: 32,
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(height: 16),
+
+                // Title
+                Text(
+                  'Daily Puzzles',
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w800,
+                    color: AppColors.textDark,
+                  ),
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  'Sharpen your tactical vision',
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: AppColors.textLight,
+                  ),
+                ),
+                const SizedBox(height: 20),
+
+                // Stats row
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 16, vertical: 12),
+                  decoration: BoxDecoration(
+                    color: AppColors.scaffoldBg,
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      _statItem(
+                        Icons.extension_rounded,
+                        '$puzzleCount',
+                        'Puzzles',
+                        AppColors.primaryBlue,
+                      ),
+                      Container(
+                        width: 1,
+                        height: 28,
+                        color: AppColors.border,
+                      ),
+                      _statItem(
+                        Icons.track_changes_rounded,
+                        '$remaining',
+                        'Remaining',
+                        const Color(0xFFFFA000),
+                      ),
+                      Container(
+                        width: 1,
+                        height: 28,
+                        color: AppColors.border,
+                      ),
+                      _statItem(
+                        Icons.local_fire_department_rounded,
+                        '$streakDays',
+                        'Day Streak',
+                        const Color(0xFFE53935),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 16),
+
+                // Current puzzle info
+                Container(
+                  padding: const EdgeInsets.all(14),
+                  decoration: BoxDecoration(
+                    color: difficultyColor.withValues(alpha: 0.06),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: difficultyColor.withValues(alpha: 0.15),
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(Icons.bolt_rounded,
+                          size: 20, color: difficultyColor),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'First Puzzle: $currentTheme',
+                              style: TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w700,
+                                color: AppColors.textDark,
+                              ),
+                            ),
+                            const SizedBox(height: 2),
+                            Text(
+                              '$difficultyLabel · Rating $currentRating',
+                              style: TextStyle(
+                                fontSize: 11,
+                                color: AppColors.textLight,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 3),
+                        decoration: BoxDecoration(
+                          color: difficultyColor.withValues(alpha: 0.12),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Text(
+                          difficultyLabel,
+                          style: TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.w700,
+                            color: difficultyColor,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+
+                // Start button
+                SizedBox(
+                  width: double.infinity,
+                  height: 48,
+                  child: ElevatedButton(
+                    onPressed: onStart,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF3949AB),
+                      foregroundColor: Colors.white,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                      textStyle: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.play_arrow_rounded, size: 22),
+                        SizedBox(width: 8),
+                        Text('Start Solving'),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 8),
+
+                // Tip text
+                Text(
+                  'Find the best move to solve each puzzle',
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: AppColors.textLight,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _statItem(
+      IconData icon, String value, String label, Color color) {
+    return Column(
+      children: [
+        Icon(icon, size: 18, color: color),
+        const SizedBox(height: 4),
+        Text(
+          value,
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w800,
+            color: AppColors.textDark,
+          ),
+        ),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 10,
+            color: AppColors.textLight,
+          ),
+        ),
+      ],
     );
   }
 }

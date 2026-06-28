@@ -388,9 +388,20 @@ class _GameBoardCardState extends State<GameBoardCard>
                 width: 28, height: 28,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: widget.gm.color.withValues(alpha: 0.12),
+                  border: Border.all(color: widget.gm.color.withValues(alpha: 0.2), width: 1),
                 ),
-                child: Icon(widget.gm.icon, size: 14, color: widget.gm.color),
+                child: ClipOval(
+                  child: Image.asset(
+                    widget.gm.imagePath,
+                    width: 28,
+                    height: 28,
+                    fit: BoxFit.cover,
+                    errorBuilder: (_, __, ___) => Container(
+                      color: widget.gm.color.withValues(alpha: 0.12),
+                      child: Icon(widget.gm.icon, size: 14, color: widget.gm.color),
+                    ),
+                  ),
+                ),
               ),
               const SizedBox(width: 8),
               Expanded(

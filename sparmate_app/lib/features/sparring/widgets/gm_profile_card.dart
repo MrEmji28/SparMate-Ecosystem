@@ -43,10 +43,20 @@ class GmProfileCard extends StatelessWidget {
                   height: 64,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.white.withValues(alpha: 0.2),
                     border: Border.all(color: Colors.white.withValues(alpha: 0.4), width: 2.5),
                   ),
-                  child: Icon(gm.icon, size: 30, color: Colors.white),
+                  child: ClipOval(
+                    child: Image.asset(
+                      gm.imagePath,
+                      width: 64,
+                      height: 64,
+                      fit: BoxFit.cover,
+                      errorBuilder: (_, __, ___) => Container(
+                        color: Colors.white.withValues(alpha: 0.2),
+                        child: Icon(gm.icon, size: 30, color: Colors.white),
+                      ),
+                    ),
+                  ),
                 ),
                 const SizedBox(width: 14),
                 Expanded(

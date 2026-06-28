@@ -19,6 +19,7 @@ class _CoachingScreenState extends State<CoachingScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _animController;
   late Animation<double> _fadeAnim;
+  bool _hasShownIntro = false;
 
   @override
   void initState() {
@@ -42,10 +43,14 @@ class _CoachingScreenState extends State<CoachingScreen>
       if (lastFetch == null ||
           DateTime.now().difference(lastFetch).inSeconds > 120) {
         state.fetchCoachingPlan().then((_) {
-          if (mounted) _animController.forward();
+          if (mounted) {
+            _animController.forward();
+            _maybeShowIntro();
+          }
         });
       } else {
         _animController.forward();
+        _maybeShowIntro();
       }
     });
   }
@@ -58,6 +63,17 @@ class _CoachingScreenState extends State<CoachingScreen>
 
   Future<void> _onRefresh() async {
     await context.read<AppState>().refreshCoachingPlan();
+  }
+
+  void _maybeShowIntro() {
+    if (_hasShownIntro || !mounted) return;
+    _hasShownIntro = true;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      final state = context.read<AppState>();
+      _showCoachingIntroDialog(state);
+    });
   }
 
   @override
@@ -381,6 +397,401 @@ class _CoachingScreenState extends State<CoachingScreen>
           ),
         ),
       ),
+    );
+  }
+
+  void _showCoachingIntroDialog(AppState state) {
+    final directive =
+        state.trainingPlan?['primary_directive'] as String? ??
+            'Analyze your games to unlock personalized coaching.';
+    // Extract skills map - try nested 'skills' key first, then flat
+    Map<String, dynamic> bktSkills = {};
+    try {
+      final raw = state.bktMatrix;
+      if (raw != null) {
+        if (raw['skills'] is Map) {
+          bktSkills = raw['skills'] as Map<String, dynamic>;
+        } else {
+          // Skills might be at top level
+          bktSkills = Map<String, dynamic>.from(raw);
+          // Remove non-skill keys
+          bktSkills.remove('timestamp');
+          bktSkills.remove('user_id');
+        }
+      }
+    } catch (_) {}
+
+    // Extract top weak skill
+    String topSkill = 'Chess Skills';
+    double topMastery = 1.0;
+    try {
+      bktSkills.forEach((key, value) {
+        final mastery = (value is num) ? value.toDouble() : 1.0;
+        if (mastery < topMastery) {
+          topMastery = mastery;
+          topSkill = key;
+        }
+      });
+    } catch (_) {}
+
+    final planItems =
+        state.trainingPlan?['plan_items'] as List<dynamic>? ?? [];
+
+    showGeneralDialog(
+      context: context,
+      barrierDismissible: false,
+      barrierLabel: 'Dismiss',
+      barrierColor: Colors.black.withValues(alpha: 0.6),
+      transitionDuration: const Duration(milliseconds: 400),
+      pageBuilder: (ctx, anim, secondAnim) => const SizedBox.shrink(),
+      transitionBuilder: (ctx, anim, secondAnim, child) {
+        final curved =
+            CurvedAnimation(parent: anim, curve: Curves.easeOutBack);
+        return ScaleTransition(
+          scale: curved,
+          child: FadeTransition(
+            opacity: anim,
+            child: _CoachingIntroDialogContent(
+              directive: directive,
+              skillCount: bktSkills.length,
+              focusSkill: topSkill,
+              focusMastery: topMastery,
+              planItemCount: planItems.length,
+              onStart: () => Navigator.of(ctx).pop(),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+/// ── Coaching Intro Dialog ─────────────────────────────────────────────
+class _CoachingIntroDialogContent extends StatelessWidget {
+  final String directive;
+  final int skillCount;
+  final String focusSkill;
+  final double focusMastery;
+  final int planItemCount;
+  final VoidCallback onStart;
+
+  const _CoachingIntroDialogContent({
+    required this.directive,
+    required this.skillCount,
+    required this.focusSkill,
+    required this.focusMastery,
+    required this.planItemCount,
+    required this.onStart,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final masteryPct = (focusMastery * 100).round();
+    final masteryLabel = masteryPct < 30
+        ? 'Novice'
+        : masteryPct < 50
+            ? 'Developing'
+            : masteryPct < 70
+                ? 'Intermediate'
+                : 'Advanced';
+    final masteryColor = masteryPct < 30
+        ? const Color(0xFFE53935)
+        : masteryPct < 50
+            ? const Color(0xFFFFA000)
+            : masteryPct < 70
+                ? const Color(0xFF1E88E5)
+                : const Color(0xFF43A047);
+
+    return Center(
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 28),
+        constraints: const BoxConstraints(maxWidth: 380),
+        decoration: BoxDecoration(
+          color: AppColors.cardBg,
+          borderRadius: BorderRadius.circular(24),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.primaryBlue.withValues(alpha: 0.15),
+              blurRadius: 30,
+              offset: const Offset(0, 10),
+            ),
+          ],
+        ),
+        child: Material(
+          color: Colors.transparent,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(24, 28, 24, 20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Coach icon
+                Container(
+                  width: 64,
+                  height: 64,
+                  decoration: BoxDecoration(
+                    gradient: const LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Color(0xFF1565C0),
+                        Color(0xFF42A5F5),
+                      ],
+                    ),
+                    borderRadius: BorderRadius.circular(18),
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color(0xFF1565C0).withValues(alpha: 0.3),
+                        blurRadius: 12,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: const Icon(
+                    Icons.psychology_rounded,
+                    size: 32,
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(height: 16),
+
+                // Title
+                Text(
+                  'Coaching Engine',
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w800,
+                    color: AppColors.textDark,
+                  ),
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  'AI-powered personalized training',
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: AppColors.textLight,
+                  ),
+                ),
+                const SizedBox(height: 20),
+
+                // Primary directive quote
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(14),
+                  decoration: BoxDecoration(
+                    color: AppColors.primaryBlue.withValues(alpha: 0.05),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: AppColors.primaryBlue.withValues(alpha: 0.12),
+                    ),
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(Icons.format_quote_rounded,
+                          size: 20,
+                          color: AppColors.primaryBlue.withValues(alpha: 0.5)),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          directive,
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                            fontStyle: FontStyle.italic,
+                            color: AppColors.textDark,
+                            height: 1.4,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 16),
+
+                // Stats row
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 16, vertical: 12),
+                  decoration: BoxDecoration(
+                    color: AppColors.scaffoldBg,
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      _statItem(
+                        Icons.analytics_rounded,
+                        '$skillCount',
+                        'Skills Tracked',
+                        AppColors.primaryBlue,
+                      ),
+                      Container(
+                        width: 1,
+                        height: 28,
+                        color: AppColors.border,
+                      ),
+                      _statItem(
+                        Icons.checklist_rounded,
+                        '$planItemCount',
+                        'Plan Items',
+                        const Color(0xFF43A047),
+                      ),
+                      Container(
+                        width: 1,
+                        height: 28,
+                        color: AppColors.border,
+                      ),
+                      _statItem(
+                        Icons.trending_up_rounded,
+                        '$masteryPct%',
+                        masteryLabel,
+                        masteryColor,
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 16),
+
+                // Focus area
+                Container(
+                  padding: const EdgeInsets.all(14),
+                  decoration: BoxDecoration(
+                    color: masteryColor.withValues(alpha: 0.06),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: masteryColor.withValues(alpha: 0.15),
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(Icons.gps_fixed_rounded,
+                          size: 20, color: masteryColor),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Priority Focus: ${_formatSkillName(focusSkill)}',
+                              style: TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w700,
+                                color: AppColors.textDark,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            // Mini progress bar
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(3),
+                              child: LinearProgressIndicator(
+                                value: focusMastery,
+                                backgroundColor:
+                                    masteryColor.withValues(alpha: 0.12),
+                                valueColor:
+                                    AlwaysStoppedAnimation(masteryColor),
+                                minHeight: 4,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 3),
+                        decoration: BoxDecoration(
+                          color: masteryColor.withValues(alpha: 0.12),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Text(
+                          '$masteryPct%',
+                          style: TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w700,
+                            color: masteryColor,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+
+                // Start button
+                SizedBox(
+                  width: double.infinity,
+                  height: 48,
+                  child: ElevatedButton(
+                    onPressed: onStart,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF1565C0),
+                      foregroundColor: Colors.white,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                      textStyle: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.play_arrow_rounded, size: 22),
+                        SizedBox(width: 8),
+                        Text('Start Coaching'),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 8),
+
+                Text(
+                  'Powered by Bayesian Knowledge Tracing',
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: AppColors.textLight,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  String _formatSkillName(String raw) {
+    return raw
+        .replaceAll('_', ' ')
+        .split(' ')
+        .map((w) => w.isEmpty ? w : '${w[0].toUpperCase()}${w.substring(1)}')
+        .join(' ');
+  }
+
+  Widget _statItem(
+      IconData icon, String value, String label, Color color) {
+    return Column(
+      children: [
+        Icon(icon, size: 18, color: color),
+        const SizedBox(height: 4),
+        Text(
+          value,
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w800,
+            color: AppColors.textDark,
+          ),
+        ),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 10,
+            color: AppColors.textLight,
+          ),
+        ),
+      ],
     );
   }
 }

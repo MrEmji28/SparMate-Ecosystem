@@ -131,18 +131,9 @@ class GrandmasterHeroCard extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              width: 52,
-              height: 52,
+              width: 48, height: 48,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    gm.color.withValues(alpha: 0.9),
-                    gm.color.withValues(alpha: 0.6),
-                  ],
-                ),
                 border: Border.all(
                   color: Colors.white.withValues(alpha: 0.5),
                   width: 2,
@@ -155,7 +146,30 @@ class GrandmasterHeroCard extends StatelessWidget {
                   ),
                 ],
               ),
-              child: Icon(gm.icon, color: Colors.white, size: 24),
+              child: ClipOval(
+                child: Image.asset(
+                  gm.imagePath,
+                  width: 48,
+                  height: 48,
+                  fit: BoxFit.cover,
+                  errorBuilder: (_, error, stackTrace) {
+                    debugPrint('Image load error for ${gm.imagePath}: $error');
+                    return Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            gm.color.withValues(alpha: 0.9),
+                            gm.color.withValues(alpha: 0.6),
+                          ],
+                        ),
+                      ),
+                      child: Icon(gm.icon, color: Colors.white, size: 24),
+                    );
+                  },
+                ),
+              ),
             ),
             const SizedBox(height: 6),
             Text(
