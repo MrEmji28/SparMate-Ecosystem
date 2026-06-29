@@ -154,12 +154,13 @@ class _LessonsScreenState extends State<LessonsScreen>
               sliver: SliverToBoxAdapter(
                 child: Row(
                   children: [
-                    IconButton(
-                      onPressed: () => Navigator.of(context).pop(),
-                      icon: const Icon(Icons.arrow_back_rounded,
-                          color: AppColors.primaryNavy),
-                      splashRadius: 22,
-                    ),
+                    if (Navigator.canPop(context))
+                      IconButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        icon: const Icon(Icons.arrow_back_rounded,
+                            color: AppColors.primaryNavy),
+                        splashRadius: 22,
+                      ),
                     const SizedBox(width: 4),
                     Text('Lessons',
                         style: tt.headlineSmall?.copyWith(

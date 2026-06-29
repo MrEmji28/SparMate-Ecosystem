@@ -32,7 +32,7 @@ class SparMateBottomNavBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               _NavItem(icon: Icons.home_rounded, label: 'Home', isActive: currentIndex == 0, onTap: () => onTap(0)),
-              _NavItem(icon: Icons.sports_esports_rounded, label: 'Play', isActive: currentIndex == 1, onTap: () => onTap(1)),
+              _NavItem(icon: Icons.castle_rounded, label: 'Play', isActive: currentIndex == 1, onTap: () => onTap(1)),
               _NavItem(icon: Icons.school_rounded, label: 'Lessons', isActive: currentIndex == 2, onTap: () => onTap(2)),
               _NavItem(icon: Icons.bar_chart_rounded, label: 'Analytics', isActive: currentIndex == 3, onTap: () => onTap(3)),
             ],

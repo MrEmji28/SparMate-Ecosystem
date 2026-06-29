@@ -3,6 +3,7 @@ import '../../core/theme/app_colors.dart';
 import '../../features/home/screens/home_screen.dart';
 import '../../features/analytics/screens/analytics_screen.dart';
 import '../../features/lessons/screens/lessons_screen.dart';
+import '../../features/sparring/screens/gm_selection_screen.dart';
 import 'bottom_nav_bar.dart';
 
 /// Root shell that manages bottom navigation and switches between
@@ -19,7 +20,7 @@ class _AppShellState extends State<AppShell> {
 
   static const _screens = [
     HomeScreen(),
-    _PlaceholderScreen(title: 'Play', icon: Icons.sports_esports_rounded),
+    GmSelectionScreen(),
     LessonsScreen(),
     AnalyticsScreen(),
   ];
