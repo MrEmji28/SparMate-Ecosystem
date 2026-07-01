@@ -21,6 +21,9 @@ class SparringMatch extends Model
         'analysis',
         'classified_blunders',
         'played_at',
+        'elo_before',
+        'elo_after',
+        'elo_change',
     ];
 
     protected function casts(): array
@@ -28,8 +31,11 @@ class SparringMatch extends Model
         return [
             'analysis'             => 'array',
             'classified_blunders'  => 'array',
-            'pressure_avg'        => 'float',
-            'played_at'           => 'datetime',
+            'pressure_avg'         => 'float',
+            'played_at'            => 'datetime',
+            'elo_before'           => 'integer',
+            'elo_after'            => 'integer',
+            'elo_change'           => 'integer',
         ];
     }
 

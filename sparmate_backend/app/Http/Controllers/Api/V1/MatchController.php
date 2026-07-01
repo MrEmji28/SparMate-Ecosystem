@@ -95,6 +95,8 @@ class MatchController extends Controller
             return response()->json(['message' => 'Unauthorized.'], 403);
         }
 
+        $match->loadMissing('grandmaster');
+
         $user = $request->user();
         $bktMatrix = $user->bktMatrix;
 
@@ -172,11 +174,47 @@ class MatchController extends Controller
             // Plan generation failed — user can manually refresh later
         }
 
+        // ── Step 4: Elo rating update ──────────────────────────────────
+        //
+        // Standard Elo formula:
+        //   E = 1 / (1 + 10^((opponentRating - playerRating) / 400))
+        //   R_new = R_old + K * (actual - E)
+        //
+        // K=32 for all sparring games (same as FIDE for players < 2400).
+        $eloBefore     = $user->elo_rating ?? 1200;
+        $gmElo         = $match->grandmaster?->elo_rating ?? 1800;
+        $k             = 32;
+
+        $expected = 1.0 / (1.0 + pow(10, ($gmElo - $eloBefore) / 400.0));
+
+        $actual = match ($match->result) {
+            'win'  => 1.0,
+            'draw' => 0.5,
+            'loss' => 0.0,
+            default => 0.0,
+        };
+
+        $ratingChange = (int) round($k * ($actual - $expected));
+        $eloAfter     = max(100, $eloBefore + $ratingChange); // floor at 100
+
+        // Persist new rating on the user
+        $user->update(['elo_rating' => $eloAfter]);
+
+        // Record per-match ELO snapshot
+        $match->update([
+            'elo_before' => $eloBefore,
+            'elo_after'  => $eloAfter,
+            'elo_change' => $ratingChange,
+        ]);
+
         return response()->json([
             'message'              => 'Analysis complete.',
             'classified_blunders'  => $classifiedBlunders,
             'blunders_found'       => count($classifiedBlunders),
             'new_matrix'           => $newMatrix,
+            'rating_change'        => $ratingChange,
+            'new_rating'           => $eloAfter,
+            'old_rating'           => $eloBefore,
         ]);
     }
 

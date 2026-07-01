@@ -197,10 +197,10 @@ class ApiService {
   }) =>
       _put('/matches/$matchId', {
         if (pgn != null) 'pgn': pgn,
-        if (finalFen != null) 'final_fen': finalFen,
+        if (finalFen != null) 'fen_final': finalFen,
         if (result != null) 'result': result,
         if (moveCount != null) 'move_count': moveCount,
-        if (duration != null) 'duration': duration,
+        if (duration != null) 'duration_seconds': duration,
       });
 
   /// Trigger post-game analysis (classifies blunders via FastAPI).
@@ -238,11 +238,16 @@ class ApiService {
   Future<Map<String, dynamic>> refreshCoachingPlan() =>
       _post('/coaching/refresh');
 
-  // ── Analytics ─────────────────────────────────────────────────────
-
   /// Fetch the user's analytics overview.
   Future<Map<String, dynamic>> getAnalyticsOverview() =>
       _get('/analytics/overview');
+
+  // ── BKT Recommendations ───────────────────────────────────────────
+
+  /// Fetch BKT-driven lesson and puzzle recommendations.
+  /// Returns weak_skills, recommended_lessons, recommended_puzzles, focus_message.
+  Future<Map<String, dynamic>> getRecommendations() =>
+      _get('/recommendations');
 
   // ── Onboarding ────────────────────────────────────────────────────
 

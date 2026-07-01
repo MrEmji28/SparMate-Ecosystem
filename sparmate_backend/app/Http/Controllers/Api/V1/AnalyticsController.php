@@ -7,40 +7,43 @@ use App\Models\SparringMatch;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class AnalyticsController extends Controller
 {
+    /** FastAPI ML microservice base URL. */
+    private string $mlBaseUrl;
+
+    public function __construct()
+    {
+        $this->mlBaseUrl = env('ML_SERVICE_URL', 'http://127.0.0.1:8000');
+    }
+
     /**
      * Return comprehensive analytics for the Analytics screen.
      *
      * Includes: rating overview, phase accuracy, match results,
-     * insights, and top opponents.
+     * insights, top opponents, and ML-powered ELO forecast.
      */
     public function overview(Request $request): JsonResponse
     {
         $user = $request->user();
 
         // ── Rating Overview ──────────────────────────────────────────
-        $ratingHistory = $user->matches()
+        // Use elo_after (stored per-match by the ELO algorithm) to get
+        // the player's true rating at each point in time — no reconstruction needed.
+        $matchHistory = $user->matches()
             ->where('result', '!=', 'in_progress')
+            ->whereNotNull('elo_after')
             ->orderBy('played_at')
             ->limit(30)
-            ->get(['id', 'played_at', 'result'])
-            ->map(function ($match, $index) use ($user) {
-                // Simulate a rating progression based on results
-                $baseRating = $user->elo_rating - (30 - $index) * 5;
-                $delta = match ($match->result) {
-                    'win'  => rand(8, 15),
-                    'loss' => rand(-15, -8),
-                    'draw' => rand(-3, 3),
-                    default => 0,
-                };
+            ->get(['id', 'played_at', 'result', 'elo_after', 'elo_change']);
 
-                return [
-                    'date'   => $match->played_at?->toDateString(),
-                    'rating' => max(800, $baseRating + $delta),
-                ];
-            });
+        $ratingHistory = $matchHistory->map(fn ($match) => [
+            'date'   => $match->played_at?->toDateString(),
+            'rating' => $match->elo_after,
+        ]);
 
         // ── Match Results ────────────────────────────────────────────
         $totalMatches = $user->matches()->where('result', '!=', 'in_progress')->count();
@@ -85,6 +88,34 @@ class AnalyticsController extends Controller
                     : 0,
             ]);
 
+        // ── ML ELO Forecast (FastAPI Linear Regression) ──────────────
+        // Only call the ML service if we have enough history data points.
+        $eloForecast = null;
+        $eloHistoryList = $ratingHistory->pluck('rating')->values()->toArray();
+
+        if (count($eloHistoryList) >= 2) {
+            try {
+                $mlResponse = Http::timeout(5)->post("{$this->mlBaseUrl}/api/v1/predict-elo", [
+                    'user_id'      => $user->id,
+                    'elo_history'  => $eloHistoryList,
+                    'horizon_days' => 14,
+                    'current_elo'  => $user->elo_rating,
+                ]);
+
+                if ($mlResponse->successful()) {
+                    $eloForecast = $mlResponse->json();
+                } else {
+                    Log::warning('ELO forecast ML call failed', [
+                        'status' => $mlResponse->status(),
+                        'body'   => $mlResponse->body(),
+                    ]);
+                }
+            } catch (\Exception $e) {
+                // ML service unavailable — analytics still works without forecast
+                Log::warning('ELO forecast ML service unreachable: ' . $e->getMessage());
+            }
+        }
+
         return response()->json([
             'rating' => [
                 'current'  => $user->elo_rating,
@@ -92,15 +123,16 @@ class AnalyticsController extends Controller
                 'history'  => $ratingHistory,
             ],
             'matches' => [
-                'total'  => $totalMatches,
-                'wins'   => $wins,
-                'losses' => $losses,
-                'draws'  => $draws,
+                'total'    => $totalMatches,
+                'wins'     => $wins,
+                'losses'   => $losses,
+                'draws'    => $draws,
                 'win_rate' => $totalMatches > 0 ? round($wins / $totalMatches * 100) : 0,
             ],
             'phase_accuracy' => $phaseAccuracy,
             'insights'       => $insights,
             'top_opponents'  => $topOpponents,
+            'elo_forecast'   => $eloForecast,   // null if ML unavailable (graceful degradation)
         ]);
     }
 

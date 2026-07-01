@@ -34,6 +34,8 @@ from models import (
     CoachingInsightsRequest,
     CoachingInsightsResponse,
     CoachingIndicator,
+    EloForecastRequest,
+    EloForecastResponse,
 )
 from bkt_engine import process_match_blunders, generate_training_plan, generate_coaching_insights
 from classifier import get_classifier
@@ -220,6 +222,81 @@ async def coaching_insights(payload: CoachingInsightsRequest):
             CoachingIndicator(**ind) for ind in insights["recent_indicators"]
         ],
         skill_trends=insights["skill_trends"],
+    )
+
+
+# ── ELO Trend Prediction — Linear Regression (Sprint 10) ────────────────
+
+@app.post("/api/v1/predict-elo", response_model=EloForecastResponse)
+async def predict_elo(payload: EloForecastRequest):
+    """
+    Predict a player's future ELO rating using Linear Regression.
+
+    Algorithm:
+    1. Map each historical ELO value to a sequential index (x = match number)
+    2. Fit sklearn LinearRegression on (x, elo) pairs
+    3. Compute R² score as goodness-of-fit metric
+    4. Extrapolate to (n + horizon_days) future time steps
+    5. Estimate confidence interval using residual standard deviation
+
+    This provides:
+    - A 14-day ELO forecast line (dashed continuation of the history chart)
+    - A confidence band (±1 std dev of residuals)
+    - Trend direction: improving / stable / declining
+    - Slope: ELO change per match (interpretable unit for the UI)
+    """
+    import numpy as np
+    from sklearn.linear_model import LinearRegression
+    from sklearn.metrics import r2_score
+
+    history = payload.elo_history
+    n = len(history)
+
+    # ── Fit Linear Regression ────────────────────────────────────────────
+    X = np.arange(n).reshape(-1, 1)          # [0, 1, 2, ... n-1]
+    y = np.array(history, dtype=float)        # ELO values
+
+    model = LinearRegression()
+    model.fit(X, y)
+
+    y_pred_hist = model.predict(X)
+    residuals = y - y_pred_hist
+    residual_std = float(np.std(residuals)) if len(residuals) > 1 else 30.0
+
+    r2 = float(r2_score(y, y_pred_hist))
+    slope = float(model.coef_[0])             # ELO change per match
+
+    # ── Forecast future steps ─────────────────────────────────────────────
+    future_X = np.arange(n, n + payload.horizon_days).reshape(-1, 1)
+    future_pred = model.predict(future_X)
+
+    # Anchor the first forecast point to the real current ELO
+    # to avoid a visual jump between history and forecast lines.
+    anchor_delta = payload.current_elo - float(future_pred[0])
+    future_pred = future_pred + anchor_delta
+
+    predicted = [max(800, int(round(v))) for v in future_pred]
+    lower     = [max(800, int(round(v - residual_std))) for v in future_pred]
+    upper     = [max(800, int(round(v + residual_std))) for v in future_pred]
+
+    # ── Trend classification ──────────────────────────────────────────────
+    # Use slope magnitude relative to rating scale; ±1.5 ELO/match = stable
+    if slope > 1.5:
+        trend = "improving"
+    elif slope < -1.5:
+        trend = "declining"
+    else:
+        trend = "stable"
+
+    return EloForecastResponse(
+        user_id=payload.user_id,
+        predicted_ratings=predicted,
+        lower_bound=lower,
+        upper_bound=upper,
+        trend=trend,
+        projected_elo=predicted[-1],
+        r2_score=round(r2, 4),
+        slope=round(slope, 2),
     )
 
 

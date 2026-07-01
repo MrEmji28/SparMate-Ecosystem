@@ -48,9 +48,12 @@ class _EngineTestScreenState extends State<EngineTestScreen> {
     });
 
     try {
-      final move = await _engine.getBestMove(_fenController.text, depth: 10);
+      final move = await _engine.getBestMove(
+        _fenController.text,
+        gmName: 'carlsen', // test at full strength
+      );
       setState(() {
-        _bestMove = move;
+        _bestMove = move ?? '(no move)';
       });
     } catch (e) {
       setState(() {

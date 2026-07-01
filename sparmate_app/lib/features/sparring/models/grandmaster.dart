@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 /// Data model representing a Grandmaster AI persona.
 class Grandmaster {
+  final int id;
   final String name;
   final String fullName;
   final String title;
@@ -18,6 +19,7 @@ class Grandmaster {
   final int eloRating;
 
   const Grandmaster({
+    required this.id,
     required this.name,
     required this.fullName,
     required this.title,
@@ -35,6 +37,7 @@ class Grandmaster {
   });
 
   static const torre = Grandmaster(
+    id: 1,
     name: 'Torre',
     fullName: 'Eugene Torre',
     title: 'GM',
@@ -54,6 +57,7 @@ class Grandmaster {
   );
 
   static const tal = Grandmaster(
+    id: 2,
     name: 'Tal',
     fullName: 'Mikhail Tal',
     title: 'GM',
@@ -73,6 +77,7 @@ class Grandmaster {
   );
 
   static const petrosian = Grandmaster(
+    id: 3,
     name: 'Petrosian',
     fullName: 'Tigran Petrosian',
     title: 'GM',
@@ -92,6 +97,7 @@ class Grandmaster {
   );
 
   static const carlsen = Grandmaster(
+    id: 4,
     name: 'Carlsen',
     fullName: 'Magnus Carlsen',
     title: 'GM',

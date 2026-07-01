@@ -3,14 +3,52 @@ import '../../../core/theme/app_colors.dart';
 
 /// Rating Overview card with current rating, trend badge, and a 30-day line chart.
 /// Accepts optional [ratingData] from the analytics API.
+///
+/// ratingData shape (from Laravel AnalyticsController):
+/// {
+///   "current": 1200,
+///   "highest": 1240,
+///   "history": [ { "date": "2025-06-01", "rating": 1180 }, ... ]
+/// }
 class RatingOverviewCard extends StatelessWidget {
   final Map<String, dynamic>? ratingData;
 
   const RatingOverviewCard({super.key, this.ratingData});
 
+  // ── Parse live history or fall back to demo data ──────────────────
+
+  List<int> get _ratings {
+    final history = ratingData?['history'];
+    if (history is List && history.isNotEmpty) {
+      return history
+          .map((h) => (h['rating'] as num?)?.toInt() ?? 1200)
+          .toList();
+    }
+    // Demo fallback
+    return const [
+      1180, 1183, 1178, 1181, 1186, 1184, 1188, 1190, 1187, 1193,
+      1191, 1196, 1194, 1198, 1197, 1200, 1196, 1203, 1201, 1206,
+      1204, 1208, 1206, 1210, 1208, 1211, 1213, 1216, 1214, 1213,
+    ];
+  }
+
+  int get _currentRating => (ratingData?['current'] as num?)?.toInt() ?? _ratings.last;
+  int get _highestRating => (ratingData?['highest'] as num?)?.toInt() ?? _ratings.reduce((a, b) => a > b ? a : b);
+
+  int get _trend {
+    final h = _ratings;
+    if (h.length < 2) return 0;
+    return h.last - h.first;
+  }
+
   @override
   Widget build(BuildContext context) {
     final tt = Theme.of(context).textTheme;
+    final trend = _trend;
+    final trendPositive = trend >= 0;
+    final trendColor = trendPositive ? AppColors.successGreen : AppColors.liveRed;
+    final trendIcon = trendPositive ? Icons.trending_up_rounded : Icons.trending_down_rounded;
+    final trendLabel = '${trendPositive ? '+' : ''}$trend';
 
     return Container(
       padding: const EdgeInsets.all(20),
@@ -38,7 +76,7 @@ class RatingOverviewCard extends StatelessWidget {
               ),
               // Current rating
               Text(
-                '${ratingData?['current'] ?? 1845}',
+                '$_currentRating',
                 style: tt.headlineLarge?.copyWith(
                   fontWeight: FontWeight.w800,
                   fontSize: 36,
@@ -48,41 +86,55 @@ class RatingOverviewCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 2),
+
           // Trend badge
-          Align(
-            alignment: Alignment.centerRight,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-              decoration: BoxDecoration(
-                color: AppColors.successGreen.withValues(alpha: 0.1),
-                borderRadius: BorderRadius.circular(8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              // Highest rating chip
+              Text(
+                'Peak $_highestRating',
+                style: tt.bodySmall?.copyWith(color: AppColors.textLight, fontSize: 11),
               ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(Icons.trending_up_rounded, size: 14, color: AppColors.successGreen),
-                  const SizedBox(width: 3),
-                  Text(
-                    '+24',
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.successGreen,
+              const SizedBox(width: 8),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                decoration: BoxDecoration(
+                  color: trendColor.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(trendIcon, size: 14, color: trendColor),
+                    const SizedBox(width: 3),
+                    Text(
+                      trendLabel,
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w700,
+                        color: trendColor,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
+            ],
           ),
           const SizedBox(height: 16),
+
           // ── "Last 30 Days" label ──
-          Text('Last 30 Days', style: tt.bodySmall?.copyWith(color: AppColors.textLight, fontWeight: FontWeight.w500)),
+          Text(
+            ratingData != null ? 'Your ELO History' : 'Last 30 Days (demo)',
+            style: tt.bodySmall?.copyWith(color: AppColors.textLight, fontWeight: FontWeight.w500),
+          ),
           const SizedBox(height: 12),
+
           // ── Chart ──
           SizedBox(
             height: 140,
             width: double.infinity,
-            child: CustomPaint(painter: _RatingChartPainter()),
+            child: CustomPaint(painter: _RatingChartPainter(ratings: _ratings)),
           ),
         ],
       ),
@@ -91,34 +143,34 @@ class RatingOverviewCard extends StatelessWidget {
 }
 
 class _RatingChartPainter extends CustomPainter {
-  // Simulated rating data points over 30 days
-  static const _ratings = [
-    1812, 1815, 1810, 1813, 1818, 1816, 1820, 1822, 1819, 1825,
-    1823, 1828, 1826, 1830, 1829, 1832, 1828, 1835, 1833, 1838,
-    1836, 1840, 1838, 1842, 1840, 1843, 1845, 1848, 1846, 1845,
-  ];
+  final List<int> ratings;
 
-  static const _minRating = 1810;
-  static const _maxRating = 1850;
+  const _RatingChartPainter({required this.ratings});
 
   @override
   void paint(Canvas canvas, Size size) {
-    final chartLeft = 36.0;
+    if (ratings.isEmpty) return;
+
+    final minRating = ratings.reduce((a, b) => a < b ? a : b);
+    final maxRating = ratings.reduce((a, b) => a > b ? a : b);
+    // Add 2% padding to avoid clipping
+    final range = (maxRating - minRating).toDouble().clamp(10, double.infinity);
+
+    const chartLeft = 40.0;
     final chartRight = size.width - 8;
-    final chartTop = 4.0;
+    const chartTop = 4.0;
     final chartBottom = size.height - 4;
     final chartW = chartRight - chartLeft;
     final chartH = chartBottom - chartTop;
-    final range = (_maxRating - _minRating).toDouble();
 
     // ── Grid lines + Y-axis labels ──
-    final gridValues = [1810, 1830, 1850];
+    final gridValues = [minRating, ((minRating + maxRating) / 2).round(), maxRating];
     final gridPaint = Paint()
       ..color = AppColors.border
       ..strokeWidth = 0.5;
 
     for (final v in gridValues) {
-      final y = chartBottom - ((v - _minRating) / range) * chartH;
+      final y = chartBottom - ((v - minRating) / range) * chartH;
       canvas.drawLine(Offset(chartLeft, y), Offset(chartRight, y), gridPaint);
 
       final tp = TextPainter(
@@ -135,16 +187,16 @@ class _RatingChartPainter extends CustomPainter {
     final path = Path();
     final fillPath = Path();
 
-    for (var i = 0; i < _ratings.length; i++) {
-      final x = chartLeft + (i / (_ratings.length - 1)) * chartW;
-      final y = chartBottom - ((_ratings[i] - _minRating) / range) * chartH;
+    for (var i = 0; i < ratings.length; i++) {
+      final x = chartLeft + (i / (ratings.length - 1)) * chartW;
+      final y = chartBottom - ((ratings[i] - minRating) / range) * chartH;
       if (i == 0) {
         path.moveTo(x, y);
         fillPath.moveTo(x, chartBottom);
         fillPath.lineTo(x, y);
       } else {
-        final prevX = chartLeft + ((i - 1) / (_ratings.length - 1)) * chartW;
-        final prevY = chartBottom - ((_ratings[i - 1] - _minRating) / range) * chartH;
+        final prevX = chartLeft + ((i - 1) / (ratings.length - 1)) * chartW;
+        final prevY = chartBottom - ((ratings[i - 1] - minRating) / range) * chartH;
         final cpX = (prevX + x) / 2;
         path.cubicTo(cpX, prevY, cpX, y, x, y);
         fillPath.cubicTo(cpX, prevY, cpX, y, x, y);
@@ -175,11 +227,11 @@ class _RatingChartPainter extends CustomPainter {
 
     // End dot
     final lastX = chartRight;
-    final lastY = chartBottom - ((_ratings.last - _minRating) / range) * chartH;
+    final lastY = chartBottom - ((ratings.last - minRating) / range) * chartH;
     canvas.drawCircle(Offset(lastX, lastY), 4.5, Paint()..color = AppColors.primaryBlue);
     canvas.drawCircle(Offset(lastX, lastY), 2.5, Paint()..color = Colors.white);
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+  bool shouldRepaint(covariant _RatingChartPainter old) => old.ratings != ratings;
 }

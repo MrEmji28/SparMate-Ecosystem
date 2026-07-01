@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\V1\LessonController;
 use App\Http\Controllers\Api\V1\MatchController;
 use App\Http\Controllers\Api\V1\OnboardingController;
 use App\Http\Controllers\Api\V1\PuzzleController;
+use App\Http\Controllers\Api\V1\RecommendationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -67,5 +68,8 @@ Route::prefix('v1')->group(function () {
 
         // Analytics
         Route::get('/analytics/overview', [AnalyticsController::class, 'overview']);
+
+        // BKT-driven Recommendations
+        Route::get('/recommendations', [RecommendationController::class, 'index']);
     });
 });

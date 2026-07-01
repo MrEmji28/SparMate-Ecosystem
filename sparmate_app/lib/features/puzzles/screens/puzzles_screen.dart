@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/state/app_state.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../shared/widgets/bkt_recommendation_banner.dart';
 import '../widgets/daily_goal_card.dart';
 import '../widgets/puzzle_board_card.dart';
 import '../widgets/recent_puzzles_card.dart';
@@ -330,6 +331,12 @@ class _PuzzlesScreenState extends State<PuzzlesScreen> {
                       solved: _solvedToday,
                       dailyGoal: _dailyGoal,
                       streakDays: _streakDays,
+                    ),
+                    const SizedBox(height: 16),
+
+                    // ── BKT Recommendation Banner (Focus Area) ──
+                    BktRecommendationBanner(
+                      context: RecommendationContext.puzzles,
                     ),
                     const SizedBox(height: 16),
 

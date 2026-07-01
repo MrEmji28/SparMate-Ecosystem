@@ -162,3 +162,68 @@ class CoachingInsightsResponse(BaseModel):
         description="Trend per skill: 'improving', 'stable', 'declining'"
     )
 
+
+# ── ELO Forecast Models (Analytics — Sprint 10) ──────────────────────────
+
+class EloForecastRequest(BaseModel):
+    """
+    Request payload for ELO trend prediction.
+
+    Sends the user's historical ELO ratings (one per completed match,
+    oldest first) and the desired forecast horizon in days.
+    """
+    user_id: int
+    elo_history: list[int] = Field(
+        ...,
+        min_length=2,
+        description="Historical ELO ratings ordered oldest → newest (minimum 2 data points)"
+    )
+    horizon_days: int = Field(
+        14,
+        ge=1,
+        le=60,
+        description="Number of days to forecast into the future"
+    )
+    current_elo: int = Field(
+        1200,
+        description="Current ELO rating (last known value)"
+    )
+
+
+class EloForecastResponse(BaseModel):
+    """
+    ELO forecast response from the Linear Regression model.
+
+    Returns predicted ratings for each future day, a confidence band,
+    the direction of the trend, and the model's R² goodness-of-fit score.
+    """
+    status: str = "success"
+    user_id: int
+    predicted_ratings: list[int] = Field(
+        ...,
+        description="Predicted ELO for each future day (length = horizon_days)"
+    )
+    lower_bound: list[int] = Field(
+        ...,
+        description="Lower confidence bound (predicted - 1 std deviation)"
+    )
+    upper_bound: list[int] = Field(
+        ...,
+        description="Upper confidence bound (predicted + 1 std deviation)"
+    )
+    trend: str = Field(
+        ...,
+        description="'improving', 'stable', or 'declining'"
+    )
+    projected_elo: int = Field(
+        ...,
+        description="Single predicted ELO at the end of the horizon"
+    )
+    r2_score: float = Field(
+        ...,
+        description="R² coefficient of determination — quality of the regression fit (0–1)"
+    )
+    slope: float = Field(
+        ...,
+        description="ELO change per match (positive = improving, negative = declining)"
+    )

@@ -5,7 +5,16 @@ import '../models/grandmaster.dart';
 /// Card showing GM strengths, preferred openings, and difficulty selector.
 class GameInfoCard extends StatefulWidget {
   final Grandmaster gm;
-  const GameInfoCard({super.key, required this.gm});
+
+  /// Called whenever the player changes the difficulty level.
+  /// 0 = Easy, 1 = Medium, 2 = Hard
+  final ValueChanged<int>? onDifficultyChanged;
+
+  const GameInfoCard({
+    super.key,
+    required this.gm,
+    this.onDifficultyChanged,
+  });
 
   @override
   State<GameInfoCard> createState() => _GameInfoCardState();
@@ -102,7 +111,10 @@ class _GameInfoCardState extends State<GameInfoCard> {
     final isSelected = _selectedDifficulty == level;
     return Expanded(
       child: GestureDetector(
-        onTap: () => setState(() => _selectedDifficulty = level),
+        onTap: () {
+          setState(() => _selectedDifficulty = level);
+          widget.onDifficultyChanged?.call(level);
+        },
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
           padding: const EdgeInsets.symmetric(vertical: 10),

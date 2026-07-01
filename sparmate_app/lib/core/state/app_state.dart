@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/foundation.dart';
 import '../services/api_service.dart';
 
@@ -75,7 +76,73 @@ class AppState extends ChangeNotifier {
   List<dynamic>? _matches;
   List<dynamic>? get matches => _matches;
 
-  // ── Actions ───────────────────────────────────────────────────────
+  bool _matchesLoading = false;
+  bool get matchesLoading => _matchesLoading;
+
+  /// Fetch the user's match history from the backend.
+  Future<void> fetchMatches() async {
+    if (!isAuthenticated) return;
+    _matchesLoading = true;
+    notifyListeners();
+    try {
+      _matches = await api.getMatches();
+    } on ApiException catch (e) {
+      _errorMessage = e.message;
+    } finally {
+      _matchesLoading = false;
+      notifyListeners();
+    }
+  }
+
+  // ── Analytics ─────────────────────────────────────────────────────
+
+  bool _analyticsLoading = false;
+  bool get analyticsLoading => _analyticsLoading;
+
+  /// Fetch the full analytics overview from the backend.
+  /// Populates [analyticsData] consumed by AnalyticsScreen widgets.
+  Future<void> fetchAnalytics() async {
+    if (!isAuthenticated) return;
+    _analyticsLoading = true;
+    notifyListeners();
+    try {
+      final data = await api.getAnalyticsOverview();
+      _analyticsData = data;
+    } on ApiException catch (e) {
+      _errorMessage = e.message;
+    } catch (_) {
+      // Network error — keep showing stale/fallback data
+    } finally {
+      _analyticsLoading = false;
+      notifyListeners();
+    }
+  }
+
+  // ── BKT Recommendations ───────────────────────────────────────────
+
+  Map<String, dynamic>? _recommendationsData;
+  Map<String, dynamic>? get recommendationsData => _recommendationsData;
+  bool _recommendationsLoading = false;
+  bool get recommendationsLoading => _recommendationsLoading;
+
+  /// Fetch BKT-driven lesson + puzzle recommendations.
+  /// Reads the user's live mastery matrix and returns content ranked
+  /// by weakness — weakest skill first.
+  Future<void> fetchRecommendations() async {
+    if (!isAuthenticated) return;
+    _recommendationsLoading = true;
+    notifyListeners();
+    try {
+      _recommendationsData = await api.getRecommendations();
+    } on ApiException catch (e) {
+      _errorMessage = e.message;
+    } catch (_) {
+      // Network error — recommendations degrade gracefully
+    } finally {
+      _recommendationsLoading = false;
+      notifyListeners();
+    }
+  }
 
   void _setLoading(bool v) {
     _isLoading = v;
@@ -207,16 +274,6 @@ class AppState extends ChangeNotifier {
     }
   }
 
-  /// Fetch the analytics overview.
-  Future<void> fetchAnalytics() async {
-    try {
-      _analyticsData = await api.getAnalyticsOverview();
-      notifyListeners();
-    } on ApiException catch (e) {
-      _errorMessage = e.message;
-      notifyListeners();
-    }
-  }
 
   /// Fetch all grandmaster personas.
   Future<void> fetchGrandmasters() async {
@@ -240,16 +297,6 @@ class AppState extends ChangeNotifier {
     }
   }
 
-  /// Fetch the user's match history.
-  Future<void> fetchMatches() async {
-    try {
-      _matches = await api.getMatches();
-      notifyListeners();
-    } on ApiException catch (e) {
-      _errorMessage = e.message;
-      notifyListeners();
-    }
-  }
 
   /// Start a new sparring match and return the match data.
   Future<Map<String, dynamic>?> startMatch({
@@ -269,6 +316,12 @@ class AppState extends ChangeNotifier {
   }
 
   /// Complete a match and trigger post-game analysis.
+  ///
+  /// Returns the analysis map which includes:
+  ///   - `rating_change`  (int, signed)
+  ///   - `new_rating`     (int)
+  ///   - `old_rating`     (int)
+  ///   - `classified_blunders`, `new_matrix`, etc.
   Future<Map<String, dynamic>?> completeMatch(
     int matchId, {
     required String pgn,
@@ -289,11 +342,22 @@ class AppState extends ChangeNotifier {
         duration: duration,
       );
 
-      // Step 2: Trigger blunder analysis (Laravel → FastAPI pipeline)
+      // Step 2: Trigger blunder analysis + ELO update (Laravel → FastAPI)
       final analysis = await api.analyzeMatch(matchId);
 
-      // Step 3: Refresh the coaching plan with updated BKT matrix
+      // Step 3: Update local user ELO immediately so every widget reflects it
+      final newRating = analysis['new_rating'] as int?;
+      if (newRating != null && _user != null) {
+        _user = Map<String, dynamic>.from(_user!)
+          ..['elo_rating'] = newRating;
+        notifyListeners();
+      }
+
+      // Step 4: Refresh the coaching plan with updated BKT matrix
       await fetchCoachingPlan();
+
+      // Step 5: Refresh match history so History tab shows the new game
+      unawaited(fetchMatches());
 
       _setLoading(false);
       return analysis;

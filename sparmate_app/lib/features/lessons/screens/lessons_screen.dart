@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../shared/widgets/bkt_recommendation_banner.dart';
 import '../screens/lesson_detail_screen.dart';
 
 /// Full Lessons tab screen with search, category filtering, active lesson,
@@ -244,6 +245,35 @@ class _LessonsScreenState extends State<LessonsScreen>
               padding: const EdgeInsets.fromLTRB(16, 18, 0, 0),
               sliver: SliverToBoxAdapter(child: _buildCategoriesRow()),
             ),
+
+            // ── BKT Recommendation Banner (visible when no filter / search active) ──
+            if (_selectedCategory == 0 && _searchQuery.isEmpty)
+              SliverPadding(
+                padding: const EdgeInsets.fromLTRB(0, 14, 0, 2),
+                sliver: SliverToBoxAdapter(
+                  child: BktRecommendationBanner(
+                    context: RecommendationContext.lessons,
+                    onLessonTap: (lesson) {
+                      // Map API lesson to local _LessonData and open it
+                      final match = _allLessons.firstWhere(
+                        (l) => l.title == (lesson['title'] as String? ?? ''),
+                        orElse: () => _LessonData(
+                          lesson['title'] as String? ?? 'Lesson',
+                          lesson['category'] as String? ?? 'Tactics',
+                          '${lesson['chapter_count'] ?? 1} Chapters',
+                          0.0,
+                          const Color(0xFF3949AB),
+                          Icons.book_rounded,
+                          desc: lesson['description'] as String? ?? '',
+                          rating: 4.5,
+                          timeLeft: '',
+                        ),
+                      );
+                      _openLesson(context, match);
+                    },
+                  ),
+                ),
+              ),
 
             // ── Continue Learning (only if active lesson) ──
             if (active != null && _searchQuery.isEmpty && _selectedCategory == 0) ...[
